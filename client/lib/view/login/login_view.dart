@@ -1,17 +1,14 @@
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/my_button.dart';
+import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../common_widget/text_field.dart';
+import '../../common_widget/text_field.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -112,7 +109,9 @@ class _LoginViewState extends State<LoginView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 10),
-                      child: MyButton(text:"Sign In", onTap: (){},)
+                      child: MyButton(text:"Sign In", onTap: (){
+                        controller.signUserIn();
+                      },)
                     ),
 
                     Padding(

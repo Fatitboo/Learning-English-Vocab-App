@@ -1,8 +1,8 @@
-import 'package:client/view/forgot_password_view.dart';
-import 'package:client/view/login_view.dart';
-import 'package:client/view/sign_up_view.dart';
-import 'package:client/view/welcome_view.dart';
+
+import 'package:client/res/routes/pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +14,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          fontFamily: "Poppins"),
-      home: const SignUpView(),
+    return ScreenUtilInit(
+      builder: ((context, child)=> GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: "Poppins"
+        ),
+        title: 'EngVocab',
+        initialRoute: AppPages.INITIAL,
+        getPages: AppPages.routes,
+      )),
     );
   }
 }
