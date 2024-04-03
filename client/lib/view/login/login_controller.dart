@@ -4,6 +4,7 @@ import '../../../res/routes/names.dart';
 
 class LoginController extends GetxController {
 
+
   void signUserIn() {
     Get.offAndToNamed(AppRoutes.HOME);
   }

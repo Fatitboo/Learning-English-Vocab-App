@@ -3,82 +3,12 @@ import 'package:client/view/home/home_controller.dart';
 import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
   HomePage({super.key});
-  List<dynamic> data = [
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "2",
-      'topicName': "Flight",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 50,
-      "totalWords": 210,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-    {
-      'topicId': "1",
-      'topicName': "Communication Communication",
-      "topicImage": "https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nuoi-meo-can-gi-0-1024x713.jpg",
-      "learnNumber": 120,
-      "totalWords": 200,
-      "onTap": (){
-        print("hello");
-      }
-    },
-  ] ;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,21 +27,22 @@ class HomePage extends GetView<HomeController> {
                   margin: const EdgeInsets.only(top: 5, bottom: 10),
                   height: 1,
                 ),
-                Expanded(
+                SingleChildScrollView(
                   child: SizedBox(
                     height: 500,
                     child: ListView.builder(
-                        itemCount: data.length,
+                        itemCount: controller.data.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: TopicWidget(
-                                topicName: data[index]["topicName"],
-                                topicImage: data[index]["topicImage"],
-                                learnNumber: data[index]["learnNumber"],
-                                totalWords: data[index]["totalWords"],
+                                topicName: controller.data[index]["topicName"],
+                                topicImage: controller.data[index]["topicImage"],
+                                learnNumber: controller.data[index]["learnNumber"],
+                                totalWords: controller.data[index]["totalWords"],
                                 onTap: (){
-                                  print("hello");
+                                  controller.toDetailTopicPage(controller.data[index]["topicId"], controller.data[index]["topicName"]);
+                                  print("concec");
                                 }
                             ),
                           );

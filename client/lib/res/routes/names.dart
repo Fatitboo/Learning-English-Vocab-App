@@ -6,5 +6,6 @@ class AppRoutes {
   // user routes
   static const SIGN_UP = '/sign_up';
   static const HOME = '/home';
+  static const DETAIL_TOPIC = '/home/detail_topic';
 
 }
