@@ -2,9 +2,13 @@
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/textfield_custom_profile.dart';
 import 'package:client/common_widget/textfield_date_picker.dart';
+import 'package:client/view/your_profile/your_profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class YourProfileView extends StatelessWidget {
+class YourProfileView extends GetView<YourProfileController> {
+
+  YourProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {

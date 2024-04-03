@@ -1,8 +1,10 @@
 
 import 'package:client/common/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class PrivateInfoManagementView extends StatelessWidget {
+class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
+  PrivateInfoManagementView({super.key});
 
   @override
   Widget build(BuildContext context) {

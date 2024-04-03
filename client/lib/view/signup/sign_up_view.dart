@@ -1,17 +1,14 @@
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/text_field.dart';
+import 'package:client/view/signup/signup_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../common_widget/my_button.dart';
+import '../../common_widget/my_button.dart';
 
-class SignUpView extends StatefulWidget {
+class SignUpView extends GetView<SignUpController> {
   const SignUpView({super.key});
 
-  @override
-  State<SignUpView> createState() => _SignUpViewState();
-}
-
-class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -1,20 +1,11 @@
+import 'package:client/view/password_management/password_management_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../common/app_color.dart';
+import '../../common/app_color.dart';
 
-class PasswordManagementView extends StatefulWidget {
-  @override
-  _PasswordManagementViewState createState() => _PasswordManagementViewState();
-}
 
-class _PasswordManagementViewState extends State<PasswordManagementView> {
-  bool _obscurePassword = true;
-  String currentPass = "pass hiện tại";
-  bool _obscureNewPassword = true;
-  String newPass = "";
-  bool _obscureConfirmNewPassword = true;
-  String confirmNewPass = "";
-
+class PasswordManagementView extends GetView<PasswordManagementController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +34,6 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
       ),
     );
   }
-
   AppBar _appBar() {
     return AppBar(
       elevation: 0,
@@ -88,7 +78,7 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
         ),
       )
   );
-  Widget CurrentPasssView() => Column(
+  Widget CurrentPasssView() => Obx(() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -99,22 +89,18 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
       SizedBox(height: 10.0),
       TextFormField(
         onChanged: (value) {
-          setState(() {
-            currentPass = value;
-          });
+          controller.setCurrentPassword(value);
         },
-        initialValue: currentPass,
-        obscureText: _obscurePassword,
+        initialValue: controller.currentPass.value,
+        obscureText: controller.obscurePassword.value,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscurePassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
-              setState(() {
-                _obscurePassword = !_obscurePassword;
-              });
+              controller.toggleObscurePassword();
             },
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
@@ -128,8 +114,9 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
+  )
   );
-  Widget NewPasssView() => Column(
+  Widget NewPasssView() => Obx(() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -140,22 +127,18 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
       SizedBox(height: 10.0),
       TextFormField(
         onChanged: (value) {
-          setState(() {
-            newPass = value;
-          });
+          controller.setNewPassword(value);
         },
-        initialValue: newPass,
-        obscureText: _obscureNewPassword,
+        initialValue: controller.newPass.value,
+        obscureText: controller.obscureNewPassword.value,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              _obscureNewPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscureNewPassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
-              setState(() {
-                _obscureNewPassword = !_obscureNewPassword;
-              });
+              controller.toggleObscureNewPassword();
             },
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
@@ -169,8 +152,9 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
+  )
   );
-  Widget ConfirmNewPasssView() => Column(
+  Widget ConfirmNewPasssView() => Obx(() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -181,22 +165,18 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
       SizedBox(height: 10.0),
       TextFormField(
         onChanged: (value) {
-          setState(() {
-            confirmNewPass = value;
-          });
+          controller.setConfirmNewPassword(value);
         },
-        initialValue: confirmNewPass,
-        obscureText: _obscureConfirmNewPassword,
+        initialValue: controller.confirmNewPass.value,
+        obscureText: controller.obscureConfirmNewPassword.value,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              _obscureConfirmNewPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscureConfirmNewPassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
-              setState(() {
-                _obscureConfirmNewPassword = !_obscureConfirmNewPassword;
-              });
+              controller.toggleObscureConfirmNewPassword();
             },
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
@@ -210,5 +190,6 @@ class _PasswordManagementViewState extends State<PasswordManagementView> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
+  )
   );
 }

@@ -1,8 +1,13 @@
 import 'package:client/common/app_color.dart';
+import 'package:client/view/privacy_policy/privacy_policy_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
-class PrivacyPolicyView extends StatelessWidget {
+class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
+
+  PrivacyPolicyView({super.key});
+
   final String title_1 = "Conditions of user";
   final String value_1 = "Use of the Service is void where prohibited. The Service is intended for users 13 years of age or older, but is open to all ages. For children under 13 years of age (or such other age as required by local law), we provide a limited set of features and website experiences, some of which are excluded. By using the Services, you represent and warrant that (a) any registration information you submit is true and accurate; (b) you will maintain the accuracy of this information; and (c) your use of the Services does not violate any applicable law or regulation.";
   final String title_2 = "Your Account and Data";
