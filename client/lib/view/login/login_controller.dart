@@ -8,7 +8,7 @@ class LoginController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   signUserIn() async {
-    Get.offAndToNamed(AppRoutes.HOME);
+    Get.offAndToNamed(AppRoutes.NAV_BAR);
   }
   toPageSignUp() async {
     Get.offAndToNamed(AppRoutes.SIGN_UP);

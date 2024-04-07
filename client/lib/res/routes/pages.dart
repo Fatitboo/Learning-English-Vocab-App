@@ -4,8 +4,6 @@ import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
 import 'package:client/view/flashcard/flashcard_binding.dart';
 import 'package:client/view/flashcard/flashcard_page.dart';
-import 'package:client/view/learning_vocabulary/detail_learned_topic/detail_learn_binding.dart';
-import 'package:client/view/learning_vocabulary/learning_vocabulary_view.dart';
 import 'package:client/view/login/login_binding.dart';
 import 'package:client/view/result_round_page.dart';
 import 'package:client/view/result_test_page.dart';
@@ -17,8 +15,6 @@ import 'package:get/get.dart';
 import 'package:client/view/login/login_view.dart';
 
 import '../../view/detail_topic/detail_topic_binding.dart';
-import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_topic.dart';
-import '../../view/learning_vocabulary/learning_vocabulary_binding.dart';
 import '../../view/password_management/password_management_binding.dart';
 import '../../view/password_management/password_management_view.dart';
 import '../../view/privacy_policy/privacy_policy_binding.dart';
@@ -39,6 +35,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.INITIAL,
       page: () => WelcomeView(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.NAV_BAR,
+      page: () => NavBar(),
+      binding: BottomNavigateBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
@@ -187,6 +192,15 @@ class AppPages {
       popGesture: false,
       transitionDuration: const Duration(milliseconds: 500),
 
+    ),
+    GetPage(
+      name: AppRoutes.SAVE_TOPIC,
+      page: () => SavedTopicPage(),
+      binding: SavedTopicBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
   ];
 }

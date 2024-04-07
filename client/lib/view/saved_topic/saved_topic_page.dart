@@ -1,14 +1,11 @@
 import 'package:client/common_widget/word_widget.dart';
-import 'package:client/view/detail_topic/detail_topic_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:client/view/saved_topic/saved_topic_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DetailTopicPage extends GetView<DetailTopicController> {
-  DetailTopicPage({super.key});
+class SavedTopicPage extends GetView<SavedTopicController> {
+  SavedTopicPage({super.key});
   //var dt = Get.arguments;
-
-
 
   @override
   Widget build(BuildContext context) {

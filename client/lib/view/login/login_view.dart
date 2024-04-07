@@ -4,6 +4,7 @@ import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common_widget/text_field.dart';
+import '../../res/routes/names.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
@@ -164,7 +165,9 @@ class LoginView extends GetView<LoginController> {
                           height: 50,
                           width: double.infinity,
                           child: OutlinedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+
+                              },
                               icon: Image.asset("assets/icons/google.png"),
                               label: const Text(
                                 'Sign In with Google',
