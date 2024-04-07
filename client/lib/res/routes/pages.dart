@@ -9,6 +9,8 @@ import 'package:client/view/flashcard/flashcard_page.dart';
 import 'package:client/view/login/login_binding.dart';
 import 'package:client/view/result_round_page.dart';
 import 'package:client/view/result_test_page.dart';
+import 'package:client/view/saved_topic/saved_topic_binding.dart';
+import 'package:client/view/saved_topic/saved_topic_page.dart';
 import 'package:client/view/setting_test_page.dart';
 import 'package:client/view/signup/sign_up_view.dart';
 import 'package:client/view/signup/signup_binding.dart';
@@ -169,6 +171,15 @@ class AppPages {
       name: AppRoutes.STATISCAL,
       page: () => StatiscalView(),
       binding: StatiscalBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.SAVE_TOPIC,
+      page: () => SavedTopicPage(),
+      binding: SavedTopicBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

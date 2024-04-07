@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-class DetailTopicController extends GetxController{
+class SavedTopicController extends GetxController{
   Rx<String> topicName = "".obs;
   Rx<String> topicId = "".obs;
 
