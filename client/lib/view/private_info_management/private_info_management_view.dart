@@ -157,7 +157,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
     ),
   );
   Widget ItemSaveTopic() => GestureDetector(
-    onTap: () {},
+    onTap: () {
+      // Get.toNamed(AppRoutes.SAVE_TOPIC);
+    },
     child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -175,7 +177,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                 ),
                 IconButton(
                   onPressed: () {
-
+                    Get.toNamed(AppRoutes.SAVE_TOPIC);
                   },
                   icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),

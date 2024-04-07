@@ -1,7 +1,8 @@
-import 'package:client/common_widget/word_widget.dart';
 import 'package:client/view/saved_topic/saved_topic_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../common_widget/topic_widget.dart';
 
 class SavedTopicPage extends GetView<SavedTopicController> {
   SavedTopicPage({super.key});
@@ -9,7 +10,7 @@ class SavedTopicPage extends GetView<SavedTopicController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SafeArea(
+    return SafeArea(
         child: Scaffold(
           body: Container(
             margin: const EdgeInsets.symmetric(vertical: 24),
@@ -20,7 +21,7 @@ class SavedTopicPage extends GetView<SavedTopicController> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Stack(alignment: Alignment.center,children: <Widget>[
-                  Container(padding: const EdgeInsets.symmetric(horizontal: 50), child: Text(controller.topicName.value, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500,))),
+                  Container(padding: const EdgeInsets.symmetric(horizontal: 50), child: const Text("Saved topic", overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,))),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
@@ -36,18 +37,15 @@ class SavedTopicPage extends GetView<SavedTopicController> {
                       itemCount: controller.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                          child: WordWidget(
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          child: TopicWidget(
+                              topicName: controller.data[index]["topicName"],
+                              topicImage: controller.data[index]["topicImage"],
+                              learnNumber: controller.data[index]["learnNumber"],
+                              totalWords: controller.data[index]["totalWords"],
                               onTap: (){
-                                //print(dt);
-                                print(controller.topicName.value);
-                              },
-                              wordName: controller.data[index]["wordName"],
-                              wordMean: controller.data[index]["wordMean"],
-                              spelling: controller.data[index]["spelling"],
-                              image: controller.data[index]["image"],
-                              wordType: controller.data[index]["wordType"],
-                              audio: controller.data[index]["audio"],
+                                controller.toDetailTopicPage(controller.data[index]["topicId"], controller.data[index]["topicName"]);
+                              }
                           ),
                         );
                       }
@@ -57,7 +55,7 @@ class SavedTopicPage extends GetView<SavedTopicController> {
             ),
           ),
         )
-    ));
+    );
   }
 }
 
