@@ -1,137 +1,196 @@
+import 'package:client/common/app_color.dart';
+import 'package:client/common_widget/achive_cell.dart';
 import 'package:client/common_widget/progress_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../common_widget/rankingRow.dart';
+
 class StatiscalView extends StatelessWidget {
+  List latestArr = [
+    {
+      "image": "assets/icons/google.png",
+      "title": "Nguyen Van A",
+      "time": "Score: 200pt"
+    },
+    {
+      "image": "assets/images/test.png",
+      "title": "Nguyen Van B",
+      "time": "Score: 100pt"
+    },
+    {
+      "image": "assets/images/img.png",
+      "title": "Nguyen Van A",
+      "time": "Score: 200pt"
+    },
+    {
+      "image": "assets/images/learn.png",
+      "title": "Nguyen Van B",
+      "time": "Score: 100pt"
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Statistics'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Avatar and Name
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/img.png'), // Thay đổi đường dẫn ảnh avatar tương ứng
-            ),
-            SizedBox(height: 5),
-            Text(
-              'tinhphan1508', // Thay đổi thành tên người dùng
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 30),
-
-            // Topic Statistics
-            _buildStatisticItem('Number of topics completed:', '5/10', Colors.deepOrange), // Thay đổi số chủ đề đã học/tổng số chủ đề
-            SizedBox(height: 10),
-            ProgressStack(
-              value: 5, // Tiến độ là 70%
-              max: 10, // Chiều rộng tối đa của thanh
-              valueColor: Colors.deepOrange, // Màu sắc của thanh tiến độ
-              maxColor: Colors.black12, // Màu sắc của thanh giá trị tối đa
-          ),
-            SizedBox(height: 10),
-
-            // Vocabulary Statistics
-            _buildStatisticItem('Vocabularies learned:', '200/500', Colors.green), // Thay đổi số từ vựng đã học/tổng số từ vựng
-            SizedBox(height: 10),
-            ProgressStack(
-              value: 200, // Tiến độ là 70%
-              max: 400, // Chiều rộng tối đa của thanh
-              valueColor: Colors.green, // Màu sắc của thanh tiến độ
-              maxColor: Colors.black12, // Màu sắc của thanh giá trị tối đa
-            ),
-            SizedBox(height: 30),
-            _buildStatisticItem('Your score:', '258 points', Colors.blue),
-            SizedBox(height: 10),
-            _buildStatisticItem('Your ranking:', '3/122 users', Colors.deepPurple),
-            SizedBox(height: 30),
-
-            // Ranking List
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black26, // Màu của border
-                  width: 2, // Độ dày của border
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+      backgroundColor: AppColors.rsBackground,
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'RANKING LIST',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
+                    "LearningE",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                   ),
+                  Icon(Icons.notifications_none_outlined)
                 ],
-              )
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black26, // Màu của border
-                    width: 2, // Độ dày của border
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Your progress",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  Expanded(child: Container()),
+                  const Text(
+                    "Details",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w200,
+                        color: Colors.blue),
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 18,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 220,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Your knowledge",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Expanded(
+                          child: AchiveCell(
+                            icon: "assets/images/learn.png",
+                            value: "300 words",
+                            title: "Total word you learned ",
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Row(
+                          children: [
+                            Expanded(
+                              child: AchiveCell(
+                                icon: "assets/images/learn.png",
+                                value: "8 topics",
+                                title: "Completed",
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Expanded(
+                              child: AchiveCell(
+                                icon: "assets/images/test.png",
+                                value: "24 topics",
+                                title: "InProcess",
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                child: ListView.builder(
-                  itemCount: 10, // Thay đổi số lượng người dùng trong danh sách
-                  itemBuilder: (context, index) {
-                    return _buildRankingItem(
-                      rank: (index + 1).toString(),
-                      avatar: 'assets/images/img.png', // Thay đổi đường dẫn ảnh avatar tương ứng
-                      name: 'tinhphan1508${index + 1}', // Thay đổi tên người dùng
-                      points: (1000 - index * 50).toString(), // Thay đổi số điểm tương ứng
-                    );
-                  },
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [AppColors.primaryColor, AppColors.lightPColor]),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                    topRight: Radius.circular(70),
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                "Your score",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              RankingRow(wObj: latestArr[0]),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                "Ranking list",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+               Expanded(
+
+                 child: Container(
+                   decoration: const BoxDecoration(
+                     color: Colors.white,
+                       boxShadow: [
+                         BoxShadow(
+                             color: Color(0x1f000000),
+                             blurRadius: 10,
+                             offset: Offset(0, 0.5)
+                         )
+                       ],
+                     borderRadius: BorderRadius.all(Radius.circular(10))
+                   ),
+                   width: MediaQuery.of(context).size.width,
+
+                   child: Padding(
+                     padding: const EdgeInsets.all(15.0),
+                     child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: latestArr.length,
+                          itemBuilder: (context, index) {
+                            var wObj = latestArr[index] as Map? ?? {};
+                            return RankingRow(wObj: wObj);
+                          }),
+                   ),
+                 ),
+               ),
+
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildStatisticItem(String title, String value, Color color) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 16, color: color, fontWeight: FontWeight.w500),
-        ),
-        Text(
-          value,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRankingItem({required String rank, required String avatar, required String name, required String points}) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 20,
-        backgroundImage: AssetImage(avatar), // Avatar của người dùng
-      ),
-      title: Text(
-        '$rank. $name',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        'Points: $points', // Số điểm của người dùng
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-      ),
-      hoverColor: Colors.grey,
-      focusColor: Colors.grey,
-      selectedColor: Colors.grey,
-    );
-  }
 }

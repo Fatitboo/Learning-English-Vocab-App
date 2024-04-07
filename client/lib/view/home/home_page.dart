@@ -1,3 +1,4 @@
+import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/topic_widget.dart';
 import 'package:client/res/routes/routes.dart';
 import 'package:client/view/home/home_controller.dart';
@@ -12,6 +13,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.rsBackground,
           body: Container(
             margin: const EdgeInsets.all(24),
             child: SingleChildScrollView(

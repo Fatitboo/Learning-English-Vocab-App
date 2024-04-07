@@ -65,11 +65,13 @@ class _DatePickerFieldState extends State<DatePickerField> {
               decoration: InputDecoration(
                 hintText: 'DD/MM/YYYY',
                 suffixIcon: Icon(Icons.calendar_today, color: AppColors.primaryColor,),
-                contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(color: Colors.black26),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
                   borderSide: BorderSide(color: AppColors.primaryColor), // Màu xanh khi focus
                 ),
               ),
@@ -102,7 +104,7 @@ class _DatePickerCustomeProfileState extends State<DatePickerCustomeProfile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

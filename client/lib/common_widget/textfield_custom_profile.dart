@@ -24,12 +24,13 @@ class CustomInput extends StatelessWidget {
         obscureText: obscureText,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          contentPadding:
+          const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: Colors.black26),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryColor), // Màu xanh khi focus
+            borderSide: BorderSide(color: AppColors.primaryColor,width: 1), // Màu xanh khi focus
           ),
         ),
         cursorColor: AppColors.primaryColor,
