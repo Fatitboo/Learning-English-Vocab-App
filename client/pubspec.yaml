@@ -38,10 +38,8 @@ dependencies:
   get: ^4.6.6
   flutter_screenutil: ^5.9.0
   percent_indicator: ^4.2.3
-  audioplayers: ^6.0.0
+  numberpicker: ^2.1.2
   just_audio: ^0.9.37
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
