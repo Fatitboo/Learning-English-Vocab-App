@@ -1,5 +1,7 @@
 import 'package:client/view/detail_topic/detail_topic_binding.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
+import 'package:client/view/flashcard/flashcard_binding.dart';
+import 'package:client/view/flashcard/flashcard_page.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/login/login_binding.dart';
@@ -48,6 +50,15 @@ class AppPages {
       name: AppRoutes.DETAIL_TOPIC,
       page: () => DetailTopicPage(),
       binding: DetailTopicBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.FLASH_CARD,
+      page: () => FlashCardPage(),
+      binding: FlashCardBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

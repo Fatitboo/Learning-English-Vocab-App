@@ -7,5 +7,6 @@ class AppRoutes {
   static const SIGN_UP = '/sign_up';
   static const HOME = '/home';
   static const DETAIL_TOPIC = '/home/detail_topic';
+  static const FLASH_CARD = '/home/detail_topic/flashcard';
 
 }

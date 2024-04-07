@@ -1,4 +1,5 @@
 
+import 'package:client/res/routes/names.dart';
 import 'package:client/res/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "Poppins"
         ),
         title: 'EngVocab',
-        initialRoute: AppPages.INITIAL,
+        initialRoute: AppRoutes.FLASH_CARD,
         getPages: AppPages.routes,
       )),
     );
