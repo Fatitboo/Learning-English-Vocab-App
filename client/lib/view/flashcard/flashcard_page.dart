@@ -149,7 +149,7 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
       });
     final mediaQuery = (context.getElementForInheritedWidgetOfExactType<MediaQuery>()!.widget as MediaQuery).data;
     final physicalSize = mediaQuery.size * mediaQuery.devicePixelRatio;
-    width = physicalSize.width / 2;
+    width = physicalSize.width / 4+100;
     _leftValue = (width - 300) / 2;
     print(width);
   }
@@ -162,14 +162,7 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
             children: [
               Align(alignment: Alignment.topCenter, child: Stack(
                 children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.black,
-                      size: 16.0,
-                    ),
-                  ),
+
                   Align(alignment: Alignment.center,child: Text("${_index + 1}/${data.length}", style: const TextStyle(color: Colors.black45, fontSize: 16),))
                 ]
              )),

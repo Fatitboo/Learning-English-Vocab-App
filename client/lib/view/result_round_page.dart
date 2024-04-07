@@ -68,12 +68,12 @@ class ResultRoundPage extends StatelessWidget {
       backgroundColor: AppColors.rsBackground,
       appBar: AppBar(
         backgroundColor: AppColors.rsBackground,
-        leading: IconButton(
-          onPressed: () {
-            // Get.offAndToNamed(AppRoutes.SIGN_IN);
-          },
-          icon: const Icon(Icons.close),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     // Get.offAndToNamed(AppRoutes.SIGN_IN);
+        //   },
+        //   icon: const Icon(Icons.close),
+        // ),
       ),
       body: Column(
         children: [

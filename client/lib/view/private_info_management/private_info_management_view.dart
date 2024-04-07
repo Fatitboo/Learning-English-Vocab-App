@@ -1,5 +1,6 @@
 
 import 'package:client/common/app_color.dart';
+import 'package:client/res/routes/names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, size: 30),
           color: Colors.black,
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
         ),
       ),
       body: Container(
@@ -153,7 +156,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.YOUR_PROFILE);
+                  },
                   icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
                 ),
               ],
@@ -185,7 +190,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
                 ),
               ],
@@ -217,7 +224,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.PRIVACY_POLICY);
+                  },
                   icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
                 ),
               ],
@@ -249,7 +258,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.PASSWORD_MANAGEMENT);
+                  },
                   icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:client/common_widget/topic_widget.dart';
+import 'package:client/res/routes/routes.dart';
 import 'package:client/view/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -47,6 +48,34 @@ class HomePage extends GetView<HomeController> {
                           }
                       ),
                     ),
+                  ),
+                  Row(
+                    children: [
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.FLASH_CARD);
+                      }, child: Text("to flc")),
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.PRIVATE_INFO_MANAGER);
+                      }, child: Text("to qltt")),
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.STATISCAL);
+                      }, child: Text("to tk")),
+
+                    ],
+                  ),
+                  Row(
+                    children: [
+
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.RESULT_ROUND);
+                      }, child: Text("to rsr")),
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.RESULT_TEST);
+                      }, child: Text("to rst")),
+                      ElevatedButton(onPressed: (){
+                        Get.toNamed(AppRoutes.SETTING_TEST);
+                      }, child: Text("to stt")),
+                    ],
                   )
                 ],
               ),

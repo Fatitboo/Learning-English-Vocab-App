@@ -56,7 +56,9 @@ class YourProfileView extends GetView<YourProfileController> {
       leading: IconButton(
         icon: Icon(Icons.arrow_back, size: 30),
         color: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
       ),
     );
   }

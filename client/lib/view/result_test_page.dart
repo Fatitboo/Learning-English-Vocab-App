@@ -19,10 +19,10 @@ class _ResultTestPageState extends State<ResultTestPage> {
       backgroundColor: AppColors.rsBackground,
       appBar: AppBar(
         backgroundColor: AppColors.rsBackground,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.close),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: const Icon(Icons.close),
+        // ),
       ),
       body: Column(
         children: [
