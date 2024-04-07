@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.6
   flutter_screenutil: ^5.9.0
   percent_indicator: ^4.2.3
+  numberpicker: ^2.1.2
 
 dev_dependencies:
   flutter_test:

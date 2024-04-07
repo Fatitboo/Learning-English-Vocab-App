@@ -1,7 +1,5 @@
 import 'package:client/common_widget/topic_widget.dart';
 import 'package:client/view/home/home_controller.dart';
-import 'package:client/view/login/login_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

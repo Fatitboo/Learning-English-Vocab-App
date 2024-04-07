@@ -1,5 +1,8 @@
 import 'package:client/common/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../res/routes/names.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -72,7 +75,9 @@ class _WelcomeViewState extends State<WelcomeView> {
                                       offset: Offset(0, 0.5))
                                 ]),
                             child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                },
                                 height: 60,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
@@ -102,7 +107,9 @@ class _WelcomeViewState extends State<WelcomeView> {
                                       offset: Offset(0, 0.5))
                                 ]),
                             child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAndToNamed(AppRoutes.SIGN_UP);
+                                },
                                 height: 60,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),

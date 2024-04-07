@@ -1,4 +1,5 @@
 
+import 'package:client/common/app_color.dart';
 import 'package:client/res/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
       builder: ((context, child)=> GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            fontFamily: "Poppins"
+            fontFamily: "Poppins",
+
+            primarySwatch: Colors.indigo
         ),
         title: 'EngVocab',
         initialRoute: AppPages.INITIAL,
