@@ -1,4 +1,5 @@
 
+import 'package:client/common/app_color.dart';
 import 'package:client/res/routes/pages.dart';
 import 'package:client/res/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,10 @@ class MyApp extends StatelessWidget {
       builder: ((context, child)=> GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            fontFamily: "Poppins"
+            fontFamily: "Poppins",
         ),
         title: 'EngVocab',
-        initialRoute: AppRoutes.INITIAL,
+        initialRoute: AppRoutes.DETAIL_LEARNED_TOPIC_WORD,
         getPages: AppPages.routes,
       )),
     );

@@ -26,4 +26,8 @@ class AppRoutes {
   static const PASSWORD_MANAGEMENT = '/private_info_manager/password_management';
   static const STATISCAL = '/statiscal';
 
+  static const LEARNING_VOCABULARY = '/learning_vocabulary';
+  static const DETAIL_LEARNED_TOPIC_WORD = '/learning_vocabulary/learned_topic_word';
+
+
 }
