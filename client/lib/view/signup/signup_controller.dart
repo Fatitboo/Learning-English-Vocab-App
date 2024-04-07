@@ -9,6 +9,9 @@ class SignUpController extends GetxController {
   final passwordController = TextEditingController();
   final confirmPassController = TextEditingController();
 
+
+
+
   toPageSignIn() async {
     Get.offAndToNamed(AppRoutes.SIGN_IN);
   }

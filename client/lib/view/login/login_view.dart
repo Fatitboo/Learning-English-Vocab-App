@@ -3,7 +3,6 @@ import 'package:client/common_widget/my_button.dart';
 import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../common_widget/text_field.dart';
 
 class LoginView extends GetView<LoginController> {
