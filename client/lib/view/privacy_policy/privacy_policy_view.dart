@@ -20,20 +20,20 @@ class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.rsBackground,
         appBar: AppBar(
           elevation: 0, // Loại bỏ đường viền bóng của AppBar
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.rsBackground,
           centerTitle: true,
           title: const Text(
             "Privacy Policy",
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 24,
                 fontWeight: FontWeight.w500
             ),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 30),
+            icon: const Icon(Icons.arrow_back),
             color: Colors.black,
             onPressed: () {
               Get.back();
@@ -42,8 +42,8 @@ class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

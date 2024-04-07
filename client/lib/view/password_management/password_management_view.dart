@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/app_color.dart';
+import '../../common_widget/my_button.dart';
 
 
 class PasswordManagementView extends GetView<PasswordManagementController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.rsBackground,
       appBar: _appBar(),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 20),
                 CurrentPasssView(),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 NewPasssView(),
                 SizedBox(height: 20),
                 ConfirmNewPasssView(),
@@ -38,18 +40,17 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
     return AppBar(
       elevation: 0,
       // Loại bỏ đường viền bóng của AppBar
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.rsBackground,
       centerTitle: true,
       title: const Text(
-        "Password Management",
+        "Change Password",
         style: TextStyle(
             color: Colors.black,
-            fontSize: 22,
             fontWeight: FontWeight.w500
         ),
       ),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, size: 30),
+        icon: const Icon(Icons.arrow_back),
         color: Colors.black,
         onPressed: () {
           Get.back();
@@ -58,27 +59,8 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
     );
   }
   Widget ButtonChangePass() => Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      alignment: Alignment.center,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          minimumSize: Size(280, 60),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
-        ),
-        child: const Text(
-          "Change Password",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      )
+      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      child: MyButton(text: 'Change password', onTap: () {  },)
   );
   Widget CurrentPasssView() => Obx(() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -86,7 +68,7 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
     children: [
       Text(
         "Current Password", // Sử dụng tiêu đề được truyền vào từ widget
-        style: TextStyle(fontSize: 14.0),
+        style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
       ),
       SizedBox(height: 10.0),
       TextFormField(
@@ -124,7 +106,7 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
     children: [
       Text(
         "New Password", // Sử dụng tiêu đề được truyền vào từ widget
-        style: TextStyle(fontSize: 14.0),
+        style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
       ),
       SizedBox(height: 10.0),
       TextFormField(
@@ -162,7 +144,7 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
     children: [
       Text(
         "Confirm New Password", // Sử dụng tiêu đề được truyền vào từ widget
-        style: TextStyle(fontSize: 14.0),
+        style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
       ),
       SizedBox(height: 10.0),
       TextFormField(

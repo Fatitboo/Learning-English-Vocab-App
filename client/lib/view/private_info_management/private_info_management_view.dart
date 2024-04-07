@@ -1,5 +1,6 @@
 
 import 'package:client/common/app_color.dart';
+import 'package:client/common_widget/my_button.dart';
 import 'package:client/res/routes/names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,18 +13,18 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0, // Loại bỏ đường viền bóng của AppBar
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.rsBackground,
         centerTitle: true,
         title: const Text(
           "Profile",
           style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+
               fontWeight: FontWeight.w500
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 30),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.black,
           onPressed: () {
             Get.back();
@@ -31,12 +32,13 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        color: AppColors.rsBackground,
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             InformationUser(),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 30),
+              margin: const EdgeInsets.symmetric(vertical: 30),
               child: Column(
                 children: [
                   ItemYourProfile(),
@@ -56,7 +58,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
 
   Widget InformationUser() => Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             Stack(
@@ -72,7 +74,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                       width: 2, // Độ dày của viền
                     ),
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage('assets/images/img.png'),
                     backgroundColor: Colors.transparent,
@@ -90,13 +92,13 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: Colors.white,
-                        width: 1,
+                        width: 0.5,
                       ),
                     ),
                     child: IconButton(
-                      icon: Icon(Icons.edit),
+                      icon: const Icon(Icons.add_photo_alternate_outlined),
                       color: Colors.white,
-                      iconSize: 18,
+                      iconSize: 20,
                       onPressed: () {},
                     ),
                   ),
@@ -107,7 +109,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "Phan Trọng Tính",
-                style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w400),
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400),
               ),
             )
           ],
@@ -116,26 +118,8 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
   );
 
   Widget ButtonDeleteAcount() => Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          minimumSize: Size(280, 60),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
-        ),
-        child: const Text(
-          "Delete Account",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      )
+      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      child: MyButton(text: 'Delete Account', onTap: () {  },)
   );
 
   Widget ItemYourProfile() => GestureDetector(
@@ -147,7 +131,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.account_circle_outlined, color: AppColors.primaryColor, size: 36),
+                const Icon(Icons.account_circle_outlined, color: AppColors.primaryColor, size: 30),
                 const Text(
                   "Your profile",
                   style: TextStyle(
@@ -159,7 +143,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.YOUR_PROFILE);
                   },
-                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
+                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),
               ],
             ),
@@ -181,7 +165,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.bookmark_border_outlined, color: AppColors.primaryColor, size: 36),
+                const Icon(Icons.bookmark_border_outlined, color: AppColors.primaryColor, size: 30),
                 const Text(
                   "Save topic",
                   style: TextStyle(
@@ -193,7 +177,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   onPressed: () {
 
                   },
-                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
+                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),
               ],
             ),
@@ -215,7 +199,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.help_outline_outlined, color: AppColors.primaryColor, size: 36),
+                const Icon(Icons.help_outline_outlined, color: AppColors.primaryColor, size: 30),
                 const Text(
                   "Privacy policy",
                   style: TextStyle(
@@ -227,7 +211,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.PRIVACY_POLICY);
                   },
-                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
+                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),
               ],
             ),
@@ -249,7 +233,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.key, color: AppColors.primaryColor, size: 36),
+                const Icon(Icons.key, color: AppColors.primaryColor, size: 30),
                 const Text(
                   "Password Management",
                   style: TextStyle(
@@ -261,7 +245,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.PASSWORD_MANAGEMENT);
                   },
-                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
+                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),
               ],
             ),
@@ -283,7 +267,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.login_outlined, color: AppColors.primaryColor, size: 36),
+                const Icon(Icons.login_outlined, color: AppColors.primaryColor, size: 30),
                 const Text(
                   "Log out",
                   style: TextStyle(
@@ -293,7 +277,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 24),
+                  icon: const Icon(Icons.arrow_forward_ios_outlined, color: AppColors.primaryColor, size: 22),
                 ),
               ],
             ),

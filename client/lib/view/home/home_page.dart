@@ -14,6 +14,7 @@ class HomePage extends GetView<HomeController> {
     Get.put(HomeController());
     return SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.rsBackground,
           body: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

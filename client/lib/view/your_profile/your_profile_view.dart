@@ -6,6 +6,8 @@ import 'package:client/view/your_profile/your_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common_widget/my_button.dart';
+
 class YourProfileView extends GetView<YourProfileController> {
 
   YourProfileView({super.key});
@@ -13,16 +15,18 @@ class YourProfileView extends GetView<YourProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.rsBackground,
         appBar: _appBar(),
         resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: Container(
+            color: AppColors.rsBackground,
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
                 InformationUser(),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Column(
                     children: [
                       TextFieldCustomProfile(title: "Name: "),
@@ -43,18 +47,18 @@ class YourProfileView extends GetView<YourProfileController> {
   AppBar _appBar() {
     return AppBar(
       elevation: 0, // Loại bỏ đường viền bóng của AppBar
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.rsBackground,
       centerTitle: true,
       title: const Text(
         "Your Profile",
         style: TextStyle(
             color: Colors.black,
-            fontSize: 22,
+
             fontWeight: FontWeight.w500
         ),
       ),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, size: 30),
+        icon: const Icon(Icons.arrow_back),
         color: Colors.black,
         onPressed: () {
           Get.back();
@@ -103,9 +107,9 @@ class YourProfileView extends GetView<YourProfileController> {
                       ),
                     ),
                     child: IconButton(
-                      icon: Icon(Icons.edit),
+                      icon: const Icon(Icons.add_photo_alternate_outlined),
                       color: Colors.white,
-                      iconSize: 18,
+                      iconSize: 20,
                       onPressed: () {},
                     ),
                   ),
@@ -125,26 +129,8 @@ class YourProfileView extends GetView<YourProfileController> {
   );
 
   Widget ButtonUpdateAcount() => Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          minimumSize: Size(280, 60),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
-        ),
-        child: const Text(
-          "Update Profile",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      )
+      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      child: MyButton(text: 'Update Profile', onTap: () {  },)
   );
 }
 
