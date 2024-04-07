@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "Poppins"
         ),
         title: 'EngVocab',
-        initialRoute: AppRoutes.FLASH_CARD,
+        initialRoute: AppRoutes.INITIAL,
         getPages: AppPages.routes,
       )),
     );
