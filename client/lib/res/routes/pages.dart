@@ -1,9 +1,13 @@
+import 'package:client/view/exam/exam_binding.dart';
+import 'package:client/view/exam/exam_view.dart';
 import 'package:client/view/forgot_password_view.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
 import 'package:client/view/flashcard/flashcard_binding.dart';
 import 'package:client/view/flashcard/flashcard_page.dart';
+import 'package:client/view/learning_vocabulary/round_learn/round_learn_binding.dart';
+import 'package:client/view/learning_vocabulary/round_learn/round_learn_view.dart';
 import 'package:client/view/login/login_binding.dart';
 import 'package:client/view/result_round_page.dart';
 import 'package:client/view/result_test_page.dart';
@@ -205,6 +209,25 @@ class AppPages {
       name: AppRoutes.SAVE_TOPIC,
       page: () => SavedTopicPage(),
       binding: SavedTopicBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.ROUND_LEARN,
+      page: () => RoundLearnView(),
+      binding: RoundLearnBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+
+    GetPage(
+      name: AppRoutes.EXAM,
+      page: () => ExamView(),
+      binding: ExamBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

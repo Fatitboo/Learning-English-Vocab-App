@@ -1,7 +1,9 @@
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/my_button.dart';
+import 'package:client/res/routes/names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class SettingTestPage extends StatefulWidget {
@@ -222,7 +224,9 @@ class _SettingTestPageState extends State<SettingTestPage> {
                     const SizedBox(height: 150,),
                     MyButton(
                       text: 'Start taking the test',
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(AppRoutes.RESULT_TEST, preventDuplicates: false);
+                      },
                     ),
                   ],
                 ),

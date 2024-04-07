@@ -87,6 +87,7 @@ class HomePage extends GetView<HomeController> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                           child: TopicWidget(
+
                               topicName: controller.data[index]["topicName"],
                               topicImage: controller.data[index]["topicImage"],
                               learnNumber: controller.data[index]["learnNumber"],
