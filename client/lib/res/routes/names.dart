@@ -4,6 +4,7 @@ class AppRoutes {
   static const INITIAL = '/';
 
   // user routes
+  static const NAV_BAR = '/nav_bar';
   static const SIGN_UP = '/sign_up';
   static const HOME = '/home';
   static const DETAIL_TOPIC = '/home/detail_topic';
