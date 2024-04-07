@@ -81,6 +81,5 @@ class HomeController extends GetxController{
       },
       preventDuplicates: false
     );
-
   }
 }

@@ -54,79 +54,62 @@ class SignUpView extends GetView<SignUpController> {
                     ),
 
                     // text field email
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Email',
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                          MyTextField(hintText: 'Email')
-                        ],
-                      ),
-                    ),
-
-                    // text field password
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Password',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          MyTextField(hintText: '*******')
-                        ],
-                      ),
-                    ),
-
-                    // text field confirm password
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Confirm Password',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          MyTextField(hintText: '*******')
-                        ],
-                      ),
-                    ),
-
-                    // btn sign up
-                    Padding(
+                      Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
-                      child: MyButton(text: 'Sign Up', onTap: (){},)
-                    ),
+                          vertical: 10, horizontal: 30),
+                      child: Form(
+                        key: controller.formField,
+                        child:  SizedBox(
+                          height: 450,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MyTextField(hintText: 'Email', controller: controller.emailController,checkEmail: true,prefixIcon:const Icon(Icons.email), ),
+                              MyTextField(hintText: 'Password', controller: controller.passwordController,checkLength: 8, isPass: true,prefixIcon:const Icon(Icons.lock),),
+                              MyTextField(hintText: 'Confirm password', controller: controller.confirmPassController, isPass: true,prefixIcon:const Icon(Icons.lock),),
+                              Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 20),
+                                  child: MyButton(text: 'Sign Up', onTap: (){
+                                    if (controller.formField.currentState!
+                                        .validate()) {
+                                      controller.emailController.clear();
+                                      controller.passwordController.clear();
 
-                    // have an account
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 30, horizontal: 30),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Text(
-                          'Already have an account',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
+                                    }
+                                  },)
+                              ),
+
+                              // have an account
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10,),
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.toPageSignIn();
+                                  },
+
+                                  child: const Text(
+                                    'Already have an account',
+                                    style: TextStyle(
+
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
+
+
+                    // btn sign up
+
 
                     // or continue with
                     const Padding(

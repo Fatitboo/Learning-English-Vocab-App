@@ -184,7 +184,7 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 50),
+              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
