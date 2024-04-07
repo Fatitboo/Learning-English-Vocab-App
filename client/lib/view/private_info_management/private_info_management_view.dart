@@ -38,7 +38,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
           children: [
             InformationUser(),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 30),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
                   ItemYourProfile(),

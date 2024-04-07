@@ -76,7 +76,7 @@ class DetailLearnedTopic extends StatelessWidget {
                  TextField(
                    decoration: InputDecoration(
                      hintText: 'Enter word',
-                    
+
 
                    ),
                  )

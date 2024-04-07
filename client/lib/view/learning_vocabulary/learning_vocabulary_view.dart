@@ -14,6 +14,7 @@ class LearningVocabularyView extends GetView<LearningVocabularyController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<LearningVocabularyController>(() => LearningVocabularyController());
     return GetBuilder<LearningVocabularyController>(builder: (_) {
       return SafeArea(
           child: DefaultTabController(

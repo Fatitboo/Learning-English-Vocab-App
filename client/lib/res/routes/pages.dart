@@ -14,13 +14,21 @@ import 'package:client/view/welcome_view.dart';
 import 'package:get/get.dart';
 import 'package:client/view/login/login_view.dart';
 
+import '../../common_widget/bottom_navigate/bottom_navigate.dart';
+import '../../common_widget/bottom_navigate/bottom_navigate_binding.dart';
 import '../../view/detail_topic/detail_topic_binding.dart';
+import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_binding.dart';
+import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_topic.dart';
+import '../../view/learning_vocabulary/learning_vocabulary_binding.dart';
+import '../../view/learning_vocabulary/learning_vocabulary_view.dart';
 import '../../view/password_management/password_management_binding.dart';
 import '../../view/password_management/password_management_view.dart';
 import '../../view/privacy_policy/privacy_policy_binding.dart';
 import '../../view/privacy_policy/privacy_policy_view.dart';
 import '../../view/private_info_management/private_info_management_binding.dart';
 import '../../view/private_info_management/private_info_management_view.dart';
+import '../../view/saved_topic/saved_topic_binding.dart';
+import '../../view/saved_topic/saved_topic_page.dart';
 import '../../view/statiscal/statiscal_binding.dart';
 import '../../view/statiscal/statiscal_view.dart';
 import '../../view/your_profile/your_profile_binding.dart';
@@ -186,7 +194,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.DETAIL_LEARNED_TOPIC_WORD,
       page: () => DetailLearnedTopic(),
-      binding: DetailLearnBinding(),
+      binding: DetailLearnedBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

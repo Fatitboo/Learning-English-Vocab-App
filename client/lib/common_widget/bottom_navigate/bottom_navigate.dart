@@ -1,4 +1,5 @@
 import 'package:client/view/flashcard/flashcard_page.dart';
+import 'package:client/view/learning_vocabulary/learning_vocabulary_view.dart';
 import 'package:client/view/login/login_view.dart';
 import 'package:client/view/private_info_management/private_info_management_view.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../common/app_color.dart';
 import '../../view/home/home_page.dart';
+import '../../view/statiscal/statiscal_view.dart';
 import '../../view/your_profile/your_profile_view.dart';
 import 'bottom_navigate_controller.dart';
 
@@ -19,8 +21,9 @@ class NavBar extends GetView<BottomNavigateController> {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         HomePage(),
-        FlashCardPage(),
+        LearningVocabularyView(),
         LoginView(),
+        StatiscalView(),
         PrivateInfoManagementView(),
       ],
     );
@@ -32,7 +35,7 @@ class NavBar extends GetView<BottomNavigateController> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Statistic',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.school),
@@ -41,6 +44,10 @@ class NavBar extends GetView<BottomNavigateController> {
         BottomNavigationBarItem(
           icon: Icon(Icons.insert_page_break_sharp),
           label: 'Examine',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.pie_chart),
+          label: 'Statistic',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

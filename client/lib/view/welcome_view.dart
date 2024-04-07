@@ -53,8 +53,8 @@ class _WelcomeViewState extends State<WelcomeView> {
                           fontSize: 14, fontWeight: FontWeight.normal),
                     ),
                   ),
-                  const SizedBox(
-                    height: 70,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.width*0.2,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
