@@ -54,7 +54,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     ),
                   ),
                    SizedBox(
-                    height: MediaQuery.of(context).size.width*0.2,
+                    height: MediaQuery.of(context).size.width*0.1,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
