@@ -225,7 +225,7 @@ class _SettingTestPageState extends State<SettingTestPage> {
                     MyButton(
                       text: 'Start taking the test',
                       onTap: () {
-                        Get.toNamed(AppRoutes.RESULT_TEST, preventDuplicates: false);
+                        Get.toNamed(AppRoutes.EXAM_ROUND, preventDuplicates: false);
                       },
                     ),
                   ],
