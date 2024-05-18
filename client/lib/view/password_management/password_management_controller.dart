@@ -1,12 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PasswordManagementController extends GetxController {
   bool obscurePassword = true; // Có thể sử dụng Obx để theo dõi thay đổi
   bool obscureNewPassword = true;
   bool obscureConfirmNewPassword = true;
-  String currentPass = "pass hiện tại";
-  String newPass = "";
-  String confirmNewPass = "";
+  TextEditingController currentPass = TextEditingController();
+  TextEditingController newPass = TextEditingController();
+  TextEditingController confirmNewPass = TextEditingController();
 
   void toggleObscurePassword() {
     obscurePassword = !obscurePassword;
@@ -20,21 +21,6 @@ class PasswordManagementController extends GetxController {
 
   void toggleObscureConfirmNewPassword() {
     obscureConfirmNewPassword = !obscureConfirmNewPassword;
-    update();
-  }
-
-  void setCurrentPassword(String value) {
-    currentPass = value;
-    update();
-  }
-
-  void setNewPassword(String value) {
-    newPass = value;
-    update();
-  }
-
-  void setConfirmNewPassword(String value) {
-    confirmNewPass = value;
     update();
   }
 }

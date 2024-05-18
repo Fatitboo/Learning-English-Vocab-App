@@ -1,18 +1,41 @@
 import 'package:client/common/app_color.dart';
 import 'package:flutter/material.dart';
 
+typedef StringFunction = String? Function(String? value);
+
+
 
 class TextFieldCustomProfile extends StatelessWidget {
   late String title;
   late TextEditingController textController;
   late TextInputType keyboardType;
   late bool obscureText;
+  StringFunction? validator;
+
+  InputDecoration _inputDecoration() {
+    return InputDecoration(
+      contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.primaryColor),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red),
+      ),
+    );
+  }
 
   TextFieldCustomProfile({Key? key,
     required this.title,
     required this.textController,
     required this.keyboardType,
     required this.obscureText,
+    this.validator
   }) : super(key: key);
 
   @override
@@ -29,21 +52,12 @@ class TextFieldCustomProfile extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
           Container(
-            height: 50,
             child: TextFormField(
               controller: textController,
               obscureText: obscureText,
               keyboardType: keyboardType,
-              decoration: const InputDecoration(
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black26),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.primaryColor,width: 1), // Màu xanh khi focus
-                ),
-              ),
+              validator: this.validator,
+              decoration: _inputDecoration(),
               cursorColor: AppColors.primaryColor,
               style: const TextStyle(
                 fontSize: 14,
@@ -54,7 +68,5 @@ class TextFieldCustomProfile extends StatelessWidget {
       ),
     );
   }
-
-
 }
 

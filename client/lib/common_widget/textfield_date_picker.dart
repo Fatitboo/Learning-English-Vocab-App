@@ -58,12 +58,17 @@ class _DatePickerFieldState extends State<DatePickerField> {
       onTap: () => _selectDate(context),
       child: AbsorbPointer(
         child: Container(
-          height: 50,
           child: TextFormField(
             controller: _textController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your birthday';
+              }
+              return null;
+            },
             decoration: InputDecoration(
               hintText: 'DD/MM/YYYY',
-              suffixIcon: Icon(Icons.calendar_today, color: AppColors.primaryColor),
+              suffixIcon: Icon(Icons.calendar_today, color: Colors.grey),
               contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -72,6 +77,14 @@ class _DatePickerFieldState extends State<DatePickerField> {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: AppColors.primaryColor), // Màu xanh khi focus
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.red),
               ),
             ),
             cursorColor: AppColors.primaryColor,
