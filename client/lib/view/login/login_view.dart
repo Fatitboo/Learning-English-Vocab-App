@@ -4,7 +4,6 @@ import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common_widget/text_field.dart';
-import '../../res/routes/names.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
@@ -69,7 +68,6 @@ class LoginView extends GetView<LoginController> {
                                 hintText: 'Email',
                                 prefixIcon: Icon(Icons.email),
                                 controller: controller.emailController,
-                                checkEmail: true,
                               ),
                               MyTextField(
                                 hintText: 'Password',
@@ -79,8 +77,8 @@ class LoginView extends GetView<LoginController> {
                                 checkLength: 8,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -103,15 +101,13 @@ class LoginView extends GetView<LoginController> {
 
                               // btn login
                               Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: MyButton(
                                     text: "Sign In",
                                     onTap: () {
                                       if (controller.formField.currentState!
                                           .validate()) {
-                                        controller.emailController.clear();
-                                        controller.passwordController.clear();
                                         controller.signUserIn();
                                       }
                                     },
@@ -119,7 +115,8 @@ class LoginView extends GetView<LoginController> {
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 35, ),
+                                  vertical: 35,
+                                ),
                                 child: InkWell(
                                   onTap: () {
                                     controller.toPageSignUp();
@@ -138,10 +135,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
 
-
-
                       // forgot password
-
 
                       const SizedBox(
                         height: 20,
@@ -166,7 +160,7 @@ class LoginView extends GetView<LoginController> {
                           width: double.infinity,
                           child: OutlinedButton.icon(
                               onPressed: () {
-
+                                controller.signUserInGG();
                               },
                               icon: Image.asset("assets/icons/google.png"),
                               label: const Text(

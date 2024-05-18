@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { MyLoggerModule } from './my-logger/my-logger.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './user/auth.guard';
 
 @Module({
   imports: [
@@ -37,6 +38,10 @@ import { APP_GUARD } from '@nestjs/core';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
   ],
 })

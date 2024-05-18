@@ -19,17 +19,13 @@ class SignUpView extends GetView<SignUpController> {
                 fit: BoxFit.cover)),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            body: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-
+                    const SizedBox(height: 50,),
                     const Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
@@ -54,49 +50,69 @@ class SignUpView extends GetView<SignUpController> {
                     ),
 
                     // text field email
-                      Padding(
+                    Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 30),
                       child: Form(
                         key: controller.formField,
-                        child:  SizedBox(
-                          height: 450,
+                        child: SizedBox(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              MyTextField(hintText: 'Email', controller: controller.emailController,checkEmail: true,prefixIcon:const Icon(Icons.email), ),
-                              MyTextField(hintText: 'Password', controller: controller.passwordController,checkLength: 8, isPass: true,prefixIcon:const Icon(Icons.lock),),
-                              MyTextField(hintText: 'Confirm password', controller: controller.confirmPassController, isPass: true,prefixIcon:const Icon(Icons.lock),),
-                              Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20),
-                                  child: MyButton(text: 'Sign Up', onTap: (){
-                                    if (controller.formField.currentState!
-                                        .validate()) {
-                                      controller.emailController.clear();
-                                      controller.passwordController.clear();
-
-                                    }
-                                  },)
+                              MyTextField(
+                                hintText: 'Username',
+                                controller: controller.usernameController,
+                                prefixIcon:
+                                    const Icon(Icons.account_box_rounded),
                               ),
+                              MyTextField(
+                                hintText: 'Email',
+                                controller: controller.emailController,
+                                checkEmail: true,
+                                prefixIcon: const Icon(Icons.email),
+                              ),
+                              MyTextField(
+                                hintText: 'Password',
+                                controller: controller.passwordController,
+                                checkLength: 8,
+                                isPass: true,
+                                prefixIcon: const Icon(Icons.lock),
+                              ),
+                              MyTextField(
+                                  hintText: 'Confirm password',
+                                  controller: controller.confirmPassController,
+                                  isPass: true,
+                                  prefixIcon: const Icon(Icons.lock),
+                                  checkPasswordMatch:
+                                      controller.passwordController),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  child: MyButton(
+                                    text: 'Sign Up',
+                                    onTap: () {
+                                      if (controller.formField.currentState!.validate()) {
+                                        controller.signUserUp();
+                                      }
+                                    },
+                                  )),
 
                               // have an account
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 10,),
+                                  vertical: 10,
+                                ),
                                 child: InkWell(
                                   onTap: () {
                                     controller.toPageSignIn();
                                   },
-
                                   child: const Text(
                                     'Already have an account',
                                     style: TextStyle(
-
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
@@ -107,14 +123,12 @@ class SignUpView extends GetView<SignUpController> {
                       ),
                     ),
 
-
                     // btn sign up
-
 
                     // or continue with
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                       child: Text(
                         'Or continue with',
                         style: TextStyle(
@@ -131,19 +145,21 @@ class SignUpView extends GetView<SignUpController> {
                         height: 50,
                         width: double.infinity,
                         child: OutlinedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.signUserInGG();
+                            },
                             icon: Image.asset("assets/icons/google.png"),
                             label: const Text(
                               'Sign Up with Google',
                               style: TextStyle(color: Color(0xff2186ab)),
                             ),
                             style: ButtonStyle(
-                                shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      side: const BorderSide(color: Colors.purple),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    )))),
+                              side: const BorderSide(color: Colors.purple),
+                              borderRadius: BorderRadius.circular(10.0),
+                            )))),
                       ),
                     ),
                   ],
