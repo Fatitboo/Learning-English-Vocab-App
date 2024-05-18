@@ -1,11 +1,16 @@
 
-import 'package:client/res/routes/pages.dart';
 import 'package:client/res/routes/routes.dart';
+import 'package:client/res/storage/storage.dart';
+import 'package:client/res/storage/user_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Get.putAsync<StorageService>(() => StorageService().init());
+  Get.put<UserStore>(UserStore());
   runApp(const MyApp());
 }
 

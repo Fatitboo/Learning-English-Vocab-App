@@ -3,21 +3,37 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class User {
     @PrimaryGeneratedColumn() 
     id: number;
-    @Column()
+
+    @Column({unique:true})
     username: string;
+
     @Column()
     password: string;
-    @Column() 
+
+    @Column({nullable:true}) 
     fullname: string;
-    @Column() 
+
+    @Column({nullable:true}) 
     dob: Date;
+
     @Column()
     email: string;
-    @Column() 
+
+    @Column({nullable:true}) 
     phone: string;
+
     @Column({default:0})
     score: number;
-    @Column() 
-    avatar: string;
 
+    @Column({nullable:true}) 
+    avatar: string;
+    
+    @Column({nullable:true})
+    googleAccountId: string;
+
+    @Column({nullable:true})
+    passwordResetToken: string;
+    
+    @Column({nullable:true})
+    passwordResetExpires: Date;
 }

@@ -8,21 +8,8 @@ export class CreateUserDto {
     @IsNotEmpty()
     @IsString()
     password: string;
-
-    @IsNotEmpty()
-    @IsString()
-    fullname: string;
      
-    dob: Date;
-
     @IsString()
     email: string;
 
-    @IsString()
-    phone: string;
-
-    score: number;
-
-    @IsString()
-    avatar: string;
 }

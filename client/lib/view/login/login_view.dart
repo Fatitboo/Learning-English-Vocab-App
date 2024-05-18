@@ -68,7 +68,6 @@ class LoginView extends GetView<LoginController> {
                                 hintText: 'Email',
                                 prefixIcon: Icon(Icons.email),
                                 controller: controller.emailController,
-                                checkEmail: true,
                               ),
                               MyTextField(
                                 hintText: 'Password',
@@ -78,8 +77,8 @@ class LoginView extends GetView<LoginController> {
                                 checkLength: 8,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -102,15 +101,13 @@ class LoginView extends GetView<LoginController> {
 
                               // btn login
                               Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: MyButton(
                                     text: "Sign In",
                                     onTap: () {
                                       if (controller.formField.currentState!
                                           .validate()) {
-                                        controller.emailController.clear();
-                                        controller.passwordController.clear();
                                         controller.signUserIn();
                                       }
                                     },
@@ -118,7 +115,8 @@ class LoginView extends GetView<LoginController> {
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 35, ),
+                                  vertical: 35,
+                                ),
                                 child: InkWell(
                                   onTap: () {
                                     controller.toPageSignUp();
@@ -137,10 +135,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
 
-
-
                       // forgot password
-
 
                       const SizedBox(
                         height: 20,
@@ -164,7 +159,9 @@ class LoginView extends GetView<LoginController> {
                           height: 50,
                           width: double.infinity,
                           child: OutlinedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.signUserInGG();
+                              },
                               icon: Image.asset("assets/icons/google.png"),
                               label: const Text(
                                 'Sign In with Google',
