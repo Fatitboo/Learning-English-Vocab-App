@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "Poppins"
         ),
         title: 'EngVocab',
-        initialRoute: AppRoutes.INITIAL,
+        initialRoute: AppRoutes.PRIVATE_INFO_MANAGER,
         getPages: AppPages.routes,
       )),
     );

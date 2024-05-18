@@ -1,40 +1,40 @@
 import 'package:get/get.dart';
 
 class PasswordManagementController extends GetxController {
-  var obscurePassword = true.obs; // Có thể sử dụng Obx để theo dõi thay đổi
-  var obscureNewPassword = true.obs;
-  var obscureConfirmNewPassword = true.obs;
-  var currentPass = "pass hiện tại".obs;
-  var newPass = "".obs;
-  var confirmNewPass = "".obs;
+  bool obscurePassword = true; // Có thể sử dụng Obx để theo dõi thay đổi
+  bool obscureNewPassword = true;
+  bool obscureConfirmNewPassword = true;
+  String currentPass = "pass hiện tại";
+  String newPass = "";
+  String confirmNewPass = "";
 
   void toggleObscurePassword() {
-    obscurePassword.toggle();
+    obscurePassword = !obscurePassword;
     update();
   }
 
   void toggleObscureNewPassword() {
-    obscureNewPassword.toggle();
+    obscureNewPassword = !obscureNewPassword;
     update();
   }
 
   void toggleObscureConfirmNewPassword() {
-    obscureConfirmNewPassword.toggle();
+    obscureConfirmNewPassword = !obscureConfirmNewPassword;
     update();
   }
 
   void setCurrentPassword(String value) {
-    currentPass.value = value;
+    currentPass = value;
     update();
   }
 
   void setNewPassword(String value) {
-    newPass.value = value;
+    newPass = value;
     update();
   }
 
   void setConfirmNewPassword(String value) {
-    confirmNewPass.value = value;
+    confirmNewPass = value;
     update();
   }
 }

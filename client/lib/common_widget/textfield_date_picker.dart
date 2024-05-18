@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../common/app_color.dart';
 
 class DatePickerField extends StatefulWidget {
@@ -58,48 +57,38 @@ class _DatePickerFieldState extends State<DatePickerField> {
     return GestureDetector(
       onTap: () => _selectDate(context),
       child: AbsorbPointer(
-          child: Container(
-            height: 50,
-            child: TextFormField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'DD/MM/YYYY',
-                suffixIcon: Icon(Icons.calendar_today, color: AppColors.primaryColor,),
-                contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(color: Colors.black26),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(color: AppColors.primaryColor), // Màu xanh khi focus
-                ),
+        child: Container(
+          height: 50,
+          child: TextFormField(
+            controller: _textController,
+            decoration: InputDecoration(
+              hintText: 'DD/MM/YYYY',
+              suffixIcon: Icon(Icons.calendar_today, color: AppColors.primaryColor),
+              contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.black26),
               ),
-              cursorColor: AppColors.primaryColor,
-              style: TextStyle(
-                fontSize: 14,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: AppColors.primaryColor), // Màu xanh khi focus
               ),
             ),
-          )
+            cursorColor: AppColors.primaryColor,
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+        ),
       ),
     );
   }
 }
 
-class DatePickerCustomeProfile extends StatefulWidget {
-  @override
-  _DatePickerCustomeProfileState createState() =>
-      _DatePickerCustomeProfileState();
-}
+class DatePickerCustomeProfile extends StatelessWidget {
+  final ValueNotifier<DateTime> controller;
 
-class _DatePickerCustomeProfileState extends State<DatePickerCustomeProfile> {
-  late ValueNotifier<DateTime?> _dateController;
-
-  @override
-  void initState() {
-    super.initState();
-    _dateController = ValueNotifier(null);
-  }
+  DatePickerCustomeProfile({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,17 +103,11 @@ class _DatePickerCustomeProfileState extends State<DatePickerCustomeProfile> {
           ),
           SizedBox(height: 10.0),
           DatePickerField(
-            controller: _dateController,
+            controller: controller,
             dateFormat: DateFormat('dd/MM/yyyy'),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _dateController.dispose();
-    super.dispose();
   }
 }

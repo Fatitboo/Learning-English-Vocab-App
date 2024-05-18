@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/textfield_custom_profile.dart';
@@ -8,39 +9,43 @@ import 'package:get/get.dart';
 
 import '../../common_widget/my_button.dart';
 
-class YourProfileView extends GetView<YourProfileController> {
-
+class YourProfileView extends StatelessWidget {
   YourProfileView({super.key});
+  final controller = Get.put(YourProfileController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.rsBackground,
-        appBar: _appBar(),
-        resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(
-          child: Container(
-            color: AppColors.rsBackground,
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                InformationUser(),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Column(
-                    children: [
-                      TextFieldCustomProfile(title: "Name: "),
-                      TextFieldCustomProfile(title: "Email: "),
-                      TextFieldCustomProfile(title: "Phone number: "),
-                      DatePickerCustomeProfile(),
-                    ],
-                  ),
+    return GetBuilder<YourProfileController>(
+      builder: (_) {
+        return Scaffold(
+            backgroundColor: AppColors.rsBackground,
+            appBar: _appBar(),
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Container(
+                color: AppColors.rsBackground,
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    InformationUser(),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Column(
+                        children: [
+                          TextFieldCustomProfile(title: "Name: ", textController: controller.nameController, keyboardType: TextInputType.text, obscureText: false),
+                          TextFieldCustomProfile(title: "Email: ",textController: controller.emailController, keyboardType: TextInputType.emailAddress, obscureText: false),
+                          TextFieldCustomProfile(title: "Phone number: ",textController: controller.phoneController, keyboardType: TextInputType.phone, obscureText: false),
+                          DatePickerCustomeProfile(controller: controller.dateController),
+                        ],
+                      ),
+                    ),
+                    ButtonUpdateAcount(),
+                  ],
                 ),
-                ButtonUpdateAcount(),
-              ],
-            ),
-          ),
-        )
+              ),
+            )
+        );
+      }
     );
   }
 
@@ -87,7 +92,9 @@ class YourProfileView extends GetView<YourProfileController> {
                   ),
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/img.png'),
+                    backgroundImage: controller.avatarPath.isEmpty
+                        ? const AssetImage('assets/images/img.png') as ImageProvider
+                        : FileImage(File(controller.avatarPath)),
                     backgroundColor: Colors.transparent,
                   ),
                 ),
@@ -110,7 +117,9 @@ class YourProfileView extends GetView<YourProfileController> {
                       icon: const Icon(Icons.add_photo_alternate_outlined),
                       color: Colors.white,
                       iconSize: 20,
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.pickImage();
+                      },
                     ),
                   ),
                 )
@@ -130,7 +139,14 @@ class YourProfileView extends GetView<YourProfileController> {
 
   Widget ButtonUpdateAcount() => Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-      child: MyButton(text: 'Update Profile', onTap: () {  },)
+      child: MyButton(text: 'Update Profile', onTap: () {
+        print("avatarPath: " + controller.avatarPath + '\n');
+        print("name: " + controller.nameController.text + '\n');
+        print("email: " + controller.emailController.text + '\n');
+        print("phone: " + controller.phoneController.text + '\n');
+        print("date: " + controller.dateController.value.toString() + " /" + '\n');
+      },
+      )
   );
 }
 

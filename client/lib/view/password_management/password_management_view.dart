@@ -6,35 +6,39 @@ import '../../common/app_color.dart';
 import '../../common_widget/my_button.dart';
 
 
-class PasswordManagementView extends GetView<PasswordManagementController> {
+class PasswordManagementView extends StatelessWidget {
+  final controller = Get.put(PasswordManagementController());
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.rsBackground,
-      appBar: _appBar(),
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 20),
-                CurrentPasssView(),
-                SizedBox(height: 30),
-                NewPasssView(),
-                SizedBox(height: 20),
-                ConfirmNewPasssView(),
-                SizedBox(height: 20),
-                ButtonChangePass(),
-              ],
+    return GetBuilder<PasswordManagementController>(builder: (_) {
+      return Scaffold(
+        backgroundColor: AppColors.rsBackground,
+        appBar: _appBar(),
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 20),
+                  CurrentPasssView(),
+                  SizedBox(height: 30),
+                  NewPasssView(),
+                  SizedBox(height: 20),
+                  ConfirmNewPasssView(),
+                  SizedBox(height: 20),
+                  ButtonChangePass(),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
   AppBar _appBar() {
     return AppBar(
@@ -62,7 +66,9 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       child: MyButton(text: 'Change password', onTap: () {  },)
   );
-  Widget CurrentPasssView() => Obx(() => Column(
+
+
+  Widget CurrentPasssView() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -75,12 +81,12 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         onChanged: (value) {
           controller.setCurrentPassword(value);
         },
-        initialValue: controller.currentPass.value,
-        obscureText: controller.obscurePassword.value,
+        initialValue: controller.currentPass,
+        obscureText: controller.obscurePassword,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              controller.obscurePassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
@@ -98,9 +104,8 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
-  )
   );
-  Widget NewPasssView() => Obx(() => Column(
+  Widget NewPasssView() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -113,12 +118,12 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         onChanged: (value) {
           controller.setNewPassword(value);
         },
-        initialValue: controller.newPass.value,
-        obscureText: controller.obscureNewPassword.value,
+        initialValue: controller.newPass,
+        obscureText: controller.obscureNewPassword,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              controller.obscureNewPassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscureNewPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
@@ -136,9 +141,8 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
-  )
   );
-  Widget ConfirmNewPasssView() => Obx(() => Column(
+  Widget ConfirmNewPasssView() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -151,12 +155,12 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         onChanged: (value) {
           controller.setConfirmNewPassword(value);
         },
-        initialValue: controller.confirmNewPass.value,
-        obscureText: controller.obscureConfirmNewPassword.value,
+        initialValue: controller.confirmNewPass,
+        obscureText: controller.obscureConfirmNewPassword,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(
-              controller.obscureConfirmNewPassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              controller.obscureConfirmNewPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppColors.primaryColor,
             ),
             onPressed: () {
@@ -174,6 +178,5 @@ class PasswordManagementView extends GetView<PasswordManagementController> {
         cursorColor: AppColors.primaryColor,
       ),
     ],
-  )
   );
 }

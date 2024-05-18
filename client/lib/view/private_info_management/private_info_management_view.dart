@@ -1,60 +1,64 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/my_button.dart';
 import 'package:client/res/routes/names.dart';
-import 'package:client/res/storage/user_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:client/view/private_info_management/private_info_management_controller.dart';
 
-class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
+class PrivateInfoManagementView extends StatelessWidget {
   PrivateInfoManagementView({super.key});
+  final controller = Get.put(PrivateInfoManagementController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        // Loại bỏ đường viền bóng của AppBar
-        backgroundColor: AppColors.rsBackground,
-        centerTitle: true,
-        title: const Text(
-          "Profile",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
-      body: Container(
-        color: AppColors.rsBackground,
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            InformationUser(),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Column(
-                children: [
-                  ItemYourProfile(),
-                  ItemSaveTopic(),
-                  ItemPrivacyPolicy(),
-                  ItemPasswordManagement(),
-                  ItemLogOut(),
-                ],
-              ),
+    return GetBuilder<PrivateInfoManagementController>(
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: AppColors.rsBackground,
+            centerTitle: true,
+            title: const Text(
+              "Profile",
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
             ),
-            ButtonDeleteAcount(),
-          ],
-        ),
-      ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.black,
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          body: Container(
+            color: AppColors.rsBackground,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                InformationUser(),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    children: [
+                      ItemYourProfile(),
+                      ItemSaveTopic(),
+                      ItemPrivacyPolicy(),
+                      ItemPasswordManagement(),
+                    ],
+                  ),
+                ),
+                ButtonLogoutAcount(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
   Widget InformationUser() => Center(
-          child: Container(
+      child: Container(
         margin: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
@@ -63,24 +67,22 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
               children: [
                 Container(
                   width: 104,
-                  // Kích thước của hình ảnh avatar (bán kính 50 + độ dày của viền 2)
                   height: 104,
-                  // Kích thước của hình ảnh avatar (bán kính 50 + độ dày của viền 2)
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    // Đặt hình dạng của container thành hình tròn
                     border: Border.all(
-                      color: Colors.grey, // Màu của viền
-                      width: 2, // Độ dày của viền
+                      color: Colors.grey,
+                      width: 1,
                     ),
                   ),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/img.png'),
+                    backgroundImage: controller.avatarPath.isEmpty
+                        ? const AssetImage('assets/images/img.png') as ImageProvider
+                        : FileImage(File(controller.avatarPath)),
                     backgroundColor: Colors.transparent,
                   ),
                 ),
-                // Button edit
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -99,7 +101,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                       icon: const Icon(Icons.add_photo_alternate_outlined),
                       color: Colors.white,
                       iconSize: 20,
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.pickImage();
+                      },
                     ),
                   ),
                 )
@@ -119,189 +123,161 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
         ),
       ));
 
-  Widget ButtonDeleteAcount() => Container(
+  Widget ButtonLogoutAcount() => Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       child: MyButton(
-        text: 'Delete Account',
+        text: 'Log out',
         onTap: () {},
       ));
 
   Widget ItemYourProfile() => GestureDetector(
-        onTap: () {},
-        child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+    onTap: () {
+      Get.toNamed(AppRoutes.YOUR_PROFILE);
+    },
+    child: Container(
+        margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(Icons.account_circle_outlined,
-                        color: AppColors.primaryColor, size: 30),
-                    const Text(
-                      "Your profile",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.YOUR_PROFILE);
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios_outlined,
-                          color: AppColors.primaryColor, size: 22),
-                    ),
-                  ],
+                const Icon(Icons.account_circle_outlined,
+                    color: AppColors.primaryColor, size: 30),
+                const Text(
+                  "Your profile",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
-                Container(
-                  height: 1.5,
-                  color: Colors.grey,
-                  margin: const EdgeInsets.only(top: 8),
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.YOUR_PROFILE);
+                  },
+                  icon: const Icon(Icons.arrow_forward_ios_outlined,
+                      color: AppColors.primaryColor, size: 22),
                 ),
               ],
-            )),
-      );
+            ),
+            Container(
+              height: 1.5,
+              color: Colors.grey,
+              margin: const EdgeInsets.only(top: 8),
+            ),
+          ],
+        )
+    ),
+  );
 
   Widget ItemSaveTopic() => GestureDetector(
-        onTap: () {},
-        child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+    onTap: () {
+      Get.toNamed(AppRoutes.SAVE_TOPIC);
+    },
+    child: Container(
+        margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(Icons.bookmark_border_outlined,
-                        color: AppColors.primaryColor, size: 30),
-                    const Text(
-                      "Save topic",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_forward_ios_outlined,
-                          color: AppColors.primaryColor, size: 22),
-                    ),
-                  ],
+                const Icon(Icons.bookmark_border_outlined,
+                    color: AppColors.primaryColor, size: 30),
+                const Text(
+                  "Save topic",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
-                Container(
-                  height: 1.5,
-                  color: Colors.grey,
-                  margin: const EdgeInsets.only(top: 8),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_forward_ios_outlined,
+                      color: AppColors.primaryColor, size: 22),
                 ),
               ],
-            )),
-      );
+            ),
+            Container(
+              height: 1.5,
+              color: Colors.grey,
+              margin: const EdgeInsets.only(top: 8),
+            ),
+          ],
+        )),
+  );
 
   Widget ItemPrivacyPolicy() => GestureDetector(
-        onTap: () {},
-        child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+    onTap: () {
+      Get.toNamed(AppRoutes.PRIVACY_POLICY);
+    },
+    child: Container(
+        margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(Icons.help_outline_outlined,
-                        color: AppColors.primaryColor, size: 30),
-                    const Text(
-                      "Privacy policy",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.PRIVACY_POLICY);
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios_outlined,
-                          color: AppColors.primaryColor, size: 22),
-                    ),
-                  ],
+                const Icon(Icons.help_outline_outlined,
+                    color: AppColors.primaryColor, size: 30),
+                const Text(
+                  "Privacy policy",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
-                Container(
-                  height: 1.5,
-                  color: Colors.grey,
-                  margin: const EdgeInsets.only(top: 8),
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.PRIVACY_POLICY);
+                  },
+                  icon: const Icon(Icons.arrow_forward_ios_outlined,
+                      color: AppColors.primaryColor, size: 22),
                 ),
               ],
-            )),
-      );
+            ),
+            Container(
+              height: 1.5,
+              color: Colors.grey,
+              margin: const EdgeInsets.only(top: 8),
+            ),
+          ],
+        )),
+  );
 
   Widget ItemPasswordManagement() => GestureDetector(
-        onTap: () {},
-        child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+    onTap: () {
+      Get.toNamed(AppRoutes.PASSWORD_MANAGEMENT);
+    },
+    child: Container(
+        margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(Icons.key,
-                        color: AppColors.primaryColor, size: 30),
-                    const Text(
-                      "Password Management",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.PASSWORD_MANAGEMENT);
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios_outlined,
-                          color: AppColors.primaryColor, size: 22),
-                    ),
-                  ],
+                const Icon(Icons.key,
+                    color: AppColors.primaryColor, size: 30),
+                const Text(
+                  "Password Management",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
-                Container(
-                  height: 1.5,
-                  color: Colors.grey,
-                  margin: const EdgeInsets.only(top: 8),
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.PASSWORD_MANAGEMENT);
+                  },
+                  icon: const Icon(Icons.arrow_forward_ios_outlined,
+                      color: AppColors.primaryColor, size: 22),
                 ),
               ],
-            )),
-      );
-
-  Widget ItemLogOut() => GestureDetector(
-        onTap: () {},
-        child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(Icons.login_outlined,
-                        color: AppColors.primaryColor, size: 30),
-                    const Text(
-                      "Log out",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        UserStore.to.onLogout();
-                        Get.offAllNamed(AppRoutes.SIGN_IN);
-                      },
-                      icon: const Icon(Icons.arrow_forward_ios_outlined,
-                          color: AppColors.primaryColor, size: 22),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 1.5,
-                  color: Colors.grey,
-                  margin: const EdgeInsets.only(top: 8),
-                ),
-              ],
-            )),
-      );
+            ),
+            Container(
+              height: 1.5,
+              color: Colors.grey,
+              margin: const EdgeInsets.only(top: 8),
+            ),
+          ],
+        )),
+  );
 }

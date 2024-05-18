@@ -18,15 +18,12 @@ import 'package:get/get.dart';
 import 'package:client/view/login/login_view.dart';
 
 import '../../view/detail_topic/detail_topic_binding.dart';
-import '../../view/password_management/password_management_binding.dart';
 import '../../view/password_management/password_management_view.dart';
 import '../../view/privacy_policy/privacy_policy_binding.dart';
 import '../../view/privacy_policy/privacy_policy_view.dart';
-import '../../view/private_info_management/private_info_management_binding.dart';
 import '../../view/private_info_management/private_info_management_view.dart';
 import '../../view/statiscal/statiscal_binding.dart';
 import '../../view/statiscal/statiscal_view.dart';
-import '../../view/your_profile/your_profile_binding.dart';
 import '../../view/your_profile/your_profile_view.dart';
 import '../middleware/route_welcome_middleware.dart';
 import 'names.dart';
@@ -137,7 +134,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.PRIVATE_INFO_MANAGER,
       page: () => PrivateInfoManagementView(),
-      binding: PrivateInfoManagementBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
@@ -146,7 +142,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.YOUR_PROFILE,
       page: () => YourProfileView(),
-      binding: YourProfileBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
@@ -164,7 +159,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.PASSWORD_MANAGEMENT,
       page: () => PasswordManagementView(),
-      binding: PasswordManagementBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
