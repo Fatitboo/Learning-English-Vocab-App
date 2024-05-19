@@ -14,7 +14,7 @@ class ExamController extends GetxController {
   Color colorChooseBorder = Color(0xff04BFD9);
   Color colorChooseText = Color(0xff29ABEA);
   int round = 5;
-  List<bool> booleanList = List.filled(10, false);
+  List<bool> booleanList = List.filled(12, false);
   int lengthCheck = 0;
 
   void handleCheck(int index, bool value) {

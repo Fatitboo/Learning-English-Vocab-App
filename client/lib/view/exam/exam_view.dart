@@ -102,7 +102,7 @@ class ExamView extends GetView<ExamController> {
 
                       child: Expanded(
                           child: ListView.builder(
-                              itemCount: 12,
+                              itemCount: controller.booleanList.length,
                               itemBuilder: (context,index) {
                                 return GestureDetector(
                                   onLongPress: () {
