@@ -72,7 +72,7 @@ class LoginController extends GetxController {
           icon: const Icon(Icons.person, color: Colors.white),
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.offAndToNamed(AppRoutes.HOME);
+        Get.offAndToNamed(AppRoutes.NAV_BAR);
       } else {
         Get.snackbar(
           "Bad Request",

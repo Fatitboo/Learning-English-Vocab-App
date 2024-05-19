@@ -17,4 +17,16 @@ export class TopicController {
       });
     }
   }
+  @Get('getAllTopicLearned')
+  async getAllTopicLearned(@Res() res: Response) {
+    try {
+      //   const topics = await this.topicService.getAllTopicLearned();
+      const topics = [];
+      res.status(HttpStatus.OK).json(topics);
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
+        message: 'Error',
+      });
+    }
+  }
 }

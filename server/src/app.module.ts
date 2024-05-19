@@ -8,6 +8,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './user/auth.guard';
 import { WordModule } from './word/word.module';
 import { TopicModule } from './topic/topic.module';
+import { LearntModule } from './learnt/learnt.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { TopicModule } from './topic/topic.module';
     UserModule,
     WordModule,
     TopicModule,
+    LearntModule,
   ],
   controllers: [],
   providers: [

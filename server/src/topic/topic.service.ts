@@ -14,4 +14,9 @@ export class TopicService {
     const topics = await this.topicRepository.find();
     return topics;
   }
+
+  async getAlgetAllTopicLearnedTopic() {
+    const topics = await this.topicRepository.find();
+    return topics;
+  }
 }
