@@ -1,7 +1,10 @@
+import 'package:client/view/forgot_password/enter_otp.dart';
+import 'package:client/view/forgot_password/forgot_password_binding.dart';
+import 'package:client/view/forgot_password/forgot_password_view.dart';
+import 'package:client/view/forgot_password/reset_password.dart';
 import 'package:client/view/exam/exam_binding.dart';
 import 'package:client/view/exam/exam_round_view.dart';
 import 'package:client/view/exam/exam_view.dart';
-import 'package:client/view/forgot_password_view.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
@@ -39,6 +42,7 @@ import '../../view/statiscal/statiscal_binding.dart';
 import '../../view/statiscal/statiscal_view.dart';
 import '../../view/your_profile/your_profile_binding.dart';
 import '../../view/your_profile/your_profile_view.dart';
+import '../middleware/route_welcome_middleware.dart';
 import 'names.dart';
 
 class AppPages {
@@ -47,13 +51,13 @@ class AppPages {
   static final List<GetPage> routes = [
     // user pages
     GetPage(
-      name: AppRoutes.INITIAL,
-      page: () => WelcomeView(),
-      transition: Transition.native,
-      fullscreenDialog: true,
-      popGesture: false,
-      transitionDuration: const Duration(milliseconds: 500),
-    ),
+        name: AppRoutes.INITIAL,
+        page: () => WelcomeView(),
+        transition: Transition.native,
+        fullscreenDialog: true,
+        popGesture: false,
+        transitionDuration: const Duration(milliseconds: 500),
+        middlewares: [RouteWelcomeMiddleware(priority: 1)]),
     GetPage(
       name: AppRoutes.NAV_BAR,
       page: () => NavBar(),
@@ -74,7 +78,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.SIGN_IN,
-      page: () =>  LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
@@ -84,10 +88,21 @@ class AppPages {
     GetPage(
       name: AppRoutes.FORGOT_PASSWORD,
       page: () => ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
       transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.ENTER_OTP,
+      page: () => EnterOtpPage(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.RESET_PASS,
+      page: () => ResetPasswordPage(),
+      binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: AppRoutes.RESULT_ROUND,
@@ -187,14 +202,13 @@ class AppPages {
     ),
 
     GetPage(
-        name: AppRoutes.LEARNING_VOCABULARY,
-        page: () => LearningVocabularyView(),
-        binding: LearningVocabularyBinding(),
-        transition: Transition.native,
-        fullscreenDialog: true,
-        popGesture: false,
-        transitionDuration: const Duration(milliseconds: 500),
-
+      name: AppRoutes.LEARNING_VOCABULARY,
+      page: () => LearningVocabularyView(),
+      binding: LearningVocabularyBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
 
     GetPage(
@@ -205,7 +219,6 @@ class AppPages {
       fullscreenDialog: true,
       popGesture: false,
       transitionDuration: const Duration(milliseconds: 500),
-
     ),
     GetPage(
       name: AppRoutes.SAVE_TOPIC,
@@ -227,7 +240,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.CONGRATULATION_ROUND,
-      page: () =>  CongratulationView(),
+      page: () => CongratulationView(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

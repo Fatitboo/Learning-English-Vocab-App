@@ -8,6 +8,9 @@ class AppRoutes {
   static const SIGN_UP = '/sign_up';
   static const SIGN_IN = '/sign_in';
   static const FORGOT_PASSWORD = '/forgot_password';
+  static const ENTER_OTP = '/enter_otp';
+  static const RESET_PASS = '/reset_pass';
+
   static const HOME = '/home';
   static const DETAIL_TOPIC = '/home/detail_topic';
   static const FLASH_CARD = '/home/detail_topic/flashcard';
