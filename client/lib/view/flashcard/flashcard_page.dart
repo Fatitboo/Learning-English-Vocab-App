@@ -196,8 +196,8 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
         _status = status;
       });
     final mediaQuery = (context.getElementForInheritedWidgetOfExactType<MediaQuery>()!.widget as MediaQuery).data;
-    final physicalSize = mediaQuery.size * mediaQuery.devicePixelRatio;
-    width = physicalSize.width / 2;
+    final physicalSize = mediaQuery.size;
+    width = physicalSize.width;
     _leftValue = (width - 300) / 2;
     print(width);
   }

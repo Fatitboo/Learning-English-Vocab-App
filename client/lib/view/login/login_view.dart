@@ -4,7 +4,6 @@ import 'package:client/view/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common_widget/text_field.dart';
-import '../../res/routes/names.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
@@ -23,7 +22,7 @@ class LoginView extends GetView<LoginController> {
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Form(
                   key: controller.formField,
                   child: Column(
@@ -69,7 +68,6 @@ class LoginView extends GetView<LoginController> {
                                 hintText: 'Email',
                                 prefixIcon: Icon(Icons.email),
                                 controller: controller.emailController,
-                                checkEmail: true,
                               ),
                               MyTextField(
                                 hintText: 'Password',
@@ -79,8 +77,8 @@ class LoginView extends GetView<LoginController> {
                                 checkLength: 8,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 15),
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 15),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -103,15 +101,13 @@ class LoginView extends GetView<LoginController> {
 
                               // btn login
                               Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10),
+                                  padding:
+                                  const EdgeInsets.symmetric(vertical: 10),
                                   child: MyButton(
                                     text: "Sign In",
                                     onTap: () {
                                       if (controller.formField.currentState!
                                           .validate()) {
-                                        controller.emailController.clear();
-                                        controller.passwordController.clear();
                                         controller.signUserIn();
                                       }
                                     },
@@ -119,7 +115,8 @@ class LoginView extends GetView<LoginController> {
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 35, ),
+                                  vertical: 35,
+                                ),
                                 child: InkWell(
                                   onTap: () {
                                     controller.toPageSignUp();
@@ -138,10 +135,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
 
-
-
                       // forgot password
-
 
                       const SizedBox(
                         height: 20,
@@ -149,7 +143,7 @@ class LoginView extends GetView<LoginController> {
 
                       const Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                         child: Text(
                           'Or continue with',
                           style: TextStyle(
@@ -166,7 +160,7 @@ class LoginView extends GetView<LoginController> {
                           width: double.infinity,
                           child: OutlinedButton.icon(
                               onPressed: () {
-
+                                controller.signUserInGG();
                               },
                               icon: Image.asset("assets/icons/google.png"),
                               label: const Text(
@@ -175,11 +169,11 @@ class LoginView extends GetView<LoginController> {
                               ),
                               style: ButtonStyle(
                                   shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                side: const BorderSide(color: Colors.purple),
-                                borderRadius: BorderRadius.circular(10.0),
-                              )))),
+                                        side: const BorderSide(color: Colors.purple),
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      )))),
                         ),
                       ),
                     ],

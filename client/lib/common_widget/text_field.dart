@@ -4,6 +4,7 @@ import '../common/app_color.dart';
 
 class MyTextField extends StatefulWidget {
   final TextEditingController? controller;
+  final TextEditingController? checkPasswordMatch;
   final TextInputType? keyboardType;
   final String hintText;
   final bool isPass;
@@ -23,7 +24,8 @@ class MyTextField extends StatefulWidget {
       this.isPass = false,
       this.checkBlank = true,
       this.checkEmail = false,
-      this.checkLength = 0});
+      this.checkLength = 0, this.checkPasswordMatch
+      });
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -49,8 +51,7 @@ class _MyTextFieldState extends State<MyTextField> {
             }
           }
           if (widget.checkEmail) {
-            bool emailValid = RegExp(
-                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                 .hasMatch(value!);
             if (!emailValid) {
               return "Enter Valid email ";
@@ -59,6 +60,11 @@ class _MyTextFieldState extends State<MyTextField> {
           if (widget.checkLength != 0) {
             if (widget.controller!.text.length < widget.checkLength) {
               return "${widget.hintText} length not be less than ${widget.checkLength} characters.";
+            }
+          }
+          if(widget.checkPasswordMatch != null){
+            if(widget.controller!.text!=widget.checkPasswordMatch!.text){
+              return "Confirm password have to match with password.";
             }
           }
         },
