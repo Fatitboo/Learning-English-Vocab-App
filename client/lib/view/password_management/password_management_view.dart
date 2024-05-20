@@ -25,8 +25,6 @@ class PasswordManagementView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 20),
-                    CurrentPasssView(),
                     SizedBox(height: 30),
                     NewPasssView(),
                     SizedBox(height: 20),
@@ -73,6 +71,7 @@ class PasswordManagementView extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Processing Data')),
           );
+          controller.changePassword();
         }
       },
     ),
@@ -103,38 +102,6 @@ class PasswordManagementView extends StatelessWidget {
     );
   }
 
-  Widget CurrentPasssView() => Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "Current Password", // Sử dụng tiêu đề được truyền vào từ widget
-        style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
-      ),
-      SizedBox(height: 10.0),
-      TextFormField(
-        controller: controller.currentPass,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter your password';
-          }
-          if (value.length < 8) {
-            return 'Password must be at least 8 characters long';
-          }
-          return null;
-        },
-        obscureText: controller.obscurePassword,
-        decoration: _inputDecoration(
-          obscure: controller.obscurePassword,
-          onTap: () {
-            controller.toggleObscurePassword();
-          },
-        ),
-        cursorColor: AppColors.primaryColor,
-      ),
-    ],
-  );
-
   Widget NewPasssView() => Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,10 +117,12 @@ class PasswordManagementView extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter your password';
           }
-          if (value.length < 8) {
+          else if (value.length < 8) {
             return 'Password must be at least 8 characters long';
           }
-          return null;
+          else {
+            return null;
+          }
         },
         obscureText: controller.obscureNewPassword,
         decoration: _inputDecoration(
@@ -182,10 +151,15 @@ class PasswordManagementView extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return 'Please enter your password';
           }
-          if (value.length < 8) {
+          else if (value.length < 8) {
             return 'Password must be at least 8 characters long';
           }
-          return null;
+          else if (value != controller.newPass.text) {
+            return 'Password incorrect! Please enter again';
+          }
+          else {
+            return null;
+          }
         },
         obscureText: controller.obscureConfirmNewPassword,
         decoration: _inputDecoration(

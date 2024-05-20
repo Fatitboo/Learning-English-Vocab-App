@@ -31,7 +31,10 @@ import { AuthGuard } from './user/auth.guard';
       limit: 100,
     }]),
     MyLoggerModule,
-    UserModule
+    UserModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [],
   providers: [

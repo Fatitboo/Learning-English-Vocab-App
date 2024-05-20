@@ -9,7 +9,6 @@ import 'package:client/view/private_info_management/private_info_management_cont
 class PrivateInfoManagementView extends StatelessWidget {
   PrivateInfoManagementView({super.key});
   final controller = Get.put(PrivateInfoManagementController());
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PrivateInfoManagementController>(
@@ -78,41 +77,17 @@ class PrivateInfoManagementView extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: controller.avatarPath.isEmpty
-                        ? const AssetImage('assets/images/img.png') as ImageProvider
-                        : FileImage(File(controller.avatarPath)),
+                        ? Image.network("https://res.cloudinary.com/dmo9y50zo/image/upload/v1716097921/AppTA/avatarDefault_c40wst.png").image
+                        : Image.network(controller.avatarPath).image,
                     backgroundColor: Colors.transparent,
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 0.5,
-                      ),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.add_photo_alternate_outlined),
-                      color: Colors.white,
-                      iconSize: 20,
-                      onPressed: () {
-                        controller.pickImage();
-                      },
-                    ),
-                  ),
-                )
               ],
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                "Phan Trọng Tính",
+                controller.userName,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

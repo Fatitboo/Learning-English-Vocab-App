@@ -1,17 +1,31 @@
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-
+import 'dart:convert';
+import '../../res/data/network_api_service.dart';
 
 class PrivateInfoManagementController extends GetxController {
   String avatarPath = '';
+  String userName = '';
 
-  final ImagePicker _picker = ImagePicker();
+  void setAvatarPath(String path) {
+    avatarPath = path;
+    update();
+  }
 
-  Future<void> pickImage() async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      avatarPath = pickedFile.path;
-      update();
+  @override
+  void onInit() {
+    super.onInit();
+    getCurrentUser();
+  }
+
+  Future<void> getCurrentUser() async {
+    var responseCurrentUser = await NetworkApiService().getApi("/user/current-user");
+    if (responseCurrentUser.statusCode == 200) {
+      var currentUserData = jsonDecode(responseCurrentUser.body);
+      userName = currentUserData['username'];
+      print("Current user: " +  userName);
+    } else {
+      print(responseCurrentUser.statusCode);
     }
+    update();
   }
 }

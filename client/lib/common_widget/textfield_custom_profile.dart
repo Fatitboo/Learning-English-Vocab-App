@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 
 typedef StringFunction = String? Function(String? value);
 
-
-
 class TextFieldCustomProfile extends StatelessWidget {
-  late String title;
-  late TextEditingController textController;
-  late TextInputType keyboardType;
-  late bool obscureText;
-  StringFunction? validator;
+  final String title;
+  final TextEditingController textController;
+  final TextInputType keyboardType;
+  final bool obscureText;
+  final String? initialValue;
+  final StringFunction? validator;
 
   InputDecoration _inputDecoration() {
     return InputDecoration(
-      contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+      contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.grey),
       ),
@@ -30,17 +29,23 @@ class TextFieldCustomProfile extends StatelessWidget {
     );
   }
 
-  TextFieldCustomProfile({Key? key,
+  TextFieldCustomProfile({
+    Key? key,
     required this.title,
     required this.textController,
     required this.keyboardType,
     required this.obscureText,
-    this.validator
-  }) : super(key: key);
+    this.initialValue,
+    this.validator,
+  }) : super(key: key) {
+    // Initialize the controller with the initial value if provided
+    if (initialValue != null) {
+      textController.text = initialValue!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -51,17 +56,15 @@ class TextFieldCustomProfile extends StatelessWidget {
             style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10.0),
-          Container(
-            child: TextFormField(
-              controller: textController,
-              obscureText: obscureText,
-              keyboardType: keyboardType,
-              validator: this.validator,
-              decoration: _inputDecoration(),
-              cursorColor: AppColors.primaryColor,
-              style: const TextStyle(
-                fontSize: 14,
-              ),
+          TextFormField(
+            controller: textController,
+            obscureText: obscureText,
+            keyboardType: keyboardType,
+            validator: validator,
+            decoration: _inputDecoration(),
+            cursorColor: AppColors.primaryColor,
+            style: const TextStyle(
+              fontSize: 14,
             ),
           ),
         ],
@@ -69,4 +72,3 @@ class TextFieldCustomProfile extends StatelessWidget {
     );
   }
 }
-

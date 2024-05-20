@@ -8,12 +8,13 @@ import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { sendEmail } from 'src/utils/email.service';
 import { templateHTMLResetPassword } from 'src/constants/template_email';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private jwtService: JwtService,
-    @InjectRepository(User) private readonly userRepository: Repository<User>
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) { }
 
   // private client = new OAuth2Client('426753784926-dmbba6127bn5avdf1uptppevohkkm4c6.apps.googleusercontent.com'); // Thay thế bằng Client ID của bạn
@@ -108,8 +109,8 @@ export class UserService {
   async register(createUser: CreateUserDto) {
     const exitedUser = await this.userRepository.findOneBy({ username: createUser?.username });
     if (exitedUser) throw new BadRequestException("User existed.");
-    const exitedEmail = await this.userRepository.findOneBy({ email: createUser?.email, googleAccountId:null });
-    if (exitedEmail ) throw new BadRequestException("Email existed.");
+    const exitedEmail = await this.userRepository.findOneBy({ email: createUser?.email, googleAccountId: null });
+    if (exitedEmail) throw new BadRequestException("Email existed.");
     const hashedPassword = await bcrypt.hash(createUser.password, 10);
     createUser.password = hashedPassword;
     const user = this.userRepository.create(createUser);
@@ -161,6 +162,34 @@ export class UserService {
     await this.userRepository.save(user);
     return { status: 'ok' }
   }
+
+  async currentUser(id: number): Promise<any> {
+    const exitedUser = await this.userRepository.findOneBy({ id: id });
+    if (!exitedUser) {
+      throw new NotFoundException('Người dùng không tồn tại.');
+    }
+    const { ...result } = exitedUser;
+    return result;
+  }
+
+  async updateInfoUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    console.log("zo service");
+    const user = await this.userRepository.findOneBy({ id: id });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    // Update user fields
+    user.fullname = updateUserDto.fullname;
+    user.email = updateUserDto.email;
+    user.phone = updateUserDto.phone;
+    user.dob = updateUserDto.dob;
+
+    // Save updated user to the database
+    await this.userRepository.save(user);
+    return user;
+  }
+
 }
 
 

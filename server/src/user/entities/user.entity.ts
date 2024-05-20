@@ -14,7 +14,7 @@ export class User {
     fullname: string;
 
     @Column({nullable:true}) 
-    dob: Date;
+    dob: String;
 
     @Column()
     email: string;
