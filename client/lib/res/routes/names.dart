@@ -32,6 +32,10 @@ class AppRoutes {
 
   static const LEARNING_VOCABULARY = '/learning_vocabulary';
   static const DETAIL_LEARNED_TOPIC_WORD = '/learning_vocabulary/learned_topic_word';
+  static const ROUND_LEARN = '/learning_vocabulary/round_learn';
+
+  static const EXAM = '/exam';
+
 
 
 }

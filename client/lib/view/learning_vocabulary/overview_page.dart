@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../res/routes/names.dart';
 import 'component/CardTopic.dart';
 import 'learning_vocabulary_controller.dart';
 
@@ -18,9 +19,17 @@ class OverViewPage extends StatelessWidget {
             child: ListView.builder(
                 itemCount: 12,
                 itemBuilder: (context,index) {
-                  return Container(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: CardTopic());
+                  return
+
+                     GestureDetector(
+                       onTap: () {
+                         Get.toNamed(AppRoutes.ROUND_LEARN, preventDuplicates: false);
+                       },
+                       child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: CardTopic()),
+                     );
+
                 })
         ),
       ),

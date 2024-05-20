@@ -1,3 +1,4 @@
+import 'package:client/view/exam/exam_view.dart';
 import 'package:client/view/flashcard/flashcard_page.dart';
 import 'package:client/view/learning_vocabulary/learning_vocabulary_view.dart';
 import 'package:client/view/login/login_view.dart';
@@ -22,7 +23,7 @@ class NavBar extends GetView<BottomNavigateController> {
       children: [
         HomePage(),
         LearningVocabularyView(),
-        LoginView(),
+        ExamView(),
         StatiscalView(),
         PrivateInfoManagementView(),
       ],

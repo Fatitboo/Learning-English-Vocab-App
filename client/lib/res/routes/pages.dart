@@ -1,7 +1,4 @@
-import 'package:client/view/forgot_password/enter_otp.dart';
-import 'package:client/view/forgot_password/forgot_password_binding.dart';
-import 'package:client/view/forgot_password/forgot_password_view.dart';
-import 'package:client/view/forgot_password/reset_password.dart';
+import 'package:client/view/forgot_password_view.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
@@ -36,7 +33,6 @@ import '../../view/statiscal/statiscal_binding.dart';
 import '../../view/statiscal/statiscal_view.dart';
 import '../../view/your_profile/your_profile_binding.dart';
 import '../../view/your_profile/your_profile_view.dart';
-import '../middleware/route_welcome_middleware.dart';
 import 'names.dart';
 
 class AppPages {
@@ -222,6 +218,25 @@ class AppPages {
       name: AppRoutes.SAVE_TOPIC,
       page: () => SavedTopicPage(),
       binding: SavedTopicBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.ROUND_LEARN,
+      page: () => RoundLearnView(),
+      binding: RoundLearnBinding(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+
+    GetPage(
+      name: AppRoutes.EXAM,
+      page: () => ExamView(),
+      binding: ExamBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
