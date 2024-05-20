@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-class RoundLearnView extends GetView<RoundLearnController> {
-  RoundLearnView({super.key});
+import 'exam_controller.dart';
+
+class ExamRoundView extends GetView<ExamController> {
+  ExamRoundView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RoundLearnController>(
+    return GetBuilder<ExamController>(
       builder: (_) {
         return Scaffold(
             appBar: AppBar(
@@ -19,6 +21,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
               ),
               leading: IconButton(
                 onPressed: () {
+                  controller.reset();
                   Get.back();
                 },
                 icon: const Icon(Icons.close),
@@ -206,6 +209,102 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                       )),
                                 ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  controller.setIndexAnswer(3);
+                                },
+                                child: Container(
+                                  width: Get.width,
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    'nước',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: controller.indexAnswer == 3
+                                            ? controller.colorChooseText
+                                            : Color(0xff606061)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: controller.indexAnswer == 3
+                                          ? controller.colorChoose
+                                          : Colors.transparent,
+                                      border: Border(
+                                        top: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 3
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        left: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 3
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        right: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 3
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        bottom: BorderSide(
+                                            width: 3,
+                                            color: controller.indexAnswer == 3
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                      )),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  controller.setIndexAnswer(4);
+                                },
+                                child: Container(
+                                  width: Get.width,
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    'nước',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: controller.indexAnswer == 4
+                                            ? controller.colorChooseText
+                                            : Color(0xff606061)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: controller.indexAnswer == 4
+                                          ? controller.colorChoose
+                                          : Colors.transparent,
+                                      border: Border(
+                                        top: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 4
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        left: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 4
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        right: BorderSide(
+                                            width: 1,
+                                            color: controller.indexAnswer == 4
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                        bottom: BorderSide(
+                                            width: 3,
+                                            color: controller.indexAnswer == 4
+                                                ? controller.colorChooseBorder
+                                                : Color(0xffCCCCCC)),
+                                      )),
+                                ),
+                              ),
 
                             ],
                           ),
@@ -244,7 +343,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                           SizedBox(height: 12,),
                           InkWell(
                             onTap: () {
-                              controller.check();
+                              controller.nextQuestion();
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(vertical: 8),
@@ -268,129 +367,6 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                   )
                               ),
                               child: Center(
-                                child: Text('KIỂM TRA', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                if (controller.showCorrect == 1) Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: Get.width,
-                      height: 150,
-                      padding: EdgeInsets.all(24),
-                      color: Color(0xffC6FFC1),
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xff1DC103),
-                                ),
-                                child: Center(
-                                  child: Icon(Icons.check, color: Colors.white,),
-                                ),
-                              ),
-                              SizedBox(width: 12,),
-                              Text('Chính xác!', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: Color(0xff1DC103)),)
-                            ],
-                          ),
-                          SizedBox(height: 12,),
-                          InkWell(
-                            onTap: () {
-                              controller.nextQuestion();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(28),
-                                  color: const Color(0xff0AD944),
-                                  border: const Border(
-                                      bottom: BorderSide(
-                                          width: 4,
-                                          color: Color(0xff1CBC02)
-                                      ),
-
-                                      left: BorderSide(
-                                          width: 1,
-                                          color: Color(0xff1CBC02)
-                                      ),
-                                      right: BorderSide(
-                                          width: 1,
-                                          color: Color(0xff1CBC02)
-                                      )
-                                  )
-                              ),
-                              child: Center(
-                                child: Text('TIẾP TỤC', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                ),
-                if (controller.showCorrect == 2) Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: Get.width,
-                      height: 150,
-                      padding: EdgeInsets.all(24),
-                      color: Color(0xffFFCCCC),
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffFF1F1F),
-                                ),
-                                child: Center(
-                                  child: Icon(Icons.close, color: Colors.white,),
-                                ),
-                              ),
-                              SizedBox(width: 12,),
-                              Text('Sai mất rồi!', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20, color: Color(0xffFF1F1F)),)
-                            ],
-                          ),
-                          SizedBox(height: 12,),
-                          InkWell(
-                            onTap: () {
-                              controller.nextQuestion();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(28),
-                                  color: const Color(0xffFB4949),
-                                  border: const Border(
-                                      bottom: BorderSide(
-                                          width: 4,
-                                          color: Color(0xffE51414)
-                                      ),
-
-                                      left: BorderSide(
-                                          width: 1,
-                                          color: Color(0xffE51414)
-                                      ),
-                                      right: BorderSide(
-                                          width: 1,
-                                          color: Color(0xffE51414)
-                                      )
-                                  )
-                              ),
-                              child: Center(
                                 child: Text('TIẾP TỤC', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),),
                               ),
                             ),
@@ -398,6 +374,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                         ],
                       ),
                     )),
+
               ],
             ));
       },
