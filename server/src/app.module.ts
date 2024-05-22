@@ -9,6 +9,7 @@ import { AuthGuard } from './user/auth.guard';
 import { WordModule } from './word/word.module';
 import { TopicModule } from './topic/topic.module';
 import { LearntModule } from './learnt/learnt.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { LearntModule } from './learnt/learnt.module';
     WordModule,
     TopicModule,
     LearntModule,
+    StoreModule,
   ],
   controllers: [],
   providers: [

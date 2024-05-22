@@ -1,5 +1,6 @@
+import { Store } from 'src/store/entity/store.entity';
 import { Topic } from 'src/topic/entity/topic.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Word {
   @PrimaryGeneratedColumn()
@@ -25,4 +26,7 @@ export class Word {
 
   @ManyToOne(() => Topic, (topic) => topic.words)
   topic: Topic;
+
+  @OneToMany(() => Store, (store) => store.word)
+  stores: Store[];
 }

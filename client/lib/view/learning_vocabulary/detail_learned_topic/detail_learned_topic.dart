@@ -134,6 +134,8 @@ class DetailLearnedTopic extends GetView<DetailLearnedController> {
                             image: controller.data[index]["image"],
                             wordType: controller.data[index]["wordType"],
                             audio: controller.data[index]["audio"],
+                            saved: false,
+                            onTapStar: () {  },
                           ),
                         );
                       })),

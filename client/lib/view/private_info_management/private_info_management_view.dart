@@ -163,7 +163,9 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
   );
 
   Widget ItemSaveTopic() => GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Get.toNamed(AppRoutes.SAVE_TOPIC);
+    },
     child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -174,7 +176,7 @@ class PrivateInfoManagementView extends GetView<PrimaryScrollController> {
                 const Icon(Icons.bookmark_border_outlined,
                     color: AppColors.primaryColor, size: 30),
                 const Text(
-                  "Save topic",
+                  "Save words",
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black,

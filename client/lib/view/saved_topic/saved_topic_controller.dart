@@ -1,5 +1,11 @@
-import 'package:get/get.dart';
+import 'dart:convert';
+import 'dart:io';
 
+import 'package:client/res/data/network_api_service.dart';
+import 'package:client/res/model/topic_dto.dart';
+import 'package:client/res/model/word_dto.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import '../../res/routes/names.dart';
 class SavedTopicController extends GetxController{
   List<dynamic> data = [
@@ -74,6 +80,32 @@ class SavedTopicController extends GetxController{
       }
     },
   ] ;
+  Rx<bool> loading = false.obs;
+  RxList listWord = [].obs;
+  final NetworkApiService networkApiService = NetworkApiService();
+
+
+  @override
+  void onInit() {
+    getAllSavedTopic();
+  }
+
+
+  void getAllSavedTopic() async{
+    loading.value = true;
+    http.Response res = await networkApiService.getApi("/word/getAllSavedWords/3");
+    loading.value = false;
+    if(res.statusCode == HttpStatus.ok){
+      Iterable i = json.decode(utf8.decode(res.bodyBytes));
+      List<WordDTO> words = List<WordDTO>.from(i.map((model)=> WordDTO.fromJson(model))).toList();
+      listWord.value = words;
+    }
+    else{
+      Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+      print(resMessage["message"]);
+    }
+  }
+
   void toDetailTopicPage(String topicId, String topicName) {
     Get.toNamed(AppRoutes.DETAIL_TOPIC, arguments:{
       "topicId": topicId,
@@ -81,5 +113,19 @@ class SavedTopicController extends GetxController{
     },
         preventDuplicates: false
     );
+  }
+
+  void toggleSavedWord(WordDTO word, int index) async{
+    loading.value = true;
+    http.Response res = await networkApiService.deleteApi("/store/deleteSavedWord/3/${word.id}");
+    if(res.statusCode == HttpStatus.ok){
+      listWord.removeAt(index);
+      listWord.refresh();
+    }
+    else{
+      Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+      print(resMessage["message"]);
+    }
+    loading.value = false;
   }
 }

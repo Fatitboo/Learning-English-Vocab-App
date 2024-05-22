@@ -27,7 +27,7 @@ class DetailTopicController extends GetxController{
 
   void getWordsFromTopic(int id) async {
     loading.value = true;
-    http.Response res = await networkApiService.getApi("/word/getAllWordFromTopic/$id");
+    http.Response res = await networkApiService.getApi("/word/getAllWordFromTopic/3/$id");
     loading.value = false;
     if(res.statusCode == HttpStatus.ok){
       Iterable i = json.decode(utf8.decode(res.bodyBytes));
@@ -38,5 +38,34 @@ class DetailTopicController extends GetxController{
       Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
       print(resMessage["message"]);
     }
+  }
+
+  void toggleSavedWord(WordDTO word, int index) async{
+    loading.value = true;
+    if(word.saved!){
+      http.Response res = await networkApiService.deleteApi("/store/deleteSavedWord/3/${word.id}");
+      if(res.statusCode == HttpStatus.ok){
+        listWord.value.elementAt(index).saved = false;
+        listWord.refresh();
+      }
+      else{
+        Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+        print(resMessage["message"]);
+      }
+    }
+    else{
+      var a = {};
+      Object obj = jsonEncode(a);
+          http.Response res = await networkApiService.postApi("/store/saveWord/3/${word.id}", obj);
+      if(res.statusCode == HttpStatus.ok){
+        listWord.value.elementAt(index).saved = true;
+        listWord.refresh();
+      }
+      else{
+        Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+        print(resMessage["message"]);
+      }
+    }
+    loading.value = false;
   }
 }

@@ -59,12 +59,16 @@ class DetailTopicPage extends GetView<DetailTopicController> {
                               onTap: (){
                                 print(controller.topicName.value);
                               },
+                              onTapStar: () {
+                                controller.toggleSavedWord(wordDTO!, index);
+                              },
                               wordName: wordDTO.wordName ?? '',
                               wordMean: wordDTO.wordMean ?? '',
                               spelling: wordDTO.spelling ?? '',
                               image: wordDTO.image ?? '',
                               wordType: wordDTO.wordType ?? '',
                               audio: wordDTO.audio ?? '',
+                              saved: wordDTO.saved ?? false,
                           ),
                         );
                       }

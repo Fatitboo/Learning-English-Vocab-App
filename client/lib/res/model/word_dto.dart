@@ -7,6 +7,7 @@ class WordDTO {
   String? image;
   String? wordType;
   String? audio;
+  bool? saved;
 
   WordDTO(
       this.id,
@@ -15,7 +16,8 @@ class WordDTO {
       this.spelling,
       this.image,
       this.wordType,
-      this.audio
+      this.audio,
+      this.saved
   );
 
   WordDTO.init();
@@ -28,7 +30,8 @@ class WordDTO {
         json["spelling"] ?? "",
         json["image"] ?? "",
         json["wordType"] ?? "",
-        json["audio"] ?? ""
+        json["audio"] ?? "",
+        json["saved"] ?? true,
     );
     return item;
   }
@@ -41,7 +44,8 @@ class WordDTO {
       "spelling": wordDTO.spelling,
       "image": wordDTO.image,
       "wordType": wordDTO.wordType,
-      "audio": wordDTO.audio
+      "audio": wordDTO.audio,
+      "saved": wordDTO.saved,
     };
   }
 }

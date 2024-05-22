@@ -10,6 +10,8 @@ class WordWidget extends StatelessWidget {
     required this.audio,
     required this.wordType,
     required this.onTap,
+    required this.saved,
+    required this.onTapStar,
   });
   final String wordName;
   final String wordMean;
@@ -17,6 +19,8 @@ class WordWidget extends StatelessWidget {
   final String image;
   final String audio;
   final String wordType;
+  final bool saved;
+  final VoidCallback onTapStar;
   final VoidCallback onTap;
 
   FlutterTts flutterTts = FlutterTts();
@@ -98,10 +102,15 @@ class WordWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 5,),
-                      const Icon(
-                        Icons.star_outline,
-                        color: Colors.black45,
-                        size: 24.0,
+                      InkWell(
+                        onTap: () {
+                          onTapStar();
+                        },
+                        child: Icon(
+                          saved ? Icons.star : Icons.star_outline,
+                          color: saved ? Colors.orange : Colors.black45,
+                          size: 24.0,
+                        ),
                       )
                     ],
                   ),

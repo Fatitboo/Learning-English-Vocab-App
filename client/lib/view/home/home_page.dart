@@ -63,16 +63,34 @@ class HomePage extends GetView<HomeController> {
                               ),
                               padding: const EdgeInsets.all(13),
                               margin: const EdgeInsets.symmetric(vertical: 10),
-                              child: const Row(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.search,
                                     color: Colors.black45,
                                     size: 26.0,
                                   ),
-                                  SizedBox(width: 10,),
-                                  Text("What topic you want to learn?", style: TextStyle(fontSize: 14),),
+                                  const SizedBox(width: 10,),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 30,
+                                      child: TextField(
+                                        style: const TextStyle(fontSize: 14),
+                                        maxLines: 1,
+                                        onChanged: (textChange) {
+                                          print(textChange);
+                                          controller.filterListWord(textChange);
+                                        },
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          contentPadding: EdgeInsets.symmetric(vertical: 9),
+                                          fillColor: Colors.black87,
+                                          hintText: "What topic you want to learn?",
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

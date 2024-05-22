@@ -1,4 +1,5 @@
 import { Learnt } from 'src/learnt/entity/learnt.entity';
+import { Store } from 'src/store/entity/store.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
@@ -40,4 +41,7 @@ export class User {
 
   @OneToMany(() => Learnt, (learnt) => learnt.user)
   learnts: Learnt[];
+
+  @OneToMany(() => Store, (store) => store.user)
+  stores: Store[];
 }

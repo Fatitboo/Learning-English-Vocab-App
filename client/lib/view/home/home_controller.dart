@@ -8,6 +8,7 @@ import '../../res/routes/names.dart';
 class HomeController extends GetxController{
   Rx<bool> loading = false.obs;
   RxList listTopic = [].obs;
+  List<TopicDTO> allTopic = [];
   late final NetworkApiService networkApiService = NetworkApiService();
 
 
@@ -33,11 +34,21 @@ class HomeController extends GetxController{
       Iterable i = json.decode(utf8.decode(res.bodyBytes));
       List<TopicDTO> topics = List<TopicDTO>.from(i.map((model)=> TopicDTO.fromJson(model))).toList();
       listTopic.value = topics;
+      allTopic = topics;
       print(listTopic);
     }
     else{
       Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
       print(resMessage["message"]);
+    }
+  }
+
+  void filterListWord(String textChange) {
+    if(textChange.isEmpty){
+      listTopic.value = allTopic;
+    }
+    else{
+      listTopic.value = allTopic.where((e) => e.topicName!.toLowerCase().contains(textChange.toLowerCase())).toList();
     }
   }
 }
