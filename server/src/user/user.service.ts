@@ -113,6 +113,7 @@ export class UserService {
     if (exitedEmail) throw new BadRequestException("Email existed.");
     const hashedPassword = await bcrypt.hash(createUser.password, 10);
     createUser.password = hashedPassword;
+    createUser.avatar = "https://firebasestorage.googleapis.com/v0/b/englishvoc-43d5a.appspot.com/o/images%2FavatarDefault.png?alt=media&token=59aae8c1-2129-46ca-ad75-5dad1b119188";
     const user = this.userRepository.create(createUser);
     await this.userRepository.save(user);
     return {
@@ -184,6 +185,7 @@ export class UserService {
     user.email = updateUserDto.email;
     user.phone = updateUserDto.phone;
     user.dob = updateUserDto.dob;
+    user.avatar = updateUserDto.avatar;
 
     // Save updated user to the database
     await this.userRepository.save(user);

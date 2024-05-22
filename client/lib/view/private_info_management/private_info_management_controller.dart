@@ -15,6 +15,7 @@ class PrivateInfoManagementController extends GetxController {
   void onInit() {
     super.onInit();
     getCurrentUser();
+    update();
   }
 
   Future<void> getCurrentUser() async {
@@ -22,6 +23,7 @@ class PrivateInfoManagementController extends GetxController {
     if (responseCurrentUser.statusCode == 200) {
       var currentUserData = jsonDecode(responseCurrentUser.body);
       userName = currentUserData['username'];
+      avatarPath = currentUserData['avatar'];
       print("Current user: " +  userName);
     } else {
       print(responseCurrentUser.statusCode);

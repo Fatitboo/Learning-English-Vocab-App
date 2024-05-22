@@ -9,7 +9,7 @@ import 'base_api_service.dart';
 
 class NetworkApiService extends BaseApiService {
   String token = StorageService.to.getString(STORAGE_USER_TOKEN_KEY)??"";
-  final String baseUrl = "http://192.168.208.227:3000";
+  final String baseUrl = "http://192.168.10.227:3000";
   @override
   Future<http.Response> getApi(String path) async {
     dynamic responseJson;

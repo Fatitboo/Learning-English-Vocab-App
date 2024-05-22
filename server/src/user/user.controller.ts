@@ -102,7 +102,6 @@ export class UserController {
 
   @Patch(':id/update-info')
   async updateInfoUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto, @Res() res: Response) {
-    console.log("zo controller");
     try {
       const updatedUser = await this.userService.updateInfoUser(id, updateUserDto);
       res.status(200).json(updatedUser);

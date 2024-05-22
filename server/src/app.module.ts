@@ -38,9 +38,6 @@ import { StoreModule } from './store/store.module';
     ]),
     MyLoggerModule,
     UserModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),,
     WordModule,
     TopicModule,
     LearntModule,
