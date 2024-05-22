@@ -22,7 +22,7 @@ class LoginView extends GetView<LoginController> {
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Form(
                   key: controller.formField,
                   child: Column(
@@ -78,7 +78,7 @@ class LoginView extends GetView<LoginController> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
+                                const EdgeInsets.symmetric(vertical: 15),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -102,7 +102,7 @@ class LoginView extends GetView<LoginController> {
                               // btn login
                               Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
+                                  const EdgeInsets.symmetric(vertical: 10),
                                   child: MyButton(
                                     text: "Sign In",
                                     onTap: () {
@@ -143,7 +143,7 @@ class LoginView extends GetView<LoginController> {
 
                       const Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                         child: Text(
                           'Or continue with',
                           style: TextStyle(
@@ -169,11 +169,11 @@ class LoginView extends GetView<LoginController> {
                               ),
                               style: ButtonStyle(
                                   shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                side: const BorderSide(color: Colors.purple),
-                                borderRadius: BorderRadius.circular(10.0),
-                              )))),
+                                        side: const BorderSide(color: Colors.purple),
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      )))),
                         ),
                       ),
                     ],

@@ -69,6 +69,4 @@ class NavBar extends GetView<BottomNavigateController> {
       bottomNavigationBar: _buildBottomNavigation(context),
     );
   }
-
-
 }

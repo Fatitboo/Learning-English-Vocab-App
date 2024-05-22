@@ -1,4 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Query, Res, BadRequestException, NotFoundException, UseInterceptors, UploadedFile, Request, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UsePipes,
+  ValidationPipe,
+  Query,
+  Res,
+  Req,
+  UseGuards,
+  BadRequestException,
+  HttpCode,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Public } from './authPublic.decorator';
@@ -7,17 +23,20 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
+
   @Public()
   @Post('login')
   async login(@Body() req, @Res() res: Response) {
-    const user = await this.userService.validateUser(req.username, req.password);
+    const user = await this.userService.validateUser(
+      req.username,
+      req.password,
+    );
     if (!user) {
       throw new BadRequestException('Invalid username or password');
     }
     const u = await this.userService.login(user);
     res.status(200).json(u);
-
   }
   @Public()
   @Post('login-google')
@@ -28,7 +47,6 @@ export class UserController {
     }
     const u = await this.userService.login(user);
     res.status(200).json(u);
-
   }
 
   @Public()
@@ -36,7 +54,6 @@ export class UserController {
   async register(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
     const u = await this.userService.register(createUserDto);
     res.status(200).json(u);
-
   }
 
   @Public()
@@ -48,15 +65,22 @@ export class UserController {
 
   @Public()
   @Get(':username/check-otp')
-  async checkOtpReset(@Param("username") username: string, @Query() queryParams: any, @Res() res: Response) {
-    const u = await this.userService.checkOtp(queryParams.otp, username)
+  async checkOtpReset(
+    @Param('username') username: string,
+    @Query() queryParams: any,
+    @Res() res: Response,
+  ) {
+    const u = await this.userService.checkOtp(queryParams.otp, username);
     res.status(200).json(u);
   }
 
   @Public()
   @Post('reset-password')
   async resetPassword(@Body() req: any, @Res() res: Response) {
-    const u = await this.userService.resetPassword(req?.username, req?.password)
+    const u = await this.userService.resetPassword(
+      req?.username,
+      req?.password,
+    );
     res.status(200).json(u);
   }
 

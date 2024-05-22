@@ -22,24 +22,25 @@ class LoginController extends GetxController {
       var information = {
         'username': user!.id,
         'password': '1',
-        "email":user.email,
-        "fullname":user.displayName,
-        "avatar":user.photoUrl,
-        "googleAccountId":  user.id
+        "email": user.email,
+        "fullname": user.displayName,
+        "avatar": user.photoUrl,
+        "googleAccountId": user.id
       };
       Object object = jsonEncode(information);
       print(object);
-      http.Response postApi = await NetworkApiService().postApi("/user/login-google", object);
+      http.Response postApi =
+          await NetworkApiService().postApi("/user/login-google", object);
 
-      LoginResponse customResponse = LoginResponse.fromJson(jsonDecode(postApi.body));
+      LoginResponse customResponse =
+          LoginResponse.fromJson(jsonDecode(postApi.body));
       if (postApi.statusCode == 200) {
         UserStore.to.saveProfile(customResponse);
         UserStore.to.setToken(customResponse.access_token ?? "");
-        Get.offAndToNamed(AppRoutes.HOME);
-
+        Get.offAndToNamed(AppRoutes.NAV_BAR);
       }
     } catch (e) {
-      print( e.toString());
+      print(e.toString());
       Get.snackbar(
         "Error",
         e.toString(),
@@ -49,7 +50,6 @@ class LoginController extends GetxController {
     }
   }
 
-
   Future<void> signUserIn() async {
     try {
       var information = {
@@ -58,10 +58,12 @@ class LoginController extends GetxController {
       };
       Object object = jsonEncode(information);
       print(object);
-      http.Response postApi = await NetworkApiService().postApi("/user/login", object);
+      http.Response postApi =
+          await NetworkApiService().postApi("/user/login", object);
 
       if (postApi.statusCode == 200) {
-        LoginResponse customResponse = LoginResponse.fromJson(jsonDecode(postApi.body));
+        LoginResponse customResponse =
+            LoginResponse.fromJson(jsonDecode(postApi.body));
         UserStore.to.saveProfile(customResponse);
         UserStore.to.setToken(customResponse.access_token ?? "");
         Get.snackbar(
@@ -70,8 +72,8 @@ class LoginController extends GetxController {
           icon: const Icon(Icons.person, color: Colors.white),
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.offAndToNamed(AppRoutes.PRIVATE_INFO_MANAGER);
-      }else{
+        Get.offAndToNamed(AppRoutes.NAV_BAR);
+      } else{
         Get.snackbar(
           "Bad Request",
           jsonDecode(postApi.body).message,
@@ -102,6 +104,7 @@ class LoginController extends GetxController {
     // TODO: implement onInit
     super.onInit();
   }
+
   @override
   void dispose() {
     super.dispose();

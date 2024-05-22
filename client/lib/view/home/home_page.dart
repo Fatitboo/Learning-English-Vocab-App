@@ -1,5 +1,7 @@
 import 'package:client/common/app_color.dart';
+import 'package:client/common_widget/topic_dto_widget.dart';
 import 'package:client/common_widget/topic_widget.dart';
+import 'package:client/res/model/topic_dto.dart';
 import 'package:client/view/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
-    return SafeArea(
+    return Obx(() => SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.rsBackground,
           body: Container(
@@ -61,16 +63,34 @@ class HomePage extends GetView<HomeController> {
                               ),
                               padding: const EdgeInsets.all(13),
                               margin: const EdgeInsets.symmetric(vertical: 10),
-                              child: const Row(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.search,
                                     color: Colors.black45,
                                     size: 26.0,
                                   ),
-                                  SizedBox(width: 10,),
-                                  Text("What topic you want to learn?", style: TextStyle(fontSize: 14),),
+                                  const SizedBox(width: 10,),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 30,
+                                      child: TextField(
+                                        style: const TextStyle(fontSize: 14),
+                                        maxLines: 1,
+                                        onChanged: (textChange) {
+                                          print(textChange);
+                                          controller.filterListWord(textChange);
+                                        },
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          contentPadding: EdgeInsets.symmetric(vertical: 9),
+                                          fillColor: Colors.black87,
+                                          hintText: "What topic you want to learn?",
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -82,18 +102,17 @@ class HomePage extends GetView<HomeController> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                      itemCount: controller.data.length,
+                      itemCount: controller.listTopic.value.length,
                       itemBuilder: (BuildContext context, int index) {
+                        TopicDTO topicDTO = controller.listTopic.value[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                          child: TopicWidget(
-
-                              topicName: controller.data[index]["topicName"],
-                              topicImage: controller.data[index]["topicImage"],
-                              learnNumber: controller.data[index]["learnNumber"],
-                              totalWords: controller.data[index]["totalWords"],
+                          child: TopicDTOWidget(
+                              topicName: topicDTO.topicName ?? '',
+                              topicImage: topicDTO.topicImage ?? '',
+                              topicDescription:topicDTO.topicDescription ?? '',
                               onTap: (){
-                                controller.toDetailTopicPage(controller.data[index]["topicId"], controller.data[index]["topicName"]);
+                                controller.toDetailTopicPage(topicDTO.id ?? -1, topicDTO.topicName ?? '');
                               }
                           ),
                         );
@@ -104,7 +123,7 @@ class HomePage extends GetView<HomeController> {
             ),
           ),
         )
-    );
+    ));
   }
 }
 

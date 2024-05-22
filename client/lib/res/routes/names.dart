@@ -14,6 +14,7 @@ class AppRoutes {
   static const HOME = '/home';
   static const DETAIL_TOPIC = '/home/detail_topic';
   static const FLASH_CARD = '/home/detail_topic/flashcard';
+  static const FLASH_CARD_RESULT = '/home/detail_topic/flashcard_result';
   static const SAVE_TOPIC = '/user/saved_topic';
 
 
@@ -33,6 +34,8 @@ class AppRoutes {
   static const LEARNING_VOCABULARY = '/learning_vocabulary';
   static const DETAIL_LEARNED_TOPIC_WORD = '/learning_vocabulary/learned_topic_word';
   static const ROUND_LEARN = '/learning_vocabulary/round_learn';
+  static const CONGRATULATION_ROUND = '/congratulation_round';
+  static const EXAM_ROUND = '/exam_round';
 
   static const EXAM = '/exam';
 

@@ -6,6 +6,10 @@ import { MyLoggerModule } from './my-logger/my-logger.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './user/auth.guard';
+import { WordModule } from './word/word.module';
+import { TopicModule } from './topic/topic.module';
+import { LearntModule } from './learnt/learnt.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
@@ -20,27 +24,33 @@ import { AuthGuard } from './user/auth.guard';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    ThrottlerModule.forRoot([{
-      name: 'short',
-      ttl: 100,
-      limit: 5,
-    },
-    {
-      name: 'long',
-      ttl: 60000,
-      limit: 100,
-    }]),
+    ThrottlerModule.forRoot([
+      {
+        name: 'short',
+        ttl: 100,
+        limit: 5,
+      },
+      {
+        name: 'long',
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
     MyLoggerModule,
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
-    }),
+    }),,
+    WordModule,
+    TopicModule,
+    LearntModule,
+    StoreModule,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard
+      useClass: ThrottlerGuard,
     },
     {
       provide: APP_GUARD,
@@ -48,4 +58,4 @@ import { AuthGuard } from './user/auth.guard';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

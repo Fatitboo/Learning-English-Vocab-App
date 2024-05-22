@@ -1,27 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:just_audio/just_audio.dart';
 
 class CardFront extends StatelessWidget{
 
-  CardFront(this.wordName, this.audio);
+  CardFront(this.wordName, this.audio, this.cardWidth, this.cardHeight);
 
   String wordName;
   String audio;
+  double cardWidth;
+  double cardHeight;
 
 
-  final player = AudioPlayer();
-  Future<void> playAudioFromUrl(String url) async {
-    // await player.play(UrlSource(url));
-    await player.setUrl(url);                 // Schemes: (https: | file: | asset: )
-    await player.play();                                  // Play without waiting for completion
+  FlutterTts flutterTts = FlutterTts();
+
+  Future _speak(String text) async{
+    var result = await flutterTts.speak(text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 500,
+      height: cardHeight,
+      width: cardWidth,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -39,7 +41,7 @@ class CardFront extends StatelessWidget{
             padding: const EdgeInsets.only(top: 26, left: 23),
             child: InkWell(
               onTap: () {
-                playAudioFromUrl(audio);
+                _speak(wordName);
               },
               child: const Icon(
                 Icons.volume_up,

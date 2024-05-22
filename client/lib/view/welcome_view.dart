@@ -26,7 +26,7 @@ class _WelcomeViewState extends State<WelcomeView> {
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Column(
                   children: [
                     Padding(
@@ -47,7 +47,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     ),
                     const Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
+                      EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
                       child: Text(
                         'Free English vocabulary learning platform with many interesting topics',
                         textAlign: TextAlign.center,

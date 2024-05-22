@@ -25,6 +25,7 @@ dependencies:
   google_sign_in: ^6.2.1
   http: ^1.2.1
   flutter_secure_storage: ^9.1.1
+  flutter_tts: ^4.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -50,3 +51,8 @@ flutter:
           weight: 500
         - asset: assets/font/Poppins-Bold.ttf
           weight: 700
+    - family: NotoSans
+      fonts:
+        - asset: assets/font/NotoSans-Regular.ttf
+
+

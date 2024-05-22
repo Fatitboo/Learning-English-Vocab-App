@@ -1,12 +1,17 @@
 import 'package:client/common_widget/word_widget.dart';
+import 'package:client/res/model/word_dto.dart';
+import 'package:client/res/routes/names.dart';
+import 'package:client/view/detail_topic/detail_topic_controller.dart';
 import 'package:client/view/saved_topic/saved_topic_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common_widget/topic_dto_widget.dart';
+import '../../res/model/topic_dto.dart';
+
 class SavedTopicPage extends GetView<SavedTopicController> {
   SavedTopicPage({super.key});
-  //var dt = Get.arguments;
-
   @override
   Widget build(BuildContext context) {
     return Obx(() => SafeArea(
@@ -20,7 +25,23 @@ class SavedTopicPage extends GetView<SavedTopicController> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Stack(alignment: Alignment.center,children: <Widget>[
-                  Container(padding: const EdgeInsets.symmetric(horizontal: 50), child: Text(controller.topicName.value, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500,))),
+                  Container(padding: const EdgeInsets.symmetric(horizontal: 50), child: const Text("Saved Words", overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500,))),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: GestureDetector(
+                        onTap: (){
+                          Get.toNamed(AppRoutes.FLASH_CARD, arguments: {'wordList': controller.listWord.value, 'allWord': controller.listWord.value});
+                        },
+                        child: const Image(
+                            width: 24,
+                            height: 24,
+                            image: AssetImage('assets/icons/flashcard.png')
+                        ),
+                      ),
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
@@ -33,21 +54,25 @@ class SavedTopicPage extends GetView<SavedTopicController> {
                 ]),
                 Expanded(
                   child: ListView.builder(
-                      itemCount: controller.data.length,
+                      itemCount: controller.listWord.length,
                       itemBuilder: (BuildContext context, int index) {
+                        WordDTO wordDTO = controller.listWord.value[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                           child: WordWidget(
-                              onTap: (){
-                                //print(dt);
-                                print(controller.topicName.value);
-                              },
-                              wordName: controller.data[index]["wordName"],
-                              wordMean: controller.data[index]["wordMean"],
-                              spelling: controller.data[index]["spelling"],
-                              image: controller.data[index]["image"],
-                              wordType: controller.data[index]["wordType"],
-                              audio: controller.data[index]["audio"],
+                            onTap: (){
+                              // print(controller.topicName.value);
+                            },
+                            onTapStar: () {
+                              controller.toggleSavedWord(wordDTO!, index);
+                            },
+                            wordName: wordDTO.wordName ?? '',
+                            wordMean: wordDTO.wordMean ?? '',
+                            spelling: wordDTO.spelling ?? '',
+                            image: wordDTO.image ?? '',
+                            wordType: wordDTO.wordType ?? '',
+                            audio: wordDTO.audio ?? '',
+                            saved: wordDTO.saved ?? false,
                           ),
                         );
                       }

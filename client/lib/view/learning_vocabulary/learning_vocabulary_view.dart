@@ -28,7 +28,7 @@ class LearningVocabularyView extends GetView<LearningVocabularyController> {
                         fontWeight: FontWeight.bold
                     ),),
                   leading: IconButton(
-                    onPressed: () {},
+                    onPressed: () {Get.back();},
                     icon: const Icon(Icons.arrow_back),
                   ),
                   bottom: const TabBar(
