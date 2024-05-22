@@ -1,4 +1,5 @@
 import 'package:client/view/exam/exam_binding.dart';
+import 'package:client/view/exam/exam_round_view.dart';
 import 'package:client/view/exam/exam_view.dart';
 import 'package:client/view/flashcard/result_flashcard.dart';
 import 'package:client/view/forgot_password/enter_otp.dart';
@@ -10,11 +11,14 @@ import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
 import 'package:client/view/flashcard/flashcard_binding.dart';
 import 'package:client/view/flashcard/flashcard_page.dart';
+import 'package:client/view/learning_vocabulary/round_learn/congratulation_round_view.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_binding.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_view.dart';
 import 'package:client/view/login/login_binding.dart';
 import 'package:client/view/result_round_page.dart';
 import 'package:client/view/result_test_page.dart';
+import 'package:client/view/saved_topic/saved_topic_binding.dart';
+import 'package:client/view/saved_topic/saved_topic_page.dart';
 import 'package:client/view/setting_test_page.dart';
 import 'package:client/view/signup/sign_up_view.dart';
 import 'package:client/view/signup/signup_binding.dart';
@@ -27,7 +31,6 @@ import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_bindi
 import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_topic.dart';
 import '../../view/learning_vocabulary/learning_vocabulary_binding.dart';
 import '../../view/learning_vocabulary/learning_vocabulary_view.dart';
-import '../../view/password_management/password_management_binding.dart';
 import '../../view/password_management/password_management_view.dart';
 import '../../view/privacy_policy/privacy_policy_binding.dart';
 import '../../view/privacy_policy/privacy_policy_view.dart';

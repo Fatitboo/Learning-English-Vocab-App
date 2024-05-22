@@ -14,6 +14,8 @@ import {
   UseGuards,
   BadRequestException,
   HttpCode,
+  NotFoundException,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
