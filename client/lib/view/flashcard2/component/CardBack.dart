@@ -6,13 +6,11 @@ import 'package:just_audio/just_audio.dart';
 
 class CardBack extends StatelessWidget{
 
-  CardBack(this.wordMean, this.wordType, this.image, this.cardWidth, this.cardHeight);
+  CardBack(this.wordMean, this.wordType, this.image);
 
   String wordMean;
   String wordType;
   String image;
-  double cardWidth;
-  double cardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +19,8 @@ class CardBack extends StatelessWidget{
       transform: Matrix4.identity()
         ..rotateY(pi),
       child: Container(
-        height: cardHeight,
-        width: cardWidth,
+        width: 300,
+        height: 500,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),

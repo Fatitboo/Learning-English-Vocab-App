@@ -37,7 +37,7 @@ class LoginController extends GetxController {
       if (postApi.statusCode == 200) {
         UserStore.to.saveProfile(customResponse);
         UserStore.to.setToken(customResponse.access_token ?? "");
-        Get.offAndToNamed(AppRoutes.HOME);
+        Get.offAndToNamed(AppRoutes.NAV_BAR);
       }
     } catch (e) {
       print(e.toString());

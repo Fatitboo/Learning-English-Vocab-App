@@ -1,6 +1,5 @@
-// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class WordWidget extends StatelessWidget {
   WordWidget({super.key,
@@ -20,12 +19,12 @@ class WordWidget extends StatelessWidget {
   final String wordType;
   final VoidCallback onTap;
 
-  final player = AudioPlayer();
-  Future<void> playAudioFromUrl(String url) async {
-    // await player.play(UrlSource(url));
-    await player.setUrl(url);                 // Schemes: (https: | file: | asset: )
-    await player.play();                                  // Play without waiting for completion
+  FlutterTts flutterTts = FlutterTts();
+
+  Future _speak(String text) async{
+    var result = await flutterTts.speak(text);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +69,14 @@ class WordWidget extends StatelessWidget {
                                 Text("($wordType)", overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Color(0xff252526)),)
                               ],
                             ),
-                            const SizedBox(height: 5,),
+                            Text(spelling, style: const TextStyle(fontSize: 12, fontFamily: 'NotoSans',),),
+                            const SizedBox(height: 2,),
                             Row(
                               children: [
-                                Text(spelling, style: const TextStyle(fontSize: 12),),
-                                const Text(": ", style: TextStyle(fontSize: 12),),
-                                Text(wordMean, style: const TextStyle(fontSize: 12),),
+                                Expanded(
+                                    child: SizedBox(child: Text(wordMean, overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 12),))),
                               ],
                             ),
-                            const SizedBox(height: 5,),
                           ],
                         ),
                       )
@@ -90,7 +88,8 @@ class WordWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          playAudioFromUrl(audio);
+                          // playAudioFromUrl(audio);
+                          _speak(wordName);
                         },
                         child: const Icon(
                           Icons.volume_up,
@@ -98,7 +97,7 @@ class WordWidget extends StatelessWidget {
                           size: 24.0,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      const SizedBox(width: 5,),
                       const Icon(
                         Icons.star_outline,
                         color: Colors.black45,

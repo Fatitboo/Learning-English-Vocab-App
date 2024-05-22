@@ -14,6 +14,7 @@ class AppRoutes {
   static const HOME = '/home';
   static const DETAIL_TOPIC = '/home/detail_topic';
   static const FLASH_CARD = '/home/detail_topic/flashcard';
+  static const FLASH_CARD_RESULT = '/home/detail_topic/flashcard_result';
   static const SAVE_TOPIC = '/user/saved_topic';
 
 

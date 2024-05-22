@@ -423,11 +423,11 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
                                       child: const Center(child: Text("Know", style: TextStyle(fontSize: 34, color: Color(0xff1CD0AF), fontWeight: FontWeight.w500))),
                                     ),
                                 ),
-                                AnimatedOpacity(
-                                    opacity: 1 - sqrt(_currentOpacity),
-                                    duration: const Duration(milliseconds: 10),
-                                    child: CardFront(learnedWords.elementAt(i)["wordName"], learnedWords.elementAt(i)["audio"])
-                                ),
+                                // AnimatedOpacity(
+                                //     opacity: 1 - sqrt(_currentOpacity),
+                                //     duration: const Duration(milliseconds: 10),
+                                //     child: CardFront(learnedWords.elementAt(i)["wordName"], learnedWords.elementAt(i)["audio"])
+                                // ),
                               ],
                             ),
                           ),
@@ -449,11 +449,11 @@ class FlashCardPageState extends State<FlashCardPage> with TickerProviderStateMi
                                 ]),
                             child: Stack(
                               children: [
-                                AnimatedOpacity(
-                                    opacity: 1 - sqrt(_currentOpacity),
-                                    duration: const Duration(milliseconds: 10),
-                                    child: CardBack(learnedWords.elementAt(i)["wordMean"], learnedWords.elementAt(i)["wordType"], learnedWords.elementAt(i)["image"]),
-                                ),
+                                  // AnimatedOpacity(
+                                  //     opacity: 1 - sqrt(_currentOpacity),
+                                  //     duration: const Duration(milliseconds: 10),
+                                  //     child: CardBack(learnedWords.elementAt(i)["wordMean"], learnedWords.elementAt(i)["wordType"], learnedWords.elementAt(i)["image"]),
+                                  // ),
                                 Transform(
                                   alignment: FractionalOffset.center,
                                   transform: Matrix4.identity()

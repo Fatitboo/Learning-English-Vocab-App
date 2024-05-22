@@ -1,5 +1,6 @@
 import 'package:client/view/exam/exam_binding.dart';
 import 'package:client/view/exam/exam_view.dart';
+import 'package:client/view/flashcard/result_flashcard.dart';
 import 'package:client/view/forgot_password/enter_otp.dart';
 import 'package:client/view/forgot_password/forgot_password_binding.dart';
 import 'package:client/view/forgot_password/forgot_password_view.dart';
@@ -7,8 +8,8 @@ import 'package:client/view/forgot_password/reset_password.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
-import 'package:client/view/flashcard/flashcard_binding.dart';
-import 'package:client/view/flashcard/flashcard_page.dart';
+import 'package:client/view/flashcard2/flashcard_binding.dart';
+import 'package:client/view/flashcard2/flashcard_page.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_binding.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_view.dart';
 import 'package:client/view/login/login_binding.dart';
@@ -25,6 +26,7 @@ import '../../common_widget/bottom_navigate/bottom_navigate.dart';
 import '../../common_widget/bottom_navigate/bottom_navigate_binding.dart';
 import '../../view/detail_topic/detail_topic_binding.dart';
 import '../../view/exam/exam_binding.dart';
+import '../../view/exam/exam_round_view.dart';
 import '../../view/exam/exam_view.dart';
 import '../../view/forgot_password/enter_otp.dart';
 import '../../view/forgot_password/forgot_password_binding.dart';
@@ -34,6 +36,7 @@ import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_bindi
 import '../../view/learning_vocabulary/detail_learned_topic/detail_learned_topic.dart';
 import '../../view/learning_vocabulary/learning_vocabulary_binding.dart';
 import '../../view/learning_vocabulary/learning_vocabulary_view.dart';
+import '../../view/learning_vocabulary/round_learn/congratulation_round_view.dart';
 import '../../view/learning_vocabulary/round_learn/round_learn_binding.dart';
 import '../../view/learning_vocabulary/round_learn/round_learn_view.dart';
 import '../../view/password_management/password_management_binding.dart';
@@ -265,6 +268,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.EXAM_ROUND,
       page: () => ExamRoundView(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+
+    GetPage(
+      name: AppRoutes.FLASH_CARD_RESULT,
+      page: () => ResultFlashCard(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

@@ -1,4 +1,5 @@
 import 'package:client/common_widget/word_widget.dart';
+import 'package:client/res/model/word_dto.dart';
 import 'package:client/res/routes/names.dart';
 import 'package:client/view/detail_topic/detail_topic_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,10 +8,6 @@ import 'package:get/get.dart';
 
 class DetailTopicPage extends GetView<DetailTopicController> {
   DetailTopicPage({super.key});
-  //var dt = Get.arguments;
-
-
-
   @override
   Widget build(BuildContext context) {
     return Obx(() => SafeArea(
@@ -31,7 +28,7 @@ class DetailTopicPage extends GetView<DetailTopicController> {
                       padding: const EdgeInsets.only(right: 20),
                       child: GestureDetector(
                         onTap: (){
-                          Get.toNamed(AppRoutes.FLASH_CARD);
+                          Get.toNamed(AppRoutes.FLASH_CARD, arguments: {'wordList': controller.listWord.value, 'allWord': controller.listWord.value});
                         },
                         child: const Image(
                             width: 24,
@@ -53,21 +50,21 @@ class DetailTopicPage extends GetView<DetailTopicController> {
                 ]),
                 Expanded(
                   child: ListView.builder(
-                      itemCount: controller.data.length,
+                      itemCount: controller.listWord.length,
                       itemBuilder: (BuildContext context, int index) {
+                        WordDTO wordDTO = controller.listWord.value[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                           child: WordWidget(
                               onTap: (){
-                                //print(dt);
                                 print(controller.topicName.value);
                               },
-                              wordName: controller.data[index]["wordName"],
-                              wordMean: controller.data[index]["wordMean"],
-                              spelling: controller.data[index]["spelling"],
-                              image: controller.data[index]["image"],
-                              wordType: controller.data[index]["wordType"],
-                              audio: controller.data[index]["audio"],
+                              wordName: wordDTO.wordName ?? '',
+                              wordMean: wordDTO.wordMean ?? '',
+                              spelling: wordDTO.spelling ?? '',
+                              image: wordDTO.image ?? '',
+                              wordType: wordDTO.wordType ?? '',
+                              audio: wordDTO.audio ?? '',
                           ),
                         );
                       }

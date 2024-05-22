@@ -5,12 +5,10 @@ import 'package:just_audio/just_audio.dart';
 
 class CardFront extends StatelessWidget{
 
-  CardFront(this.wordName, this.audio, this.cardWidth, this.cardHeight);
+  CardFront(this.wordName, this.audio);
 
   String wordName;
   String audio;
-  double cardWidth;
-  double cardHeight;
 
 
   FlutterTts flutterTts = FlutterTts();
@@ -22,8 +20,8 @@ class CardFront extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: cardHeight,
-      width: cardWidth,
+      width: 300,
+      height: 500,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
