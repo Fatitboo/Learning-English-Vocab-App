@@ -5,6 +5,7 @@ import {
   Param,
   ParseIntPipe,
   Put,
+  Req,
   Res,
 } from '@nestjs/common';
 import {WordService} from './word.service';
@@ -40,6 +41,29 @@ export class WordController {
       const words = await this.wordService.getAllSavedWords(userId);
 
       res.status(HttpStatus.OK).json(words);
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
+        message: 'Error',
+      });
+    }
+  }
+  @Get('getAllWordNotLearnByTopic/:topicId')
+  async getAllWordNotLearnByTopic(
+    @Req() req: Request,
+    @Param('topicId') topicId: number,
+    @Res() res: Response,
+  ) {
+    try {
+      const userName = req['user'].username;
+
+      const results = await this.wordService.getAllWordNotLearnByTopic(
+        userName,
+        topicId,
+      );
+
+      res.status(HttpStatus.OK).json(results);
+      // const topics = [];
+      // res.status(HttpStatus.OK).json(topics);
     } catch (error) {
       res.status(HttpStatus.BAD_REQUEST).json({
         message: 'Error',

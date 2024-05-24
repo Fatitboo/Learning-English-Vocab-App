@@ -48,7 +48,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                 height: 10,
                                 duration: Duration(milliseconds: 300), //
                                 width: (Get.width - 40) *
-                                    controller.sttQuestion /
+                                    (controller.correctIds.length+1) /
                                     10,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -91,7 +91,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Question x/y',
+                                    'Question ${controller.correctIds.length+1}/${controller.listRound.length + controller.correctIds.length}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 18),
@@ -102,7 +102,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                 height: 50,
                               ),
                               Text(
-                                'water (n)',
+                                '${controller.question}',
                                 style: TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.w300),
                               ),
@@ -120,15 +120,17 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                 child: Container(
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(
-                                    'nước',
+
+                                  child:  Text(
+
+                                    '${controller.answer1} ',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 1 ?
-                                           controller.colorChooseText
+                                        controller.colorChooseText
                                             : Color(0xff606061)),
                                     textAlign: TextAlign.center,
-                                  ),
+                                  ) ,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),
                                       color: controller.indexAnswer == 1
@@ -169,7 +171,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    'nước',
+                                    '${controller.answer2}',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 2

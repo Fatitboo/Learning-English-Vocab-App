@@ -1,19 +1,19 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { MyLoggerModule } from './my-logger/my-logger.module';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './user/auth.guard';
-import { WordModule } from './word/word.module';
-import { TopicModule } from './topic/topic.module';
-import { LearntModule } from './learnt/learnt.module';
-import { StoreModule } from './store/store.module';
+import {Module} from '@nestjs/common';
+import {ConfigModule} from '@nestjs/config';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {UserModule} from './user/user.module';
+import {MyLoggerModule} from './my-logger/my-logger.module';
+import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
+import {APP_GUARD} from '@nestjs/core';
+import {AuthGuard} from './user/auth.guard';
+import {WordModule} from './word/word.module';
+import {TopicModule} from './topic/topic.module';
+import {LearntModule} from './learnt/learnt.module';
+import {StoreModule} from './store/store.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.PGHOST,
@@ -38,9 +38,6 @@ import { StoreModule } from './store/store.module';
     ]),
     MyLoggerModule,
     UserModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),,
     WordModule,
     TopicModule,
     LearntModule,

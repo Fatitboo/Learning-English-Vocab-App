@@ -17,17 +17,18 @@ class OverViewPage extends StatelessWidget {
         body: Container(
             padding: EdgeInsets.all(24),
             child: ListView.builder(
-                itemCount: 12,
+                itemCount: controller.listTopicLearnt.length,
                 itemBuilder: (context,index) {
                   return
 
                      GestureDetector(
                        onTap: () {
-                         Get.toNamed(AppRoutes.ROUND_LEARN, preventDuplicates: false);
+                         controller.goToRoundLearn(index);
+
                        },
                        child: Container(
                           padding: EdgeInsets.symmetric(vertical: 8),
-                          child: CardTopic()),
+                          child: CardTopic(item: controller.listTopicLearnt[index],)),
                      );
 
                 })

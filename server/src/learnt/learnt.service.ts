@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Learnt } from './entity/learnt.entity';
-import { Repository } from 'typeorm';
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Learnt} from './entity/learnt.entity';
+import {Repository} from 'typeorm';
 
 @Injectable()
 export class LearntService {
@@ -16,7 +16,7 @@ export class LearntService {
       .innerJoinAndSelect('learnt.word', 'word')
       .innerJoinAndSelect('word.topic', 'topic')
       .innerJoin('learnt.user', 'user')
-      .where('user.username = :username', { username })
+      .where('user.username = :username', {username})
       .select(['topic.id', 'topic.topicName', 'word.id', 'word.wordName'])
       .groupBy('topic.id, word.id')
       .orderBy('topic.id')

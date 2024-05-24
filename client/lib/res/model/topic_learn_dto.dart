@@ -8,7 +8,6 @@ class WordDTO {
   String? wordType;
   String? audio;
   bool? saved;
-  int? topicId;
 
   WordDTO(
       this.id,
