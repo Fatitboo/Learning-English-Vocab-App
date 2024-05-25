@@ -1,6 +1,5 @@
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/achive_cell.dart';
-import 'package:client/common_widget/progress_bar.dart';
 import 'package:client/view/statiscal/statiscal_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,19 +85,19 @@ class StatiscalView extends StatelessWidget {
                           Expanded(
                             child: AchiveCell(
                               icon: "assets/images/learn.png",
-                              value: "300 words",
+                              value: "${controller.totalWordLearned} words",
                               title: "Total word you learned ",
                             ),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-                          const Row(
+                          Row(
                             children: [
                               Expanded(
                                 child: AchiveCell(
                                   icon: "assets/images/learn.png",
-                                  value: "8 topics",
+                                  value: "${controller.totalTopicCompleted} topics",
                                   title: "Completed",
                                 ),
                               ),
@@ -108,7 +107,7 @@ class StatiscalView extends StatelessWidget {
                               Expanded(
                                 child: AchiveCell(
                                   icon: "assets/images/test.png",
-                                  value: "24 topics",
+                                  value: "${controller.totalInProcessTopicsCount} topics",
                                   title: "InProcess",
                                 ),
                               ),
@@ -136,7 +135,7 @@ class StatiscalView extends StatelessWidget {
                   "Your score",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
-                RankingRow(wObj: latestArr[0]),
+                RankingRow(wObj: {"avatar": controller.avatarPath, "fullname": controller.fullname, "score": controller.score}),
                 const SizedBox(
                   height: 15,
                 ),
@@ -169,9 +168,14 @@ class StatiscalView extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: latestArr.length,
+                          itemCount: controller.allUsers.length,
                           itemBuilder: (context, index) {
-                            var wObj = latestArr[index] as Map? ?? {};
+                            var item = {
+                              "avatar": controller.allUsers[index].avatar,
+                              "fullname": controller.allUsers[index].fullname,
+                              "score": controller.allUsers[index].score
+                            };
+                            var wObj = item as Map? ?? {};
                             return RankingRow(wObj: wObj);
                           }),
                     ),

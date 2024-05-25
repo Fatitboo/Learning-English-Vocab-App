@@ -4,19 +4,20 @@ import 'package:get/get.dart';
 import 'dart:convert';
 
 class StatiscalController extends GetxController {
-  var allUsers = <User>[].obs;
-  var fullname = ''.obs;
-  var score = 0.obs;
-  var avatarPath = ''.obs;
-  var totalTopicCompleted = 0.obs;
-  var totalWordLearned = 0.obs;
-  var totalInProcessTopicsCount = 0.obs;
+  var allUsers = <User>[];
+  var fullname = '';
+  var score = 0;
+  var avatarPath = '';
+  var totalTopicCompleted = 0;
+  var totalWordLearned = 0;
+  var totalInProcessTopicsCount = 0;
 
   @override
   void onInit() {
     super.onInit();
     fetchAllUsers();
     getUserStatistics();
+    update();
   }
 
   Future<void> fetchAllUsers() async {
@@ -32,10 +33,11 @@ class StatiscalController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Failed to load users: $e');
     }
+    update();
   }
 
   void setAllUsers(List<User> users) {
-    allUsers.value = users;
+    allUsers = users;
   }
 
   Future<void> getUserStatistics() async {
@@ -44,16 +46,15 @@ class StatiscalController extends GetxController {
       if (responseCurrentUser.statusCode == 200) {
         var currentUserData = jsonDecode(responseCurrentUser.body);
         var id = currentUserData["id"];
-        fullname.value = currentUserData["fullname"];
-        score.value = currentUserData["score"];
-        avatarPath.value = currentUserData["avatar"];
-
+        fullname = currentUserData["fullname"];
+        score = currentUserData["score"];
+        avatarPath = currentUserData["avatar"];
         var response = await NetworkApiService().getApi("/user/$id/statistics");
         if (response.statusCode == 200) {
           var data = jsonDecode(response.body);
-          totalTopicCompleted.value = data["completedTopicsCount"];
-          totalWordLearned.value = data["learntWordsCount"];
-          totalInProcessTopicsCount.value = data["inProcessTopicsCount"];
+          totalTopicCompleted = data["completedTopicsCount"];
+          totalWordLearned = data["learntWordsCount"];
+          totalInProcessTopicsCount = data["inProcessTopicsCount"];
         } else {
           Get.snackbar('Error', 'Failed to load user statistics');
         }
@@ -63,5 +64,6 @@ class StatiscalController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Failed to load user statistics: $e');
     }
+    update();
   }
 }
