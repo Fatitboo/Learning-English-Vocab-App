@@ -13,12 +13,13 @@ import '../../../res/model/word_dto.dart';
 
 class RoundLearnController extends GetxController {
   int topicId = 0;
+  int nextRound = 0;
+  int numberOfRounds = 0;
   int indexAnswer = 0;
   String typeQuestion = 'string';
   int sttQuestion = 0;
   int correctAnswert = 0;
   int showCorrect = 0;
-  int round =  5;
   Color colorChoose = Color(0xffD3EEFB);
   Color colorChooseBorder = Color(0xff04BFD9);
   Color colorChooseText = Color(0xff29ABEA);
@@ -37,13 +38,14 @@ class RoundLearnController extends GetxController {
     super.onInit();
     var args = Get.arguments;
     topicId = args['topicId'];
+    nextRound = args['nextRound'];
+    numberOfRounds = args['numberOfRounds'];
      await getWordsNotLearn(topicId);
      initRound();
 
   }
   void initRound() {
     var random = Random();
-    int length = listWordsNotLearn.length;
     listWordsNotLearn.toList().forEach((word) {
       List otherWords = listWordsNotLearn.map((item) => ({
         "wrongId": item.id,
@@ -98,6 +100,7 @@ class RoundLearnController extends GetxController {
 
         listRound.removeWhere((element) => element['id'] == currentQuestion?['id']);
         if (listRound.length==0) {
+          handleSaveLearnWord();
           Get.offNamed(AppRoutes.CONGRATULATION_ROUND);
           return;
         }
@@ -189,6 +192,19 @@ class RoundLearnController extends GetxController {
     if(res.statusCode == HttpStatus.ok){
       Iterable i = json.decode(utf8.decode(res.bodyBytes));
         listWordsNotLearn =  List<WordDTO>.from(i.map((model)=> WordDTO.fromJson(model))).toList();
+    }
+    else{
+      Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+      print(resMessage["message"]);
+    }
+  }
+
+  Future<void> handleSaveLearnWord() async {
+    http.Response res = await networkApiService.postApi("/learnt/saveLearntWords", jsonEncode(correctIds));
+
+    if(res.statusCode == HttpStatus.ok){
+
+
     }
     else{
       Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));

@@ -82,7 +82,7 @@ export class WordService {
         'topic.id as topicId',
       ])
       .getRawMany();
-    console.log(resluts.length);
+
     const formattedWords = resluts.map(word => ({
       id: word.id,
       wordName: word.wordname,

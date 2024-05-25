@@ -1,3 +1,9 @@
+
+
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -12,6 +18,7 @@ class WordWidget extends StatelessWidget {
     required this.onTap,
     required this.saved,
     required this.onTapStar,
+    this.showSave = true,
   });
   final String wordName;
   final String wordMean;
@@ -22,7 +29,7 @@ class WordWidget extends StatelessWidget {
   final bool saved;
   final VoidCallback onTapStar;
   final VoidCallback onTap;
-
+  final bool showSave;
   FlutterTts flutterTts = FlutterTts();
 
   Future _speak(String text) async{
@@ -93,6 +100,7 @@ class WordWidget extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           // playAudioFromUrl(audio);
+
                           _speak(wordName);
                         },
                         child: const Icon(
@@ -102,7 +110,7 @@ class WordWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 5,),
-                      InkWell(
+                      if (showSave) InkWell(
                         onTap: () {
                           onTapStar();
                         },

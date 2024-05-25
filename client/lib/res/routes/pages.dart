@@ -197,8 +197,8 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.DETAIL_LEARNED_TOPIC_WORD,
-      page: () => DetailLearnedTopic(),
       binding: DetailLearnedBinding(),
+      page: () => DetailLearnedTopic(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

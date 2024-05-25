@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class CardTopicLearned extends StatelessWidget {
+class CardTopicExam extends StatelessWidget {
 
    var item;
-   CardTopicLearned({
+   CardTopicExam({
       super.key,
       this.item});
 
@@ -46,7 +46,7 @@ class CardTopicLearned extends StatelessWidget {
                   Text('${item['topicName']}', style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xff252526)),),
                   SizedBox(height: 4,),
-                  Text('${item['learntWords']} words'),
+                  Text('${item['words'].length} words'),
 
 
                 ],

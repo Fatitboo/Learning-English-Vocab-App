@@ -65,9 +65,20 @@ export class TopicService {
       totalWords: topic.totalwords,
       learntWords: topic.learntwords,
     }));
-    console.log(formattedTopics);
 
     // Trả về kết quả
     return formattedTopics;
+  }
+
+  async getAllTopicHasLearntWord(username: string) {
+    const list = await this.topicRepository
+      .createQueryBuilder('topic')
+      .leftJoinAndSelect('topic.words', 'word')
+      .leftJoin('word.learnts', 'learnt')
+      .leftJoin('learnt.user', 'user')
+      .where('user.username = :username', {username})
+      .getMany();
+
+    return list;
   }
 }

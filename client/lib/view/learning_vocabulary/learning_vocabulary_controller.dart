@@ -9,11 +9,12 @@ import 'package:http/http.dart' as http;
 
 import '../../res/data/network_api_service.dart';
 
-class LearningVocabularyController extends GetxController {
+class LearningVocabularyController extends GetxController with StateMixin{
   LearningVocabularyController();
   int _a = 5;
   int get a => _a;
   List<dynamic> listTopicLearnt = [];
+  int indexBlock = 0;
 
   void increase() {
     _a++;
@@ -25,6 +26,9 @@ class LearningVocabularyController extends GetxController {
   void onInit() {
     getAllTopicLearnt();
   }
+
+
+
   void getAllTopicLearnt() async{
 
     http.Response res = await networkApiService.getApi("/topic/getWordsLearnedGroupedByTopic");
@@ -33,6 +37,11 @@ class LearningVocabularyController extends GetxController {
       Iterable i = json.decode(utf8.decode(res.bodyBytes));
 
       listTopicLearnt = i.toList();
+      listTopicLearnt.forEach((topic) {
+        if (topic['learntWords'].toInt()==topic['totalWords'].toInt()) indexBlock++;
+      });
+      if (indexBlock==0) indexBlock++;
+
       update();
 
     }
@@ -41,10 +50,12 @@ class LearningVocabularyController extends GetxController {
       print(resMessage["message"]);
     }
   }
-  void goToRoundLearn(int index) {
-    Get.toNamed(AppRoutes.ROUND_LEARN, preventDuplicates: false, arguments:{
-      "topicId": listTopicLearnt[index]['topicId'],
-      "round": listTopicLearnt[index]['']
+  void goToRoundLearn(int index, int nextRound, int numberOfRounds) {
+    int topicId = listTopicLearnt[index]['topicId'];
+    Get.offNamed(AppRoutes.ROUND_LEARN, preventDuplicates: false, arguments:{
+      "topicId": topicId,
+      "nextRound": nextRound,
+      "numberOfRounds": numberOfRounds
     } );
   }
 }

@@ -38,7 +38,6 @@ export class TopicController {
   ) {
     try {
       const userName = req['user'].username;
-      console.log(userName);
 
       const topics =
         await this.topicService.getWordsLearnedGroupedByTopic(userName);
@@ -50,6 +49,19 @@ export class TopicController {
       res.status(HttpStatus.BAD_REQUEST).json({
         message: 'Error',
       });
+    }
+  }
+
+  @Get('getAllTopicHasLearntWord')
+  async getAllTopicHasLearntWord(@Req() req: Request, @Res() res: Response) {
+    try {
+      const username = req['user'].username;
+      const result = await this.topicService.getAllTopicHasLearntWord(username);
+      console.log(result);
+      res.status(HttpStatus.OK).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(HttpStatus.OK).json(error.message);
     }
   }
 }

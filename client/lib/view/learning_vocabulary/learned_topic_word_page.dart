@@ -16,15 +16,22 @@ class LearnedTopicWordPage extends GetView<LearningVocabularyController> {
       body: Container(
           padding: EdgeInsets.all(24),
           child: ListView.builder(
-              itemCount: 12,
+              itemCount: controller.listTopicLearnt.length,
               itemBuilder: (context,index) {
+                var item =controller.listTopicLearnt[index];
+
+
                 return GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.DETAIL_LEARNED_TOPIC_WORD, preventDuplicates: false);
+                  onTap: ()  {
+                     // controller.getWordsLeantByTopic(item['topicId']);
+                    Get.toNamed(AppRoutes.DETAIL_LEARNED_TOPIC_WORD, preventDuplicates: false, arguments: {
+                      "topicId": item['topicId'],
+                      "topicImage": item['topicImage']
+                    });
                   },
                   child: Container(
                       padding: EdgeInsets.symmetric(vertical: 8),
-                      child: CardTopicLearned()),
+                      child: CardTopicLearned(item:item)),
                 );
               })
       ),

@@ -1,12 +1,19 @@
-import { Store } from 'src/store/entity/store.entity';
-import { Topic } from 'src/topic/entity/topic.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {Learnt} from 'src/learnt/entity/learnt.entity';
+import {Store} from 'src/store/entity/store.entity';
+import {Topic} from 'src/topic/entity/topic.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity()
 export class Word {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({nullable: false})
   wordName: string;
 
   @Column()
@@ -24,9 +31,12 @@ export class Word {
   @Column()
   audio: string;
 
-  @ManyToOne(() => Topic, (topic) => topic.words)
+  @ManyToOne(() => Topic, topic => topic.words)
   topic: Topic;
 
-  @OneToMany(() => Store, (store) => store.word)
+  @OneToMany(() => Store, store => store.word)
   stores: Store[];
+
+  @OneToMany(() => Learnt, learnt => learnt.word)
+  learnts: Learnt[];
 }

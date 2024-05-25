@@ -1,8 +1,54 @@
 
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../res/data/network_api_service.dart';
+import '../../../res/model/topic_learn_dto.dart';
+
 
 class DetailLearnedController extends GetxController {
   DetailLearnedController();
+  int topicId = 0;
+  String topicImage = '';
+  List<WordDTO> listWordsLearnByTopic = [];
+  List<WordDTO> listWordsLearnByTopicOrigin = [];
+  final NetworkApiService networkApiService = NetworkApiService();
+  TextEditingController search = TextEditingController();
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    var args = Get.arguments;
+    topicId = args['topicId'];
+    topicImage = args['topicImage'];
+    getWordsLeanByTopic(topicId);
+
+  }
+  Future<void>  getWordsLeanByTopic(topicId) async {
+    http.Response res = await networkApiService.getApi("/learnt/getWordsByTopic/$topicId");
+
+    if(res.statusCode == HttpStatus.ok){
+      Iterable i = json.decode(utf8.decode(res.bodyBytes));
+      listWordsLearnByTopic =  List<WordDTO>.from(i.map((model)=> WordDTO.fromJson(model))).toList();
+      listWordsLearnByTopicOrigin = List.from(listWordsLearnByTopic);
+      update();
+    }
+    else{
+      Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+      print(resMessage["message"]);
+    }
+  }
+  void handleChange(String search) {
+    if (search.trim()=='') listWordsLearnByTopic = List.from(listWordsLearnByTopicOrigin);
+    listWordsLearnByTopic = listWordsLearnByTopicOrigin.where((element) => element.wordName.toString().toLowerCase().contains(search.toLowerCase())).toList();
+    update();
+  }
   final _data = [
     {
       "wordName": "Food",

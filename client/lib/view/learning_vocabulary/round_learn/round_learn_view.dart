@@ -1,3 +1,4 @@
+import 'package:client/res/routes/routes.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,13 +14,13 @@ class RoundLearnView extends GetView<RoundLearnController> {
         return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: const Text(
-                'Vòng 1',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              title:  Text(
+                'Vòng ${controller.nextRound}',
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               leading: IconButton(
                 onPressed: () {
-                  Get.back();
+                  Get.offNamed(AppRoutes.LEARNING_VOCABULARY);
                 },
                 icon: const Icon(Icons.close),
               ),

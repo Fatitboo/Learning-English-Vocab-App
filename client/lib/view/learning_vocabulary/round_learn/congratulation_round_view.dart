@@ -15,15 +15,10 @@ class CongratulationView extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title:  Text(
-            'Vòng ${controller.round}',
+            'Vòng ${controller.nextRound}',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(Icons.close),
-          ),
+
         ),
         body: Container(
           width: Get.width,
@@ -33,7 +28,7 @@ class CongratulationView extends StatelessWidget {
               SizedBox(height: 40,),
               Text('Congratulation!', style: TextStyle(color: Color(0xff007398), fontWeight: FontWeight.w700, fontSize: 28),),
               SizedBox(height: 8,),
-              Text('Bạn vừa hoàn thành vòng ${controller.round}', style: TextStyle(fontSize: 16, color: Color(0xff429EBB)),),
+              Text('Bạn vừa hoàn thành vòng ${controller.nextRound}', style: TextStyle(fontSize: 16, color: Color(0xff429EBB)),),
               SizedBox(height: 80,),
               Image.asset('assets/images/congratulation.png'),
               SizedBox(height: 32,),
@@ -41,9 +36,9 @@ class CongratulationView extends StatelessWidget {
                 radius: 36,
                 lineWidth: 6,
                 animation: false,
-                percent: controller.round  / 7,
+                percent: controller.nextRound  / controller.numberOfRounds,
                 center:  Text(
-                  '${controller.round}/7',
+                  '${controller.nextRound}/${controller.numberOfRounds}',
                   style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 12,

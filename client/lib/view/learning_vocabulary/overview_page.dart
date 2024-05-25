@@ -19,16 +19,22 @@ class OverViewPage extends StatelessWidget {
             child: ListView.builder(
                 itemCount: controller.listTopicLearnt.length,
                 itemBuilder: (context,index) {
+                  var item =controller.listTopicLearnt[index];
+                  int totalWords = item['totalWords'].toInt();
+                  int learntWords =  item['learntWords'].toInt();
+                  int numberOfRounds = totalWords%10 == 0 ?totalWords~/10 : (totalWords~/10 + 1);
+                  int currentRound = learntWords == totalWords ? numberOfRounds : learntWords~/10;
                   return
 
                      GestureDetector(
                        onTap: () {
-                         controller.goToRoundLearn(index);
+                         if (index >= controller.indexBlock) return;
+                         controller.goToRoundLearn(index,currentRound+1,numberOfRounds);
 
                        },
                        child: Container(
                           padding: EdgeInsets.symmetric(vertical: 8),
-                          child: CardTopic(item: controller.listTopicLearnt[index],)),
+                          child: CardTopic(item: item, currentRound: currentRound, numberOfRounds: numberOfRounds, indexBlock: controller.indexBlock, index: index,)),
                      );
 
                 })

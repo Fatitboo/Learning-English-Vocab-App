@@ -69,6 +69,7 @@ class DetailTopicPage extends GetView<DetailTopicController> {
                               wordType: wordDTO.wordType ?? '',
                               audio: wordDTO.audio ?? '',
                               saved: wordDTO.saved ?? false,
+
                           ),
                         );
                       }
