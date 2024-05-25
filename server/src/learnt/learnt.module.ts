@@ -8,5 +8,6 @@ import { Learnt } from './entity/learnt.entity';
   imports: [TypeOrmModule.forFeature([Learnt])],
   providers: [LearntService],
   controllers: [LearntController],
+  exports: [TypeOrmModule],
 })
 export class LearntModule {}

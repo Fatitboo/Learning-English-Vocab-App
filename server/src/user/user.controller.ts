@@ -16,12 +16,15 @@ import {
   HttpCode,
   NotFoundException,
   Request,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Public } from './authPublic.decorator';
 import { Response } from 'express';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import { UserStatisticsDto } from './dto/user-statistics.dto';
 
 @Controller('user')
 export class UserController {
@@ -112,5 +115,17 @@ export class UserController {
         res.status(500).json({ message: 'Internal Server Error' });
       }
     }
+  }
+
+  @Get('/get_all_users')
+  async getAllUsersSortedByScore(): Promise<User[]> {
+    return this.userService.getAllUsersSortedByScore();
+  }
+
+  @Get(':id/statistics')
+  async getUserStatistics(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.userService.getUserStatistics(id);
   }
 }
