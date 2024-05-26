@@ -64,22 +64,14 @@ class PrivateInfoManagementView extends StatelessWidget {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                Container(
-                  width: 104,
-                  height: 104,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(80),
+                  child: Image.network(
+                    '${controller.avatarPath}',
+                    height: 100.0,
+                    width: 100.0,
                   ),
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(controller.avatarPath),
-                    backgroundColor: Colors.transparent,
-                  ),
-                ),
+                )
               ],
             ),
             Container(
@@ -105,7 +97,9 @@ class PrivateInfoManagementView extends StatelessWidget {
 
   Widget ItemYourProfile() => GestureDetector(
     onTap: () {
-      Get.toNamed(AppRoutes.YOUR_PROFILE);
+      Get.toNamed(AppRoutes.YOUR_PROFILE)?.then((value) =>  {
+        // controller.avatarPath = value
+      });
     },
     child: Container(
         margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),

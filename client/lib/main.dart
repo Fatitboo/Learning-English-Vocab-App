@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(fontFamily: "Poppins"),
             title: 'EngVocab',
-            initialRoute: AppRoutes.STATISCAL,
+            initialRoute: AppRoutes.SIGN_IN,
             getPages: AppPages.routes,
           )),
     );

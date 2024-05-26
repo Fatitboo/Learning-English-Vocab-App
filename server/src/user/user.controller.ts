@@ -139,7 +139,7 @@ export class UserController {
   }
 
   @Get('/get_all_users')
-  async getAllUsersSortedByScore(): Promise<User[]> {
+  async getAllUsersSortedByScore() {
     return this.userService.getAllUsersSortedByScore();
   }
 

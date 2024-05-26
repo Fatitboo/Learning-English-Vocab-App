@@ -14,7 +14,7 @@ class RouteWelcomeMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     if (UserStore.to.isLogin == true) {
-      return RouteSettings(name: AppRoutes.PRIVATE_INFO_MANAGER);
+      return RouteSettings(name: AppRoutes.NAV_BAR);
     } else {
       return RouteSettings(name: AppRoutes.SIGN_IN);
     }

@@ -106,13 +106,14 @@ export class UserService {
 
   async login(exitedUser: any) {
     const pl = {sub: exitedUser.id, username: exitedUser.username};
-
+    const accessToken = this.jwtService.sign(pl);
+    console.log(accessToken);
     return {
       userId: exitedUser.id,
       username: exitedUser.username,
       avatar: exitedUser.avatar,
       fullname: exitedUser.fullname,
-      access_token: this.jwtService.sign(pl),
+      access_token: accessToken,
     };
   }
 

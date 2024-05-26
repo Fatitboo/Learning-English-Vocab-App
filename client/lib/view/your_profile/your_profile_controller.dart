@@ -96,6 +96,7 @@ class YourProfileController extends GetxController {
             title: "Update successfully!",
             middleText: "You updated successfully.",
             textConfirm: "OK",
+
           );
         } else {
           Get.defaultDialog(

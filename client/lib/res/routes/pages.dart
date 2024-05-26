@@ -1,7 +1,11 @@
+import 'package:client/common_widget/bottom_navigate/bottom_navigate.dart';
+import 'package:client/common_widget/bottom_navigate/bottom_navigate_binding.dart';
 import 'package:client/view/exam/exam_binding.dart';
 import 'package:client/view/exam/exam_round_view.dart';
 import 'package:client/view/exam/exam_view.dart';
 import 'package:client/view/flashcard/result_flashcard.dart';
+import 'package:client/view/flashcard2/flashcard_binding.dart';
+import 'package:client/view/flashcard2/flashcard_page.dart';
 import 'package:client/view/forgot_password/enter_otp.dart';
 import 'package:client/view/forgot_password/forgot_password_binding.dart';
 import 'package:client/view/forgot_password/forgot_password_view.dart';
@@ -9,8 +13,6 @@ import 'package:client/view/forgot_password/reset_password.dart';
 import 'package:client/view/home/home_binding.dart';
 import 'package:client/view/home/home_page.dart';
 import 'package:client/view/detail_topic/detail_topic_page.dart';
-import 'package:client/view/flashcard/flashcard_binding.dart';
-import 'package:client/view/flashcard/flashcard_page.dart';
 import 'package:client/view/learning_vocabulary/round_learn/congratulation_round_view.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_binding.dart';
 import 'package:client/view/learning_vocabulary/round_learn/round_learn_view.dart';
@@ -144,6 +146,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.PRIVATE_INFO_MANAGER,
       page: () => PrivateInfoManagementView(),
+      transition: Transition.native,
+      fullscreenDialog: true,
+      popGesture: false,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: AppRoutes.NAV_BAR,
+      page: () => NavBar(),
+      binding: BottomNavigateBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
