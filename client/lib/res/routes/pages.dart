@@ -35,7 +35,6 @@ import '../../view/password_management/password_management_view.dart';
 import '../../view/privacy_policy/privacy_policy_binding.dart';
 import '../../view/privacy_policy/privacy_policy_view.dart';
 import '../../view/private_info_management/private_info_management_view.dart';
-import '../../view/statiscal/statiscal_binding.dart';
 import '../../view/statiscal/statiscal_view.dart';
 import '../../view/your_profile/your_profile_view.dart';
 import '../middleware/route_welcome_middleware.dart';
@@ -178,7 +177,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.STATISCAL,
       page: () => StatiscalView(),
-      binding: StatiscalBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

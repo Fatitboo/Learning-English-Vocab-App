@@ -16,4 +16,8 @@ export class UpdateUserDto  {
   @IsNotEmpty()
   @IsString()
   dob: string;
+
+  @IsNotEmpty()
+  @IsString()
+  avatar: string;
 }

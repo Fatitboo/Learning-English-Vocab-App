@@ -1,6 +1,7 @@
 import { Learnt } from 'src/learnt/entity/learnt.entity';
 import { Store } from 'src/store/entity/store.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -15,8 +16,8 @@ export class User {
   @Column({ nullable: true })
   fullname: string;
 
-    @Column({nullable:true}) 
-    dob: String;
+  @Column({ nullable: true })
+  dob: string;
 
   @Column()
   email: string;

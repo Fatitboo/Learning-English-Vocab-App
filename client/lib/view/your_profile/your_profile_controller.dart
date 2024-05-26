@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../../res/data/network_api_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class YourProfileController extends GetxController {
   String avatarPath = '';
@@ -17,13 +19,48 @@ class YourProfileController extends GetxController {
   final ImagePicker _picker = ImagePicker();
 
   Future<void> pickImage() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      avatarPath = pickedFile.path;
-      update();
+    try {
+      final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        // Hiển thị trạng thái đang upload ảnh cho người dùng
+        Get.defaultDialog(
+          radius: 8,
+          title: "Uploading",
+          middleText: "Please wait while the image is being uploaded.",
+          barrierDismissible: false,
+        );
+
+        File imageFile = File(pickedFile.path);
+        final storageRef = FirebaseStorage.instance.ref("images/").child(pickedFile.name);
+        await storageRef.putFile(imageFile);
+
+        final downloadUrl = await storageRef.getDownloadURL();
+        print("Đường dẫn nè: " + downloadUrl);
+
+        avatarPath = downloadUrl;
+        update();
+
+        Get.defaultDialog(
+          radius: 8,
+          title: "Upload Successful",
+          middleText: "The image has been uploaded successfully.",
+          textConfirm: "OK",
+          onConfirm: () {
+            Get.back();
+          },
+        );
+      }
+    } catch (e) {
+      print('Error uploading image: $e');
+
+      Get.defaultDialog(
+        radius: 8,
+        title: "Upload failed",
+        middleText: "An error occurred while uploading the image.",
+      );
     }
   }
+
 
   String formatDate(DateTime date) {
     String day = date.day.toString().padLeft(2, '0');
@@ -44,6 +81,7 @@ class YourProfileController extends GetxController {
           'email': emailController.text.trim(),
           'phone': phoneController.text.trim(),
           'dob': formatDate(dateController.value).trim(),
+          'avatar': avatarPath,
         };
         String jsonBody = jsonEncode(information);
 
@@ -113,21 +151,10 @@ class YourProfileController extends GetxController {
         DateTime dateTime = dateFormat.parse(currentUserData['dob']);
         dateController.value = dateTime;
       }
+      avatarPath = currentUserData['avatar'];
     } else {
       print(responseCurrentUser.statusCode);
     }
     update();
   }
 }
-
-// final linkCloud = Uri.parse('https://api.cloudinary.com/v1_1/dmo9y50zo/image/upload');
-// final request = http.MultipartRequest('POST', linkCloud)
-//   ..fields['upload_preset'] = 'vpvtwpde'
-//   ..files.add(await http.MultipartFile.fromPath('file', pickedFile.path));
-//
-// final response = await request.send();
-// if (response.statusCode == 200) {
-// final resData = await response.stream.toBytes();
-// final resString = String.fromCharCodes(resData);
-// final jsonMap = jsonDecode(resString);
-// avatarPath = jsonMap['secure_url'];

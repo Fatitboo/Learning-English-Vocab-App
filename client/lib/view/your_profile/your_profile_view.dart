@@ -152,7 +152,7 @@ class YourProfileView extends StatelessWidget {
                     backgroundImage: controller.avatarPath.isEmpty
                         ? const AssetImage('assets/images/img.png')
                             as ImageProvider
-                        : FileImage(File(controller.avatarPath)),
+                        : NetworkImage(controller.avatarPath),
                     backgroundColor: Colors.transparent,
                   ),
                 ),

@@ -12,4 +12,7 @@ export class CreateUserDto {
     @IsString()
     email: string;
 
+    @IsString()
+    avatar: string;
+
 }

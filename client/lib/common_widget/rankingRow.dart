@@ -14,8 +14,8 @@ class RankingRow extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
-              child: Image.asset(
-                wObj["image"].toString(),
+              child: Image.network(
+                wObj["avatar"].toString(),
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,
@@ -28,21 +28,18 @@ class RankingRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      wObj["title"].toString(),
+                      wObj["fullname"].toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14, fontWeight: FontWeight.w500),
                     ),
 
                     Text(
-                      wObj["time"].toString(),
+                      wObj["score"].toString() + " points",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 12,),
                     ),
-
-
-
                   ],
                 )),
 

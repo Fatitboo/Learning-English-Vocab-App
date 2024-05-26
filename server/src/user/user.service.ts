@@ -13,12 +13,19 @@ import {CreateUserDto} from './dto/create-user.dto';
 import {sendEmail} from 'src/utils/email.service';
 import {templateHTMLResetPassword} from 'src/constants/template_email';
 import {UpdateUserDto} from './dto/update-user.dto';
+import {Learnt} from 'src/learnt/entity/learnt.entity';
+import {Topic} from 'src/topic/entity/topic.entity';
+import {UserStatisticsDto} from './dto/user-statistics.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private jwtService: JwtService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Learnt)
+    private readonly learntRepository: Repository<Learnt>,
+    @InjectRepository(Topic)
+    private readonly topicRepository: Repository<Topic>,
   ) {}
 
   // private client = new OAuth2Client('426753784926-dmbba6127bn5avdf1uptppevohkkm4c6.apps.googleusercontent.com'); // Thay thế bằng Client ID của bạn
@@ -99,14 +106,13 @@ export class UserService {
 
   async login(exitedUser: any) {
     const pl = {sub: exitedUser.id, username: exitedUser.username};
-    const actk = this.jwtService.sign(pl);
-    console.log(actk);
+
     return {
       userId: exitedUser.id,
       username: exitedUser.username,
       avatar: exitedUser.avatar,
       fullname: exitedUser.fullname,
-      access_token: actk,
+      access_token: this.jwtService.sign(pl),
     };
   }
 
@@ -122,6 +128,8 @@ export class UserService {
     if (exitedEmail) throw new BadRequestException('Email existed.');
     const hashedPassword = await bcrypt.hash(createUser.password, 10);
     createUser.password = hashedPassword;
+    createUser.avatar =
+      'https://firebasestorage.googleapis.com/v0/b/englishvoc-43d5a.appspot.com/o/images%2FavatarDefault.png?alt=media&token=59aae8c1-2129-46ca-ad75-5dad1b119188';
     const user = this.userRepository.create(createUser);
     await this.userRepository.save(user);
     return {
@@ -199,7 +207,6 @@ export class UserService {
     id: number,
     updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    console.log('zo service');
     const user = await this.userRepository.findOneBy({id: id});
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
@@ -210,12 +217,73 @@ export class UserService {
     user.email = updateUserDto.email;
     user.phone = updateUserDto.phone;
     user.dob = updateUserDto.dob;
+    user.avatar = updateUserDto.avatar;
 
     // Save updated user to the database
     await this.userRepository.save(user);
     return user;
   }
 
+  async getAllUsersSortedByScore(): Promise<User[]> {
+    return this.userRepository.find({
+      order: {
+        score: 'DESC',
+      },
+    });
+  }
+
+  async getUserStatistics(userId: number) {
+    const results = await this.learntRepository
+      .createQueryBuilder('learnt')
+      .innerJoin('learnt.word', 'word')
+      .innerJoin('word.topic', 'topic')
+      .where('learnt.userId = :userId', {userId})
+      .select('topic.id', 'topicId')
+      .addSelect('topic.topicName', 'topicName')
+      .addSelect('ARRAY_AGG(word.wordName)', 'words')
+      .addSelect(subQuery => {
+        return subQuery
+          .select('CAST(COUNT(word.id) AS INTEGER)', 'totalWordOfTopic')
+          .from('word', 'word')
+          .where('word.topicId = topic.id');
+      }, 'totalWordOfTopic')
+      .groupBy('topic.id')
+      .addGroupBy('topic.topicName')
+      .getRawMany();
+
+    var completedTopicsCount = 0;
+    var learntWordsCount = 0;
+    var inProcessTopicsCount = 0;
+    for (var i = 0; i < results.length; i++) {
+      learntWordsCount = learntWordsCount + results[i].words.length;
+      if (results[i].words.length === results[i].totalWordOfTopic) {
+        completedTopicsCount = completedTopicsCount + 1;
+      } else {
+        inProcessTopicsCount = inProcessTopicsCount + 1;
+      }
+    }
+
+    const user = await this.userRepository.findOne({
+      where: {id: userId},
+    });
+
+    const userStatisticsDto: UserStatisticsDto = {
+      id: user.id,
+      username: user.username,
+      fullname: user.fullname,
+      dob: user.dob,
+      email: user.email,
+      phone: user.phone,
+      score: user.score,
+      avatar: user.avatar,
+      googleAccountId: user.googleAccountId,
+      learntWordsCount: learntWordsCount,
+      completedTopicsCount: completedTopicsCount,
+      inProcessTopicsCount: inProcessTopicsCount,
+    };
+
+    return userStatisticsDto;
+  }
   async addScore(username: string) {
     const user = await this.userRepository.findOne({
       where: {

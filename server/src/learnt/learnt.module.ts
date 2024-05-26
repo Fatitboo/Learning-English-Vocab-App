@@ -10,5 +10,6 @@ import {Word} from 'src/word/entity/word.entity';
   imports: [TypeOrmModule.forFeature([Learnt, User, Word])],
   providers: [LearntService],
   controllers: [LearntController],
+  exports: [TypeOrmModule],
 })
 export class LearntModule {}

@@ -5,6 +5,8 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {User} from './entities/user.entity';
 import {JwtModule} from '@nestjs/jwt';
 import {GoogleStrategy} from './google.strategy';
+import {LearntModule} from 'src/learnt/learnt.module';
+import {TopicModule} from 'src/topic/topic.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import {GoogleStrategy} from './google.strategy';
       signOptions: {expiresIn: '1d'},
     }),
     TypeOrmModule.forFeature([User]),
+    LearntModule,
+    TopicModule,
   ],
   controllers: [UserController],
   providers: [UserService],

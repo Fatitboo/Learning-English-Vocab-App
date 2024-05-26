@@ -76,9 +76,7 @@ class PrivateInfoManagementView extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: controller.avatarPath.isEmpty
-                        ? Image.network("https://res.cloudinary.com/dmo9y50zo/image/upload/v1716097921/AppTA/avatarDefault_c40wst.png").image
-                        : Image.network(controller.avatarPath).image,
+                    backgroundImage: NetworkImage(controller.avatarPath),
                     backgroundColor: Colors.transparent,
                   ),
                 ),

@@ -11,5 +11,6 @@ import {User} from 'src/user/entities/user.entity';
   imports: [TypeOrmModule.forFeature([Topic, User])],
   providers: [TopicService],
   controllers: [TopicController],
+  exports: [TypeOrmModule],
 })
 export class TopicModule {}
