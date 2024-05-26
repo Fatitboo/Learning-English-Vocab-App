@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class RoundLearnView extends GetView<RoundLearnController> {
   RoundLearnView({super.key});
-
+  final controller = Get.put(RoundLearnController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RoundLearnController>(

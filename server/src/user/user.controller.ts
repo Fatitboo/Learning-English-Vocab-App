@@ -17,11 +17,11 @@ import {
   NotFoundException,
   Request,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { Public } from './authPublic.decorator';
-import { Response } from 'express';
-import { UpdateUserDto } from './dto/update-user.dto';
+import {UserService} from './user.service';
+import {CreateUserDto} from './dto/create-user.dto';
+import {Public} from './authPublic.decorator';
+import {Response} from 'express';
+import {UpdateUserDto} from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -93,24 +93,46 @@ export class UserController {
       res.status(200).json(user);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({message: error.message});
       } else {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({message: 'Internal Server Error'});
       }
     }
   }
 
   @Patch(':id/update-info')
-  async updateInfoUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto, @Res() res: Response) {
-    console.log("zo controller");
+  async updateInfoUser(
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateUserDto,
+    @Res() res: Response,
+  ) {
+    console.log('zo controller');
     try {
-      const updatedUser = await this.userService.updateInfoUser(id, updateUserDto);
+      const updatedUser = await this.userService.updateInfoUser(
+        id,
+        updateUserDto,
+      );
       res.status(200).json(updatedUser);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({message: error.message});
       } else {
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({message: 'Internal Server Error'});
+      }
+    }
+  }
+
+  @Patch('/addScore')
+  async addScore(@Request() req, @Res() res: Response) {
+    try {
+      const result = await this.userService.addScore(req.user.username);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      if (error instanceof NotFoundException) {
+        res.status(404).json({message: error.message});
+      } else {
+        res.status(500).json({message: 'Internal Server Error'});
       }
     }
   }

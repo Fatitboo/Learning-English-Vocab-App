@@ -53,14 +53,14 @@ class ExamView extends GetView<ExamController> {
                               blurRadius: 4,
                             )
                           ]),
-                      child: const Row(
+                      child:  Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Nguyen Van A',
+                                '${controller.currentUser?['fullname'] ?? ''}',
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
@@ -106,7 +106,7 @@ class ExamView extends GetView<ExamController> {
                                     width: 4,
                                   ),
                                   Text(
-                                    '260 points',
+                                    '${controller.currentUser?['score'] ?? 0} scores',
                                     style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
@@ -116,11 +116,15 @@ class ExamView extends GetView<ExamController> {
                               )
                             ],
                           ),
-                          CircleAvatar(
-                            radius: 44, // Image radius
-                            backgroundImage: NetworkImage(
-                                'https://i.pinimg.com/originals/1e/c8/f4/1ec8f463568b4cfae39a71b3c1b20abc.png'),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.network(
+                              '${controller.currentUser?['avatar'] ?? 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'}',
+                              height: 70,
+                              width: 70,
+                            ),
                           )
+
                         ],
                       ),
                     ),
@@ -203,6 +207,8 @@ class ExamView extends GetView<ExamController> {
                       onPressed: () {
                         // Get.toNamed(AppRoutes.SETTING_TEST,
                         //     preventDuplicates: false);
+                        controller.initExam();
+                        Get.toNamed(AppRoutes.EXAM_ROUND);
                       },
                       style: TextButton.styleFrom(
                           backgroundColor: Color(0xff5CDDFF),

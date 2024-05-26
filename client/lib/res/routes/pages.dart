@@ -216,7 +216,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.ROUND_LEARN,
       page: () => RoundLearnView(),
-      binding: RoundLearnBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,
@@ -234,7 +233,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.EXAM,
       page: () => ExamView(),
-      binding: ExamBinding(),
       transition: Transition.native,
       fullscreenDialog: true,
       popGesture: false,

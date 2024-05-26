@@ -79,7 +79,7 @@ class RoundLearnController extends GetxController {
     update();
   }
 
-  void nextQuestion() {
+  void nextQuestion() async {
     var random = Random();
     if (showCorrect==0) {
       currentQuestion = listRound[0];
@@ -100,7 +100,7 @@ class RoundLearnController extends GetxController {
 
         listRound.removeWhere((element) => element['id'] == currentQuestion?['id']);
         if (listRound.length==0) {
-          handleSaveLearnWord();
+          await handleSaveLearnWord();
           Get.offNamed(AppRoutes.CONGRATULATION_ROUND);
           return;
         }

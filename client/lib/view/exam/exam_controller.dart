@@ -15,7 +15,7 @@ class ExamController extends GetxController {
   int indexAnswer = 0;
   String typeQuestion = 'string';
   int indexQuestion = -1;
-  int correctAnswert = 2;
+  int correctAnswert = 0;
   int showCorrect = 0;
   Color colorChoose = Color(0xffD3EEFB);
   Color colorChooseBorder = Color(0xff04BFD9);
@@ -23,13 +23,18 @@ class ExamController extends GetxController {
   int round = 5;
   int lengthCheck = 0;
   List<dynamic> listTopicExam = [];
+  var currentUser;
   List<WordDTO> listWordsExam = [];
   List<Map<String,dynamic>> listRoundExam = [];
+  List<Map<String,dynamic>> saveResult = [];
   Map<String,dynamic>? currentQuestion;
   String question = "";
   String answer1 = "";
   String answer2= "";
   String answer3= "";
+  String answer4= "";
+
+  int numTrue = 0;
 
   final NetworkApiService networkApiService = NetworkApiService();
 
@@ -38,23 +43,12 @@ class ExamController extends GetxController {
     getAllTopicExam();
   }
   void getAllTopicExam() async{
-
-    http.Response res = await networkApiService.getApi("/topic/getAllTopicHasLearntWord");
-
+    http.Response res =await  networkApiService.getApi("/user/current-user");
     if(res.statusCode == HttpStatus.ok){
-      Iterable i = json.decode(utf8.decode(res.bodyBytes));
+      Map<String, dynamic> jsonMap = json.decode(utf8.decode(res.bodyBytes));
 
-      listTopicExam = i.toList();
-      listTopicExam.forEach((element) {
-        element['isChoose'] = false;
-      });
-      update();
-      print(listTopicExam);
 
-      // listTopicLearnt.forEach((topic) {
-      //   if (topic['learntWords'].toInt()==topic['totalWords'].toInt()) indexBlock++;
-      // });
-      // if (indexBlock==0) indexBlock++;
+      currentUser = jsonMap;
 
       update();
 
@@ -63,6 +57,24 @@ class ExamController extends GetxController {
       Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
       print(resMessage["message"]);
     }
+    res = await networkApiService.getApi("/topic/getAllTopicHasLearntWord");
+
+    if(res.statusCode == HttpStatus.ok){
+      Iterable i = json.decode(utf8.decode(res.bodyBytes));
+
+      listTopicExam = i.toList();
+      listTopicExam.forEach((element) {
+        element['isChoose'] = false;
+      });
+
+      update();
+
+    }
+    else{
+      Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));
+      print(resMessage["message"]);
+    }
+
   }
   void handleCheck(int index, bool value) {
     listTopicExam[index]['isChoose'] = value;
@@ -74,86 +86,8 @@ class ExamController extends GetxController {
   }
 
   void setIndexAnswer(index) {
-    if (showCorrect!=0) return;
     indexAnswer = index;
     update();
-  }
-
-  void nextQuestion() {
-    indexQuestion++;
-    if (indexQuestion > 9) {
-      Get.offNamed(AppRoutes.RESULT_TEST);
-      return;
-    }
-    currentQuestion = listRoundExam[indexQuestion];
-
-    configQuestion();
-  }
-  void configQuestion() {
-
-    var random = Random();
-    int indexTypeQuestion = random.nextInt(2);
-    int indexCorrect = random.nextInt(4);
-    if (indexTypeQuestion == 0) {
-      question = currentQuestion?['wordName'] + '(${currentQuestion?['wordType']})';
-      answer1 = indexCorrect == 0 ? (currentQuestion?['wordMean']) : (currentQuestion?['wrongMean']);
-      answer2 = indexCorrect == 0 ? (currentQuestion?['wrongMean']) : (currentQuestion?['wordMean']);
-    }
-    else if (indexTypeQuestion == 1){
-      question = currentQuestion?['wordMean'];
-      answer1 = indexCorrect == 0 ? (currentQuestion?['wordName']) : (currentQuestion?['wrongName']);
-      answer2 = indexCorrect == 0 ? (currentQuestion?['wrongName']) : (currentQuestion?['wordName']);
-    }
-    correctAnswert = ++indexCorrect;
-    showCorrect = 0;
-    indexAnswer = 0;
-
-    colorChoose = Color(0xffD3EEFB);
-    colorChooseBorder = Color(0xff04BFD9);
-    colorChooseText = Color(0xff29ABEA);
-
-    update();
-
-
-    // sttQuestion++;
-    // if (sttQuestion> listRound.length) {
-    //   Get.offNamed(AppRoutes.CONGRATULATION_ROUND);
-    // }
-    //
-    // currentQuestion = listRound[sttQuestion-1];
-    //
-    // var random = Random();
-    // int indexTypeQuestion = random.nextInt(2);
-    // int indexCorrect = random.nextInt(2);
-    // if (indexTypeQuestion == 0) {
-    //   question = currentQuestion?['wordName'] + '(${currentQuestion?['wordType']})';
-    //   answer1 = indexCorrect == 0 ? (currentQuestion?['wordMean']) : (currentQuestion?['wrongMean']);
-    //   answer2 = indexCorrect == 0 ? (currentQuestion?['wrongMean']) : (currentQuestion?['wordMean']);
-    // }
-    // else if (indexTypeQuestion == 1){
-    //   question = currentQuestion?['wordMean'];
-    //   answer1 = indexCorrect == 0 ? (currentQuestion?['wordName']) : (currentQuestion?['wrongName']);
-    //   answer2 = indexCorrect == 0 ? (currentQuestion?['wrongName']) : (currentQuestion?['wordName']);
-    // }
-    // correctAnswert = ++indexCorrect;
-    // showCorrect = 0;
-    // indexAnswer = 0;
-    //
-    //  colorChoose = Color(0xffD3EEFB);
-    //  colorChooseBorder = Color(0xff04BFD9);
-    //  colorChooseText = Color(0xff29ABEA);
-    //
-    // update();
-  }
-
-  void reset() {
-    sttQuestion = 1;
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    reset();
   }
   void shuffleList<T>(List<T> list) {
     final random = Random();
@@ -174,10 +108,15 @@ class ExamController extends GetxController {
     });
     shuffleList(listWordsChoose);
     var random = Random();
-    for (int i=0; i<=9; i++) {
+    Set<int> chosenIndices = Set();
+    while (listWordsExam.length < 10) {
       int number = random.nextInt(listWordsChoose.length);
-      listWordsExam.add(listWordsChoose[number]);
+      if (!chosenIndices.contains(number)) {
+        chosenIndices.add(number);
+        listWordsExam.add(listWordsChoose[number]);
+      }
     }
+
 
     listWordsExam.forEach((word) {
       List otherWords = listWordsExam.map((item) => ({
@@ -186,9 +125,11 @@ class ExamController extends GetxController {
         "wrongMean": item.wordMean,
       })).toList();
       otherWords.removeWhere((item) => item["wrongId"] == word.id);
+      print(otherWords.length);
       int indexRandomWrongWord1 = random.nextInt(otherWords.length);
-      int indexRandomWrongWord2 = (indexRandomWrongWord1+1)%10;
-      int indexRandomWrongWord3 = (indexRandomWrongWord1+2)%10;
+      int indexRandomWrongWord2 = (indexRandomWrongWord1+1)%9;
+      int indexRandomWrongWord3 = (indexRandomWrongWord1+2)%9;
+
 
       Map<String,dynamic> mp = {
         "id": word.id,
@@ -208,4 +149,130 @@ class ExamController extends GetxController {
     });
     nextQuestion();
   }
+
+  void nextQuestion() {
+    String tmp = '';
+    switch (indexAnswer) {
+      case 1:
+        tmp = answer1;
+        break;
+      case 2:
+        tmp = answer2;
+        break;
+      case 3:
+        tmp = answer3;
+        break;
+      case 4:
+        tmp = answer4;
+        break;
+    }
+    if (indexQuestion>=0) saveResult[indexQuestion]['answer'] = tmp;
+    indexQuestion++;
+    if (indexQuestion > 9) {
+
+
+      Get.offAllNamed(AppRoutes.RESULT_TEST, arguments: {
+        "saveResult":saveResult
+      });
+
+      return;
+    }
+    currentQuestion = listRoundExam[indexQuestion];
+
+    configQuestion();
+  }
+  void configQuestion() {
+
+    var random = Random();
+    int indexTypeQuestion = random.nextInt(2);
+    int indexCorrect = random.nextInt(4);
+    if (indexTypeQuestion == 0) {
+      question = currentQuestion?['wordName'] + '(${currentQuestion?['wordType']})';
+      if (indexCorrect==0) {
+        answer1 = currentQuestion?['wordMean'];
+        answer2 = currentQuestion?['wrongMean1'];
+        answer3 = currentQuestion?['wrongMean2'];
+        answer4 = currentQuestion?['wrongMean3'];
+      }
+      else if (indexCorrect==1) {
+        answer1 = currentQuestion?['wrongMean1'];
+        answer2 = currentQuestion?['wordMean'];
+        answer3 = currentQuestion?['wrongMean2'];
+        answer4 = currentQuestion?['wrongMean3'];
+      }
+      else if (indexCorrect==2) {
+        answer1 = currentQuestion?['wrongMean1'];
+        answer2 = currentQuestion?['wrongMean2'];
+        answer3 = currentQuestion?['wordMean'];
+        answer4 = currentQuestion?['wrongMean3'];
+      }
+      else if (indexCorrect == 3) {
+        answer1 = currentQuestion?['wrongMean1'];
+        answer2 = currentQuestion?['wrongMean2'];
+        answer3 = currentQuestion?['wrongMean3'];
+        answer4 = currentQuestion?['wordMean'];
+      }
+
+    }
+    else if (indexTypeQuestion == 1){
+      question = currentQuestion?['wordMean'];
+      if (indexCorrect==0) {
+        answer1 = currentQuestion?['wordName'];
+        answer2 = currentQuestion?['wrongName1'];
+        answer3 = currentQuestion?['wrongName2'];
+        answer4 = currentQuestion?['wrongName3'];
+      }
+      else if (indexCorrect==1) {
+        answer1 = currentQuestion?['wrongName1'];
+        answer2 = currentQuestion?['wordName'];
+        answer3 = currentQuestion?['wrongName2'];
+        answer4 = currentQuestion?['wrongName3'];
+      }
+      else if (indexCorrect==2) {
+        answer1 = currentQuestion?['wrongName1'];
+        answer2 = currentQuestion?['wrongName2'];
+        answer3 = currentQuestion?['wordName'];
+        answer4 = currentQuestion?['wrongName3'];
+      }
+      else if (indexCorrect == 3) {
+        answer1 = currentQuestion?['wrongName1'];
+        answer2 = currentQuestion?['wrongName2'];
+        answer3 = currentQuestion?['wrongName3'];
+        answer4 = currentQuestion?['wordName'];
+      }
+    }
+
+    correctAnswert = ++indexCorrect;
+    String tmp ='';
+    switch (correctAnswert) {
+      case 1:
+        tmp = answer1;
+        break;
+      case 2:
+        tmp = answer2;
+        break;
+      case 3:
+        tmp = answer3;
+        break;
+      case 4:
+        tmp = answer4;
+        break;
+    }
+    saveResult.add({
+      "question": question,
+      "correctAnswer": tmp
+    });
+    // colorChoose = Color(0xffD3EEFB);
+    // colorChooseBorder = Color(0xff04BFD9);
+    // colorChooseText = Color(0xff29ABEA);
+    indexAnswer = 0;
+    update();
+
+
+
+  }
+
+
+
+
 }

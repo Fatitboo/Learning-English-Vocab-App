@@ -7,7 +7,7 @@ import 'exam_controller.dart';
 
 class ExamRoundView extends GetView<ExamController> {
   ExamRoundView({super.key});
-
+  final controller = Get.put(ExamController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ExamController>(
@@ -16,13 +16,12 @@ class ExamRoundView extends GetView<ExamController> {
             appBar: AppBar(
               centerTitle: true,
               title: const Text(
-                'Vòng 1',
+                'Kiểm Tra',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               leading: IconButton(
                 onPressed: () {
-                  controller.reset();
-                  Get.back();
+                    return;
                 },
                 icon: const Icon(Icons.close),
               ),
@@ -51,7 +50,7 @@ class ExamRoundView extends GetView<ExamController> {
                                 height: 10,
                                 duration: Duration(milliseconds: 300), //
                                 width: (Get.width - 40) *
-                                    controller.sttQuestion /
+                                    (controller.indexQuestion + 1) /
                                     10,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -94,7 +93,7 @@ class ExamRoundView extends GetView<ExamController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Question x/y',
+                                    'Question ${controller.indexQuestion+1}/10',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 18),
@@ -105,7 +104,7 @@ class ExamRoundView extends GetView<ExamController> {
                                 height: 50,
                               ),
                               Text(
-                                'water (n)',
+                                '${controller.question}',
                                 style: TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.w300),
                               ),
@@ -124,7 +123,7 @@ class ExamRoundView extends GetView<ExamController> {
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    'nước',
+                                    '${controller.answer1}',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 1 ?
@@ -172,7 +171,7 @@ class ExamRoundView extends GetView<ExamController> {
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    'nước',
+                                    '${controller.answer2}',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 2
@@ -220,7 +219,7 @@ class ExamRoundView extends GetView<ExamController> {
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    'nước',
+                                    '${controller.answer3}',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 3
@@ -268,7 +267,7 @@ class ExamRoundView extends GetView<ExamController> {
                                   width: Get.width,
                                   padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    'nước',
+                                    '${controller.answer4}',
                                     style: TextStyle(
                                         fontSize: 20,
                                         color: controller.indexAnswer == 4

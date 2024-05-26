@@ -215,4 +215,16 @@ export class UserService {
     await this.userRepository.save(user);
     return user;
   }
+
+  async addScore(username: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username: username,
+      },
+    });
+    console.log(user);
+    user.score += 5;
+    this.userRepository.save(user);
+    return 'success';
+  }
 }
