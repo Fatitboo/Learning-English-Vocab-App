@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../common/app_color.dart';
 
 class DatePickerField extends StatefulWidget {
-  final ValueNotifier<DateTime?> controller;
+  final ValueNotifier<String?> controller;
   final DateFormat dateFormat;
 
   const DatePickerField({
@@ -24,6 +24,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
     super.initState();
     _textController = TextEditingController();
     widget.controller.addListener(_handleControllerChanged);
+    _handleControllerChanged(); // Initialize with current value
   }
 
   @override
@@ -34,21 +35,30 @@ class _DatePickerFieldState extends State<DatePickerField> {
 
   void _handleControllerChanged() {
     setState(() {
-      _textController.text = widget.controller.value != null
-          ? widget.dateFormat.format(widget.controller.value!)
-          : '';
+      _textController.text = widget.controller.value ?? '';
     });
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    DateTime? initialDate;
+    if (widget.controller.value != null && widget.controller.value!.isNotEmpty) {
+      try {
+        initialDate = widget.dateFormat.parse(widget.controller.value!);
+      } catch (e) {
+        initialDate = DateTime.now();
+      }
+    } else {
+      initialDate = DateTime.now();
+    }
+
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: widget.controller.value ?? DateTime.now(),
+      initialDate: initialDate,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
     if (pickedDate != null) {
-      widget.controller.value = pickedDate;
+      widget.controller.value = widget.dateFormat.format(pickedDate);
     }
   }
 
@@ -99,7 +109,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
 }
 
 class DatePickerCustomeProfile extends StatelessWidget {
-  final ValueNotifier<DateTime> controller;
+  final ValueNotifier<String> controller;
 
   DatePickerCustomeProfile({Key? key, required this.controller}) : super(key: key);
 

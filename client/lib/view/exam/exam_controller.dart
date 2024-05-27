@@ -46,12 +46,8 @@ class ExamController extends GetxController {
     http.Response res =await  networkApiService.getApi("/user/current-user");
     if(res.statusCode == HttpStatus.ok){
       Map<String, dynamic> jsonMap = json.decode(utf8.decode(res.bodyBytes));
-
-
       currentUser = jsonMap;
-
       update();
-
     }
     else{
       Map<String, dynamic> resMessage = json.decode(utf8.decode(res.bodyBytes));

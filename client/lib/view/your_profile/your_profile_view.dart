@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:client/common/app_color.dart';
 import 'package:client/common_widget/textfield_custom_profile.dart';
 import 'package:client/common_widget/textfield_date_picker.dart';
+import 'package:client/view/private_info_management/private_info_management_controller.dart';
 import 'package:client/view/your_profile/your_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,12 +13,12 @@ import '../../common_widget/my_button.dart';
 class YourProfileView extends StatelessWidget {
   YourProfileView({super.key});
 
-  final controller = Get.put(YourProfileController());
+  final controller = Get.put(PrivateInfoManagementController());
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<YourProfileController>(builder: (_) {
+    return GetBuilder<PrivateInfoManagementController>(builder: (_) {
       return Form(
         key: _formKey,
         child: Scaffold(
@@ -120,7 +121,7 @@ class YourProfileView extends StatelessWidget {
         icon: const Icon(Icons.arrow_back),
         color: Colors.black,
         onPressed: () {
-          Get.back();
+          Get.back(result: true);
         },
       ),
     );

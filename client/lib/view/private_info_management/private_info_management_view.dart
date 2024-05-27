@@ -77,7 +77,7 @@ class PrivateInfoManagementView extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                controller.userName,
+                controller.fullName,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -92,14 +92,14 @@ class PrivateInfoManagementView extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       child: MyButton(
         text: 'Log out',
-        onTap: () {},
+        onTap: () {
+          controller.logOut();
+        },
       ));
 
   Widget ItemYourProfile() => GestureDetector(
     onTap: () {
-      Get.toNamed(AppRoutes.YOUR_PROFILE)?.then((value) =>  {
-        // controller.avatarPath = value
-      });
+      Get.toNamed(AppRoutes.YOUR_PROFILE);
     },
     child: Container(
         margin: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
