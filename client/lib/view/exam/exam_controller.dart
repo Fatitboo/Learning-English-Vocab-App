@@ -23,9 +23,11 @@ class ExamController extends GetxController {
   int round = 5;
   int lengthCheck = 0;
   List<dynamic> listTopicExam = [];
-  var currentUser;
-  List<WordDTO> listWordsExam = [];
   List<Map<String,dynamic>> listRoundExam = [];
+  List<WordDTO> listWordsExam = [];
+  var currentUser;
+
+
   List<Map<String,dynamic>> saveResult = [];
   Map<String,dynamic>? currentQuestion;
   String question = "";
@@ -42,7 +44,7 @@ class ExamController extends GetxController {
   void onInit() {
     getAllTopicExam();
   }
-  void getAllTopicExam() async{
+  Future<void> getAllTopicExam() async{
     http.Response res =await  networkApiService.getApi("/user/current-user");
     if(res.statusCode == HttpStatus.ok){
       Map<String, dynamic> jsonMap = json.decode(utf8.decode(res.bodyBytes));
@@ -100,6 +102,8 @@ class ExamController extends GetxController {
   }
 
   void initExam() {
+    indexQuestion = -1;
+    saveResult = [];
     var listTopicChoose = listTopicExam.where((element) => element['isChoose'] == true).toList();
     var listWordsChoose = [];
     listTopicChoose.forEach((element) {
@@ -171,9 +175,10 @@ class ExamController extends GetxController {
     if (indexQuestion > 9) {
 
 
-      Get.offAllNamed(AppRoutes.RESULT_TEST, arguments: {
+      Get.offNamed(AppRoutes.RESULT_TEST, arguments: {
         "saveResult":saveResult
       });
+      reset();
 
       return;
     }
@@ -262,13 +267,29 @@ class ExamController extends GetxController {
       "question": question,
       "correctAnswer": tmp
     });
-    // colorChoose = Color(0xffD3EEFB);
-    // colorChooseBorder = Color(0xff04BFD9);
-    // colorChooseText = Color(0xff29ABEA);
     indexAnswer = 0;
     update();
 
 
+
+  }
+
+  void handleContinue()  {
+    initExam();
+    Get.toNamed(AppRoutes.EXAM_ROUND);
+
+  }
+
+  Future<void> reset() async {
+    await getAllTopicExam();
+    listTopicExam.forEach((element) {
+      element['isChoose'] = false;
+    });
+    setLengthCheck();
+    initExam();
+
+
+    update();
 
   }
 

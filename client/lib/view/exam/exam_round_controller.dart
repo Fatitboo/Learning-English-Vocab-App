@@ -28,7 +28,7 @@ class ExamRoundController extends GetxController {
     saveResult = args['saveResult'];
     numTrue = saveResult.where((element) => element['answer'] == element['correctAnswer']).toList().length;
     update();
-     addScore();
+    if (numTrue >= 8) addScore();
   }
   Future<void> addScore() async{
 

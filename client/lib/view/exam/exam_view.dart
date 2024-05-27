@@ -26,12 +26,7 @@ class ExamView extends GetView<ExamController> {
               'KIỂM TRA TỪ VỰNG',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.close),
-            ),
+
             surfaceTintColor: Colors.transparent,
           ),
           body: Stack(
@@ -207,8 +202,8 @@ class ExamView extends GetView<ExamController> {
                       onPressed: () {
                         // Get.toNamed(AppRoutes.SETTING_TEST,
                         //     preventDuplicates: false);
-                        controller.initExam();
-                        Get.toNamed(AppRoutes.EXAM_ROUND);
+                        controller.handleContinue();
+
                       },
                       style: TextButton.styleFrom(
                           backgroundColor: Color(0xff5CDDFF),

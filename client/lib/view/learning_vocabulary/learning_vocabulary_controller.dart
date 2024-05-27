@@ -30,7 +30,7 @@ class LearningVocabularyController extends GetxController with StateMixin{
 
 
   void getAllTopicLearnt() async{
-
+    indexBlock = 0;
     http.Response res = await networkApiService.getApi("/topic/getWordsLearnedGroupedByTopic");
 
     if(res.statusCode == HttpStatus.ok){
@@ -40,7 +40,7 @@ class LearningVocabularyController extends GetxController with StateMixin{
       listTopicLearnt.forEach((topic) {
         if (topic['learntWords'].toInt()==topic['totalWords'].toInt()) indexBlock++;
       });
-      if (indexBlock==0) indexBlock++;
+       indexBlock++;
 
       update();
 
@@ -50,12 +50,17 @@ class LearningVocabularyController extends GetxController with StateMixin{
       print(resMessage["message"]);
     }
   }
-  void goToRoundLearn(int index, int nextRound, int numberOfRounds) {
+  void goToRoundLearn(int index, int nextRound, int numberOfRounds) async {
     int topicId = listTopicLearnt[index]['topicId'];
-    Get.offNamed(AppRoutes.ROUND_LEARN, preventDuplicates: false, arguments:{
+    final result = await Get.toNamed(AppRoutes.ROUND_LEARN, preventDuplicates: true, arguments:{
       "topicId": topicId,
       "nextRound": nextRound,
       "numberOfRounds": numberOfRounds
-    } );
+    });
+    if (result == 'backToLearningController') {
+
+      getAllTopicLearnt();
+    }
+
   }
 }

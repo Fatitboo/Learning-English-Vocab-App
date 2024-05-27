@@ -26,7 +26,7 @@ class ResultTestPage extends StatelessWidget {
             backgroundColor: AppColors.rsBackground,
             leading: IconButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.EXAM);
+                Get.offNamed(AppRoutes.EXAM);
               },
               icon: const Icon(Icons.close),
             ),

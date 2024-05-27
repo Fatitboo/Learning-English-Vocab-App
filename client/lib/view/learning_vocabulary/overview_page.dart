@@ -29,6 +29,7 @@ class OverViewPage extends StatelessWidget {
                      GestureDetector(
                        onTap: () {
                          if (index >= controller.indexBlock) return;
+                         if (learntWords==totalWords) return;
                          controller.goToRoundLearn(index,currentRound+1,numberOfRounds);
 
                        },
