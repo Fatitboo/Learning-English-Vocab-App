@@ -50,7 +50,7 @@ class RoundLearnView extends GetView<RoundLearnController> {
 
                         Get.back();
 
-                        Get.offNamed(AppRoutes.EXAM);
+                        Get.back(result: 'backToLearningController');
                       }
 
                     );

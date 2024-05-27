@@ -14,6 +14,7 @@ class ResultTestPage extends StatelessWidget {
   ResultTestPage({super.key});
 
   final controller = Get.put(ExamRoundController());
+  final controllerExam = Get.find<ExamController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class ResultTestPage extends StatelessWidget {
             backgroundColor: AppColors.rsBackground,
             leading: IconButton(
               onPressed: () {
-                Get.offNamed(AppRoutes.EXAM);
+                controllerExam.reset();
+                Get.back();
               },
               icon: const Icon(Icons.close),
             ),

@@ -43,6 +43,7 @@ class ExamController extends GetxController {
   @override
   void onInit() {
     getAllTopicExam();
+    print('qqqq');
   }
   Future<void> getAllTopicExam() async{
     http.Response res =await  networkApiService.getApi("/user/current-user");

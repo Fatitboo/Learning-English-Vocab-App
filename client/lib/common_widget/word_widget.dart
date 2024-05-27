@@ -77,7 +77,7 @@ class WordWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text("$wordName ", overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff252526)),),
-                                Text("($wordType)", overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Color(0xff252526)),)
+                                Expanded(child: Text("($wordType)", overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Color(0xff252526)),))
                               ],
                             ),
                             Text(spelling, style: const TextStyle(fontSize: 12, fontFamily: 'NotoSans',),),
